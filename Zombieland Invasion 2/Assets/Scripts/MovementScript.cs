@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementScript : MonoBehaviour
 {
     [Header("Movement")]
-    private float moveSpeed;
+    public float moveSpeed;
     public float walkSpeed;
     public float SprintSpeed;
     public float slideSpeed;
@@ -36,12 +36,16 @@ public class MovementScript : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask WhatIsGround;
-    bool grounded;
+    public bool grounded;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
     private RaycastHit SlopeHit;
     private bool exitingSlope;
+
+    [Header("Sliding")]
+    public float slideSpeedDecreaseRate; // Rate at which sliding speed decreases
+    private bool slidingSpeedDecreasing;
 
 
     public Transform orientation;
@@ -51,7 +55,7 @@ public class MovementScript : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     public MovementState state;
     public enum MovementState
@@ -71,6 +75,7 @@ public class MovementScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         startYscale = transform.localScale.y;
+        slidingSpeedDecreasing = false;
     }
 
     private void Update()
@@ -88,6 +93,24 @@ public class MovementScript : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+
+        if (sliding && moveSpeed > crounchSpeed)
+        {
+            slidingSpeedDecreasing = true;
+            moveSpeed -= slideSpeedDecreaseRate * Time.deltaTime;
+
+            // If speed reaches or goes below crouching speed, change state to crouching
+            if (moveSpeed <= crounchSpeed)
+            {
+                moveSpeed = crounchSpeed;
+                slidingSpeedDecreasing = false;
+                state = MovementState.crounching;
+            }
+        }
+        else
+        {
+            slidingSpeedDecreasing = false;
+        }
     }
     private void FixedUpdate()
     {
@@ -210,7 +233,12 @@ public class MovementScript : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplayer, ForceMode.Force);
 
         // turn gravity off while on slope 
-        //rb.useGravity = !OnSlope();
+        // rb.useGravity = !OnSlope();
+
+        if (sliding && (!slidingSpeedDecreasing || moveSpeed <= crounchSpeed))
+        {
+            sliding = false;
+        }
 
     }
 
@@ -238,6 +266,11 @@ public class MovementScript : MonoBehaviour
             if (flatVel.magnitude > moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
+
+                if (!grounded)
+                {
+                    limitedVel *= airMultiplayer;
+                }
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }

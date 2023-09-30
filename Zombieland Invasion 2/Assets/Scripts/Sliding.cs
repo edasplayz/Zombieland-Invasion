@@ -16,6 +16,7 @@ public class Sliding : MonoBehaviour
     public float slideStartForce;
     public float slideDamping;
     private float slideTimer;
+    public float slideSpeedDecreaseRate = 0.1f;
 
     public float slideYScale;
     private float startYScale;
@@ -28,6 +29,8 @@ public class Sliding : MonoBehaviour
     private Vector3 slideDirection;
 
     private bool slidingEnded;
+
+    public float slideToCrouchSpeedThreshold;
 
     private void Start()
     {
@@ -67,6 +70,8 @@ public class Sliding : MonoBehaviour
         slideDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(slideDirection.normalized * slideStartForce, ForceMode.Force);
 
+
+
         slideTimer = maxSlideTime;
     }
 
@@ -83,8 +88,11 @@ public class Sliding : MonoBehaviour
 
                 // Change the state to crouching when sliding ends.
                 pm.sliding = false;
-                pm.state = MovementScript.MovementState.crounching;
-                //playerObject.localScale = new Vector3(playerObject.localScale.x, pm.crounchYScale, playerObject.localScale.z);
+                if (rb.velocity.magnitude <= slideToCrouchSpeedThreshold)
+                {
+                    pm.state = MovementScript.MovementState.crounching;
+                    playerObject.localScale = new Vector3(playerObject.localScale.x, pm.crounchYScale, playerObject.localScale.z);
+                }
             }
         }
     }
@@ -99,6 +107,16 @@ public class Sliding : MonoBehaviour
 
         // Calculate the force required to completely stop lateral movement.
         Vector3 lateralForce = -lateralVelocity;
+
+        // Check if we're on a slope.
+        bool onSlope = pm.OnSlope();
+
+        // Gradually decrease speed on flat surface.
+        if (!onSlope)
+        {
+            pm.moveSpeed -= slideSpeedDecreaseRate * Time.deltaTime;
+            pm.moveSpeed = Mathf.Max(pm.moveSpeed, 0f); // Ensure moveSpeed doesn't go negative.
+        }
 
         // Apply the slide force in the calculated direction.
         rb.AddForce(moveDirection * slideForce, ForceMode.Force);
