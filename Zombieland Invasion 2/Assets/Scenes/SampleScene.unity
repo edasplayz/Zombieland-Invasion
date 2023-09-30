@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 916177448}
   - component: {fileID: 916177449}
   - component: {fileID: 916177450}
+  - component: {fileID: 916177451}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -483,7 +484,7 @@ MonoBehaviour:
   desiredMoveSpeed: 7
   lastDesiredMoveSpeed: 2.5
   groundDrag: 7
-  jumpForce: 8
+  jumpForce: 16
   jumpCooldown: 0.25
   airMultiplayer: 0.5
   crounchSpeed: 4
@@ -509,7 +510,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916177446}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9b5ccb7a6318d74bacbed0aa5430ac3, type: 3}
   m_Name: 
@@ -524,6 +525,19 @@ MonoBehaviour:
   slideYScale: 1
   slideKey: 306
   slideToCrouchSpeedThreshold: 0
+--- !u!114 &916177451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916177446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf24a8d3a102a846b8a10ca6e1195d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityMultiplier: 3.5
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToShoot: {fileID: 8300465985972244574, guid: f6d49179c4a5e294dae5b198d1f7dd9f, type: 3}
-  targetGameObject: {fileID: 1043548788}
+  targetGameObject: {fileID: 1931005737}
   FireSpeed: 1000
   fireRate: 1
 --- !u!4 &968565809
