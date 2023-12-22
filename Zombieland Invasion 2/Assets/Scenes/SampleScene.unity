@@ -123,55 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &542999543
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 542999544}
-  - component: {fileID: 542999545}
-  m_Layer: 0
-  m_Name: Bow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &542999544
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542999543}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 916177447}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &542999545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542999543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af0bcee048037ef47b6bd75620537b09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bowString: {fileID: 0}
-  arrowPrefab: {fileID: 8300465985972244574, guid: f6d49179c4a5e294dae5b198d1f7dd9f, type: 3}
-  arrowSpawnPoint: {fileID: 542999544}
-  arrowSpeed: 10
-  maxPullDistance: 2
 --- !u!1 &587934544
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +414,6 @@ GameObject:
   - component: {fileID: 916177450}
   - component: {fileID: 916177451}
   - component: {fileID: 916177452}
-  - component: {fileID: 916177453}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -488,7 +438,6 @@ Transform:
   - {fileID: 1406608613}
   - {fileID: 587934545}
   - {fileID: 706691660}
-  - {fileID: 542999544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &916177448
@@ -585,7 +534,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916177446}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbf24a8d3a102a846b8a10ca6e1195d9, type: 3}
   m_Name: 
@@ -598,15 +547,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916177446}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9811a6e6f223c2340979dfeeaf9a3bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 817206693}
   orientation: {fileID: 587934545}
-  moveSpeed: 4500
-  maxSpeed: 20
+  moveSpeed: 3000
+  maxSpeed: 10
   grounded: 0
   whatIsGround:
     serializedVersion: 2
@@ -615,26 +564,11 @@ MonoBehaviour:
   maxSlopeAngle: 35
   slideForce: 400
   slideCounterMovement: 0.2
-  jumpForce: 120
---- !u!114 &916177453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 916177446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac790085388632e4998176092a3a06ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  rotationSpeed: 700
-  jumpForce: 8
-  gravity: 30
-  dashDistance: 5
-  dashCooldown: 2
-  dashDuration: 0.2
+  jumpForce: 300
+  dashForceInAir: 2
+  dashForceOnGround: 20
+  dashDuration: 0.1
+  dashCooldown: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

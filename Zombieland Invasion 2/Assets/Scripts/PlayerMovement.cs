@@ -47,6 +47,15 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    // Dash
+    private bool dashing = false;
+    public float dashForceInAir = 30f; // Adjust this value for mid-air dash force
+    public float dashForceOnGround = 10f; // Adjust this value for grounded dash force
+    public float dashDuration = 0.2f;
+    private float dashTimer = 0f;
+    private bool canDash = true;
+    public float dashCooldown = 2f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -69,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
     {
         MyInput();
         Look();
+
+        // Handle dash
+        HandleDash();
     }
 
     /// <summary>
@@ -86,6 +98,12 @@ public class PlayerMovement : MonoBehaviour
             StartCrouch();
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
+
+        // Dash input
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartDash();
+        }
     }
 
     private void StartCrouch()
@@ -294,6 +312,51 @@ public class PlayerMovement : MonoBehaviour
     private void StopGrounded()
     {
         grounded = false;
+    }
+
+    private void HandleDash()
+    {
+        if (dashing)
+        {
+            // Check if dash duration is over
+            if (dashTimer >= dashDuration)
+            {
+                StopDash();
+            }
+            else
+            {
+                // Apply dash force based on whether the player is grounded or not
+                float currentDashForce = grounded ? dashForceOnGround : dashForceInAir;
+                Vector3 dashDirection = rb.velocity.normalized;
+                rb.AddForce(dashDirection * currentDashForce, ForceMode.VelocityChange);
+
+                dashTimer += Time.deltaTime;
+            }
+        }
+
+        // Cooldown for dash
+        if (!canDash)
+        {
+            dashTimer += Time.deltaTime;
+            if (dashTimer >= dashCooldown)
+            {
+                canDash = true;
+            }
+        }
+    }
+    private void StartDash()
+    {
+        if (canDash)
+        {
+            dashing = true;
+            canDash = false;
+            dashTimer = 0f;
+            // Add any additional logic for invincibility frames here
+        }
+    }
+    private void StopDash()
+    {
+        dashing = false;
     }
 
 }
