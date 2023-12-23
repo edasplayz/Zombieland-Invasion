@@ -53,8 +53,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isDashing = false;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
-
     
+    private bool canDash = true;
+    public float dashCooldown = 1f; // Set your desired cooldown time
+
+
     public Transform dashOrientation; // Assign the object in the inspector for calculating dash orientation
 
 
@@ -83,10 +86,13 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
 
+        
         // Handle dash
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !IsPlayerCloseToTarget() && canDash)
         {
             StartCoroutine(Dash());
+            canDash = false;
+            Invoke(nameof(ResetDashCooldown), dashCooldown);
         }
     }
 
@@ -354,8 +360,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    bool IsPlayerCloseToTarget()
+    {
+        // Check if the distance between the player and the target object is less than the proximity distance
+        float distance = Vector3.Distance(transform.position, dashOrientation.position);
+        return distance < dashDistance;
+    }
 
-
+    private void ResetDashCooldown()
+    {
+        canDash = true;
+    }
 
 
 

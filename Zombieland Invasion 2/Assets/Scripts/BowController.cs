@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class BowController : MonoBehaviour
 {
@@ -6,6 +8,7 @@ public class BowController : MonoBehaviour
     public Transform arrowSpawnPoint;
     public float maxShootForce = 50f;
     public float chargeRate = 10f;
+    public float shotCooldown = 1f; // Adjust this value for the desired cooldown time
 
     [Header("Target Object (Set in Editor)")]
     public Transform targetObject;
@@ -13,6 +16,7 @@ public class BowController : MonoBehaviour
     private bool isAiming = false;
     private float currentShootForce;
     private GameObject currentArrow;
+    private bool canShoot = true;
 
     public GameObject arrow;
 
@@ -42,11 +46,13 @@ public class BowController : MonoBehaviour
 
     void StartAiming()
     {
-        isAiming = true;
-        currentShootForce = 0f;
-        GetComponent<Animator>().SetTrigger("Shoot");
-        arrow.SetActive(true);
-
+        if (canShoot)
+        {
+            isAiming = true;
+            currentShootForce = 0f;
+            GetComponent<Animator>().SetTrigger("Shoot");
+            arrow.SetActive(true);
+        }
     }
 
     void Charge()
@@ -67,7 +73,7 @@ public class BowController : MonoBehaviour
             // Play your shoot animation here
             GetComponent<Animator>().SetTrigger("Relese");
 
-            if (targetObject != null)
+            if (targetObject != null && canShoot)
             {
                 currentArrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, arrowSpawnPoint.rotation);
                 Vector3 targetDirection = (targetObject.position - arrowSpawnPoint.position).normalized;
@@ -76,12 +82,27 @@ public class BowController : MonoBehaviour
                 Rigidbody arrowRb = currentArrow.GetComponent<Rigidbody>();
                 arrowRb.AddForce(currentArrow.transform.forward * currentShootForce, ForceMode.Impulse);
                 arrow.SetActive(false);
+
+                // Start the cooldown only if not in cooldown
+                if (canShoot)
+                {
+                    StartCoroutine(ShotCooldown());
+                }
             }
             else
             {
-                Debug.LogWarning("Target object not set. Arrow not fired.");
+                Debug.LogWarning("Target object not set or on cooldown. Arrow not fired.");
                 Destroy(currentArrow);
             }
         }
     }
+
+    IEnumerator ShotCooldown()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(shotCooldown);
+        canShoot = true;
+    }
+
+
 }

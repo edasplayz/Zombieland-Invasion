@@ -40,5 +40,14 @@ public class Arrow : MonoBehaviour
 
         // Restore the parent transform
         transform.SetParent(parentTransform);
+
+        // Schedule the arrow to disappear after 10 seconds
+        Invoke("Disappear", 10f);
+    }
+
+    private void Disappear()
+    {
+        // Destroy the arrow GameObject after 10 seconds
+        Destroy(gameObject);
     }
 }
