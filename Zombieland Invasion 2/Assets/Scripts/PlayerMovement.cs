@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
         
         // Handle dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !IsPlayerCloseToTarget() && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             StartCoroutine(Dash());
             canDash = false;
@@ -324,6 +324,8 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
     }
 
+    // ... (previous code)
+
     private IEnumerator Dash()
     {
         if (!isDashing)
@@ -347,6 +349,15 @@ public class PlayerMovement : MonoBehaviour
                 float t = elapsedTime / dashDuration;
                 transform.position = Vector3.Lerp(dashStartPos, dashEndPos, t);
 
+                // Raycast to check for collisions with the "whatisground" layer
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, dashDirection, out hit, dashDistance, whatIsGround))
+                {
+                    // Stop the dash if a collision with the specified layer is detected
+                    transform.position = hit.point;
+                    break;
+                }
+
                 // Clamp the magnitude to restrict the dash distance
                 Vector3 currentDashVector = transform.position - dashStartPos;
                 transform.position = dashStartPos + Vector3.ClampMagnitude(currentDashVector, dashDistance);
@@ -360,12 +371,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    bool IsPlayerCloseToTarget()
+
+   /* bool IsPlayerCloseToTarget()
     {
         // Check if the distance between the player and the target object is less than the proximity distance
         float distance = Vector3.Distance(transform.position, dashOrientation.position);
         return distance < dashDistance;
-    }
+    }*/
 
     private void ResetDashCooldown()
     {

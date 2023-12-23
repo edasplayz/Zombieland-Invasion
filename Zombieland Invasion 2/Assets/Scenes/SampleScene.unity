@@ -804,8 +804,8 @@ MonoBehaviour:
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 300
-  dashDistance: 10
-  dashDuration: 0.1
+  dashDistance: 5
+  dashDuration: 0.2
   dashCooldown: 1
   dashOrientation: {fileID: 1931005738}
 --- !u!1 &963194225
@@ -1114,7 +1114,7 @@ GameObject:
   - component: {fileID: 1127060721}
   - component: {fileID: 1127060720}
   - component: {fileID: 1127060719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ' Player Object'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1444,7 @@ GameObject:
   - component: {fileID: 1406608616}
   - component: {fileID: 1406608615}
   - component: {fileID: 1406608614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ' Player Object (1)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1460,7 +1460,7 @@ Transform:
   m_GameObject: {fileID: 1406608612}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.051, z: 0}
+  m_LocalPosition: {x: 0, y: 0.031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
