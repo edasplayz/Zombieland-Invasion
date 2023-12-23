@@ -2,6 +2,8 @@
 
 using System;
 using UnityEngine;
+using System.Collections;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -48,17 +50,19 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 wallNormalVector;
 
     // Dash
-    private bool dashing = false;
-    public float dashForceInAir = 30f; // Adjust this value for mid-air dash force
-    public float dashForceOnGround = 10f; // Adjust this value for grounded dash force
+    private bool isDashing = false;
+    public float dashDistance = 5f;
     public float dashDuration = 0.2f;
-    private float dashTimer = 0f;
-    private bool canDash = true;
-    public float dashCooldown = 2f;
+
+    
+    public Transform dashOrientation; // Assign the object in the inspector for calculating dash orientation
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        
     }
 
     void Start()
@@ -80,7 +84,10 @@ public class PlayerMovement : MonoBehaviour
         Look();
 
         // Handle dash
-        HandleDash();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     /// <summary>
@@ -99,11 +106,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
 
-        // Dash input
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            StartDash();
-        }
+        
+       
     }
 
     private void StartCrouch()
@@ -314,49 +318,56 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
     }
 
-    private void HandleDash()
+    private IEnumerator Dash()
     {
-        if (dashing)
+        if (!isDashing)
         {
-            // Check if dash duration is over
-            if (dashTimer >= dashDuration)
-            {
-                StopDash();
-            }
-            else
-            {
-                // Apply dash force based on whether the player is grounded or not
-                float currentDashForce = grounded ? dashForceOnGround : dashForceInAir;
-                Vector3 dashDirection = rb.velocity.normalized;
-                rb.AddForce(dashDirection * currentDashForce, ForceMode.VelocityChange);
+            isDashing = true;
 
-                dashTimer += Time.deltaTime;
-            }
-        }
+            // Get the input direction in world space based on the assigned orientation
+            Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
-        // Cooldown for dash
-        if (!canDash)
-        {
-            dashTimer += Time.deltaTime;
-            if (dashTimer >= dashCooldown)
+            // Calculate the dash direction using the assigned orientation
+            Vector3 dashDirection = dashOrientation.forward * inputDirection.z + dashOrientation.right * inputDirection.x;
+
+            Vector3 dashStartPos = transform.position;
+            Vector3 dashEndPos = dashStartPos + dashDirection * dashDistance;
+
+            float startTime = Time.time;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < dashDuration)
             {
-                canDash = true;
+                float t = elapsedTime / dashDuration;
+                transform.position = Vector3.Lerp(dashStartPos, dashEndPos, t);
+
+                // Clamp the magnitude to restrict the dash distance
+                Vector3 currentDashVector = transform.position - dashStartPos;
+                transform.position = dashStartPos + Vector3.ClampMagnitude(currentDashVector, dashDistance);
+
+                elapsedTime = Time.time - startTime;
+                yield return null;
             }
+
+            isDashing = false;
         }
     }
-    private void StartDash()
-    {
-        if (canDash)
-        {
-            dashing = true;
-            canDash = false;
-            dashTimer = 0f;
-            // Add any additional logic for invincibility frames here
-        }
-    }
-    private void StopDash()
-    {
-        dashing = false;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -670,10 +670,9 @@ MonoBehaviour:
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 300
-  dashForceInAir: 1
-  dashForceOnGround: 20
+  dashDistance: 5
   dashDuration: 0.1
-  dashCooldown: 1
+  dashOrientation: {fileID: 1931005738}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
