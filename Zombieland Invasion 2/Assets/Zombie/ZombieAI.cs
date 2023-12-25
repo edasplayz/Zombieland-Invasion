@@ -5,7 +5,7 @@ public class ZombieAI : MonoBehaviour
 {
     [SerializeField] private float detectionRange = 10f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float moveSpeed = 2f;
+   // [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float standStillTime = 3f;
     [SerializeField] private float moveRandomlyTime = 2f;
     [SerializeField] private float wanderRange = 5f; // Added range for wandering
@@ -37,8 +37,6 @@ public class ZombieAI : MonoBehaviour
         {
             // Player is in range, move towards the player
             MoveTowardsPlayer();
-            
-
 
             // Check if the player is close enough to attack
             if (Vector3.Distance(transform.position, player.position) <= attackRange)
@@ -48,19 +46,15 @@ public class ZombieAI : MonoBehaviour
             else
             {
                 // Player is not close enough to attack, trigger movement animation
-                
-                SetMoveSpeed(1f);
-                StopMovingRandomly(); // Stop moving randomly when player is detected
+                PlayWalkAnimation();
             }
         }
         else
         {
             // Player is not in range
-
-            
             if (!isMovingRandomly)
             {
-               timer += Time.deltaTime;
+                timer += Time.deltaTime;
                 if (timer >= standStillTime)
                 {
                     // Stand still for a certain time
@@ -73,8 +67,22 @@ public class ZombieAI : MonoBehaviour
                         timer = 0f;
                     }
                 }
+                else
+                {
+                    // Check if the zombie is stationary and trigger idle animation
+                    if (navMeshAgent.velocity.magnitude < 0.5f)
+                    {
+                        PlayIdleAnimation();
+                    }
+                }
             }
         }
+    }
+
+    void PlayIdleAnimation()
+    {
+        // Trigger idle animation
+        SetMoveSpeed(0f);
     }
 
     void CheckPlayerInRange()
@@ -95,15 +103,39 @@ public class ZombieAI : MonoBehaviour
         // Set the destination for the NavMeshAgent
         navMeshAgent.SetDestination(player.position);
 
-        // Trigger movement animation
-        SetMoveSpeed(1f);
+        // Check if the zombie is moving
+        if (!navMeshAgent.isStopped)
+        {
+            // Trigger movement animation
+            SetMoveSpeed(1f);
+        }
+        else
+        {
+            // Stop moving animation if the zombie is not moving
+            SetMoveSpeed(0f);
+        }
+    }
+
+    void PlayWalkAnimation()
+    {
+        // Check if the zombie is moving
+        if (navMeshAgent.velocity.magnitude > 0.1f)
+        {
+            // Trigger movement animation
+            SetMoveSpeed(1f);
+        }
+        else
+        {
+            // Stop moving animation if the zombie is not moving
+            SetMoveSpeed(0f);
+        }
     }
 
 
     void StandStill()
     {
         // Stand still and trigger idle animation
-        SetMoveSpeed(0f);
+        //SetMoveSpeed(0f);
         gameObject.GetComponent<NavMeshAgent>().isStopped = false;
     }
 
@@ -131,6 +163,13 @@ public class ZombieAI : MonoBehaviour
         // Check for player proximity while moving randomly
         while (!isPlayerInRange && Vector3.Distance(transform.position, player.position) > detectionRange)
         {
+            // Check if the zombie has reached its destination
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                // Stop moving animation when the zombie has reached its destination
+                SetMoveSpeed(0f);
+            }
+
             yield return null;
         }
 
