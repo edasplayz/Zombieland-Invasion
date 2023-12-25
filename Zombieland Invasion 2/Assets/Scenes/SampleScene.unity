@@ -1619,6 +1619,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FreeZombieSimpleMovement Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7410754702303945126, guid: edd9e8e82006c7845a4b69661a32eb80, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7410754702303945126, guid: edd9e8e82006c7845a4b69661a32eb80, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7443083580856044760, guid: edd9e8e82006c7845a4b69661a32eb80, type: 3}
       propertyPath: m_Controller
       value: 

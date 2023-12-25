@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    private Rigidbody rb;
     private bool targetHit;
     private Quaternion initialRotation;
+    private Rigidbody rb;
 
     private void Start()
     {
@@ -23,23 +23,19 @@ public class Arrow : MonoBehaviour
             targetHit = true;
         }
 
-        rb.velocity = Vector3.zero;
-        rb.isKinematic = true;
+        // Remove the Collider component
+        Destroy(GetComponent<Collider>());
 
-        // Store the parent transform before making it a child
-        Transform parentTransform = transform.parent;
+        // Add a FixedJoint component to connect the arrow to the target
+        FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
+        fixedJoint.connectedBody = collision.rigidbody;
 
-        // Make the arrow a child of the target
-        transform.SetParent(collision.transform, true);
-
-        // Offset the arrow slightly to avoid z-fighting
-        transform.position += transform.forward * 0.01f;
+        // Adjust the connectedMassScale and massScale to allow the target to move more freely
+        fixedJoint.connectedMassScale = 0.1f;  // Adjust this value as needed
+        fixedJoint.massScale = 1.0f;            // Adjust this value as needed
 
         // Apply the initial rotation after becoming a child
         transform.rotation = initialRotation;
-
-        // Restore the parent transform
-        transform.SetParent(parentTransform);
 
         // Schedule the arrow to disappear after 10 seconds
         Invoke("Disappear", 10f);
