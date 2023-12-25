@@ -30,13 +30,91 @@ public class ZombieCharacterControl : MonoBehaviour
 
     private Vector3 m_currentDirection = Vector3.zero;
 
+
+
+
+
     // New variable for FollowPlayer mode
     [SerializeField] private Transform targetPlayer = null;
+
+    [SerializeField] private float attackRange = 2f;
+    [SerializeField] private int maxHealth = 100;
+    private int currentHealth;
+
+    private bool isDead = false;
+    private bool isAttacking = false;
 
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+
+        currentHealth = maxHealth;
+    }
+
+    private void Update()
+    {
+        if (m_controlMode == ControlMode.FollowPlayer && !isDead && !isAttacking)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
+
+            if (distanceToPlayer <= attackRange)
+            {
+                // Stop moving towards the player and start attacking
+                isAttacking = true;
+                m_animator.SetFloat("MoveSpeed", 0f); // Stop movement
+                Attack();
+            }
+            else
+            {
+                // Continue moving towards the player
+                isAttacking = false;
+                m_animator.SetFloat("MoveSpeed", m_moveSpeed); // Set movement speed
+            }
+        }
+    }
+
+    private void Attack()
+    {
+        // Play the attack animation
+        m_animator.SetTrigger("Attack");
+
+        // Implement any additional attack logic here
+        Debug.Log("Zombie is attacking!");
+
+        // For demonstration purposes, reduce player health
+        /*PlayerHealth playerHealth = targetPlayer.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(10);
+        }*/
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        if (isDead) return;
+
+        currentHealth -= damageAmount;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+
+        // Play the death animation
+        m_animator.SetTrigger("Dead");
+
+        // Disable other components, such as the collider or scripts, to prevent further interactions
+        GetComponent<Collider>().enabled = false;
+        // Optionally, disable the script to stop updates
+        // enabled = false;
+
+        // You might want to play death sounds or particle effects here
     }
 
     private void FixedUpdate()
