@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -5,6 +6,8 @@ public class Arrow : MonoBehaviour
     private bool targetHit;
     private Quaternion initialRotation;
     private Rigidbody rb;
+
+    public int damage;
 
     private void Start()
     {
@@ -21,6 +24,12 @@ public class Arrow : MonoBehaviour
         else
         {
             targetHit = true;
+        }
+        if (collision.gameObject.GetComponent<Enemyhp>() != null)
+        {
+            Enemyhp enemyhp = collision.gameObject.GetComponent<Enemyhp>();
+
+            enemyhp.TakeDamage(damage);
         }
 
         // Remove the Collider component
