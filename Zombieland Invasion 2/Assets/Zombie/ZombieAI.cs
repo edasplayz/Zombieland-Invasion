@@ -1,252 +1,171 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+
 public class ZombieAI : MonoBehaviour
 {
-    [SerializeField] private float detectionRange = 10f;
+    [SerializeField] private float visionRadius = 10f;
+    [SerializeField] private float smallVisionRadius = 3f;
+    [SerializeField, Range(1f, 180f)] private float visionAngle = 45f;
     [SerializeField] private float attackRange = 2f;
-   // [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float standStillTime = 3f;
-    [SerializeField] private float moveRandomlyTime = 2f;
-    [SerializeField] private float wanderRange = 5f; // Added range for wandering
+    [SerializeField] private float attackDelay = 2f;
+    [SerializeField] private float turningSpeed = 120f; // Adjust this value as needed
 
-    private Animator animator;
     private Transform player;
-    private bool isPlayerInRange = false;
-    private bool isMovingRandomly = false;
-    private float timer = 0f;
+    private NavMeshAgent navMeshAgent;
+    private Animator animator;
+    private Vector3 lastKnownPlayerPosition;
+    private bool canAttack = true;
 
-    private float moveSpeedParameter = 0f; // Added parameter for moveSpeed
-    private bool playerEnteredDuringRandomMove = false;
-
-    NavMeshAgent navMeshAgent;
-
-    void Start()
+    private void Start()
     {
-        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
-        timer = Random.Range(0f, moveRandomlyTime);
+        animator = GetComponent<Animator>();
+        lastKnownPlayerPosition = transform.position;
+
+        // Set turning speed
+        navMeshAgent.angularSpeed = turningSpeed;
     }
 
-    void Update()
+    private void Update()
     {
-        CheckPlayerInRange();
-
-        if (isPlayerInRange)
+        // Check if the player is in the vision cone or the small vision zone
+        if (CanSeePlayer() || IsPlayerInSmallVisionZone())
         {
-            // Player is in range, move towards the player
+            // Player is in sight
             MoveTowardsPlayer();
 
-            // Check if the player is close enough to attack
-            if (Vector3.Distance(transform.position, player.position) <= attackRange)
+            // Check if the player is in attack range and can attack
+            if (Vector3.Distance(transform.position, player.position) <= attackRange && canAttack)
             {
                 Attack();
             }
-            else
-            {
-                // Player is not close enough to attack, trigger movement animation
-                PlayWalkAnimation();
-            }
         }
         else
         {
-            // Player is not in range
-            if (!isMovingRandomly)
-            {
-                timer += Time.deltaTime;
-                if (timer >= standStillTime)
-                {
-                    // Stand still for a certain time
-                    StandStill();
+            // Player is not in sight, move to the last known position
+            MoveToLastKnownPosition();
+        }
 
-                    if (timer >= standStillTime + moveRandomlyTime)
-                    {
-                        // Move randomly for a certain time
-                        MoveRandomly();
-                        timer = 0f;
-                    }
-                }
-                else
+        // Update animator parameters based on movement
+        float moveSpeed = navMeshAgent.velocity.magnitude / navMeshAgent.speed;
+        animator.SetFloat("MoveSpeed", moveSpeed);
+
+        // Update animator parameters based on attack state
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        bool isAttacking = stateInfo.IsTag("Attack");
+        //animator.SetBool("IsAttacking", isAttacking);
+
+        // Log the current animation state
+        // Debug.Log("Current Animation State: " + stateInfo.fullPathHash);
+    }
+
+    private bool CanSeePlayer()
+    {
+        Vector3 directionToPlayer = player.position - transform.position;
+        float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+
+        if (angleToPlayer <= visionAngle / 2f)
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, directionToPlayer, out hit, visionRadius))
+            {
+                if (hit.collider.CompareTag("Player") && IsPlayerVisible(hit.collider.gameObject))
                 {
-                    // Check if the zombie is stationary and trigger idle animation
-                    if (navMeshAgent.velocity.magnitude < 0.5f)
-                    {
-                        PlayIdleAnimation();
-                    }
+                    // Player is in sight
+                    DrawVisionCone(Color.green);
+                    lastKnownPlayerPosition = player.position; // Update last known position
+                    return true;
                 }
             }
         }
+
+        // Player is not in sight
+        return false;
     }
 
-    void PlayIdleAnimation()
+    private bool IsPlayerInSmallVisionZone()
     {
-        // Trigger idle animation
-        SetMoveSpeed(0f);
+        Vector3 directionToPlayer = player.position - transform.position;
+        RaycastHit hit;
+
+        // Perform a raycast within the small vision radius
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, smallVisionRadius))
+        {
+            if (hit.collider.CompareTag("Player") && IsPlayerVisible(hit.collider.gameObject))
+            {
+                // Player is in small vision zone and visible, update last known position
+                lastKnownPlayerPosition = player.position;
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    void CheckPlayerInRange()
+    private bool IsPlayerVisible(GameObject playerObject)
     {
-        // Check if the player is within detection range
-        bool playerInRange = Vector3.Distance(transform.position, player.position) <= detectionRange;
-        isPlayerInRange = playerInRange;
+        // Check if the player is visible, e.g., not behind a wall
+        // You can customize this logic based on your game's requirements
+        // For a simple example, you can use layers or additional tags for obstacles
+        return !Physics.Linecast(transform.position, player.position, LayerMask.GetMask("Obstacle"));
     }
 
-
-    void MoveTowardsPlayer()
+    private void MoveTowardsPlayer()
     {
-        // Rotate towards the player
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0, directionToPlayer.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
         // Set the destination for the NavMeshAgent
         navMeshAgent.SetDestination(player.position);
-
-        // Check if the zombie is moving
-        if (!navMeshAgent.isStopped)
-        {
-            // Trigger movement animation
-            SetMoveSpeed(1f);
-        }
-        else
-        {
-            // Stop moving animation if the zombie is not moving
-            SetMoveSpeed(0f);
-        }
     }
 
-    void PlayWalkAnimation()
+    private void MoveToLastKnownPosition()
     {
-        // Check if the zombie is moving
-        if (navMeshAgent.velocity.magnitude > 0.1f)
-        {
-            // Trigger movement animation
-            SetMoveSpeed(1f);
-        }
-        else
-        {
-            // Stop moving animation if the zombie is not moving
-            SetMoveSpeed(0f);
-        }
+        // Set the destination for the NavMeshAgent to the last known player position
+        navMeshAgent.SetDestination(lastKnownPlayerPosition);
     }
 
-
-    void StandStill()
+    private void Attack()
     {
-        // Stand still and trigger idle animation
-        //SetMoveSpeed(0f);
-        gameObject.GetComponent<NavMeshAgent>().isStopped = false;
-    }
-
-    void MoveRandomly()
-    {
-        // Move randomly and trigger movement animation
-        Vector3 randomDirection = Random.onUnitSphere * wanderRange;
-        randomDirection.y = 0f; // Ensure the zombie moves only on the horizontal plane
-
-        // Calculate a random destination point within the specified range
-        Vector3 randomDestination = transform.position + randomDirection;
-
-        // Use NavMeshAgent to move the zombie
-        navMeshAgent.SetDestination(randomDestination);
-
-        // Trigger movement animation
-        SetMoveSpeed(1f);
-
-        // Start checking for player proximity while moving randomly
-        StartCoroutine(CheckPlayerProximity(randomDestination));
-    }
-
-    IEnumerator CheckPlayerProximity(Vector3 randomDestination)
-    {
-        // Check for player proximity while moving randomly
-        while (!isPlayerInRange && Vector3.Distance(transform.position, player.position) > detectionRange)
-        {
-            // Check if the zombie has reached its destination
-            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
-            {
-                // Stop moving animation when the zombie has reached its destination
-                SetMoveSpeed(0f);
-            }
-
-            yield return null;
-        }
-
-        // Player is in range
-        if (isPlayerInRange)
-        {
-            // Stop moving randomly
-            StopMovingRandomly();
-
-            // Move towards the player immediately
-            MoveTowardsPlayer();
-        }
-        else
-        {
-            // Player is not in range, continue moving randomly
-            StartCoroutine(WaitForDestination());
-        }
-    }
-
-    void StopMovingRandomly()
-    {
-        // Stop moving randomly
-        isMovingRandomly = false;
-        SetMoveSpeed(0f); // Set the move speed to 0 to stop the movement
-    }
-
-    IEnumerator WaitForDestination()
-    {
-        // Store the initial position
-        Vector3 initialPosition = transform.position;
-
-        // Wait until the zombie reaches its destination or the player comes into range
-        while (navMeshAgent.pathPending || navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
-        {
-            // If the player comes into range during random movement, break from the loop
-            if (isPlayerInRange)
-            {
-                playerEnteredDuringRandomMove = true;
-                break;
-            }
-            yield return null;
-        }
-
-        // If the player didn't come into range during random movement, stop moving randomly
-        if (!playerEnteredDuringRandomMove)
-        {
-            isMovingRandomly = false;
-            SetMoveSpeed(0f);
-        }
-
-        // Reset the flag
-        playerEnteredDuringRandomMove = false;
-    }
-
-
-    void Attack()
-    {
-        // Trigger attack animation
+        // Implement attack logic here
         animator.SetTrigger("Attack");
+        Debug.Log("Attacking player!");
 
-        // Implement attack logic here if needed
+        // Set canAttack to false to prevent further attacks during the delay
+        canAttack = false;
+
+        // Start the coroutine to reset canAttack after the delay
+        StartCoroutine(ResetAttackDelay());
     }
 
-    public void Die()
+    private IEnumerator ResetAttackDelay()
     {
-        // Trigger dead animation
-        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(attackDelay);
 
-        // Implement any additional logic for when the zombie dies
+        // Reset canAttack to true after the delay
+        canAttack = true;
     }
 
-    void SetMoveSpeed(float speed)
+    private void DrawVisionCone(Color color)
     {
-        // Set the "MoveSpeed" parameter in the Animator
-        moveSpeedParameter = speed;
-        animator.SetFloat("MoveSpeed", moveSpeedParameter);
+        Vector3 leftConeDirection = Quaternion.Euler(0, -visionAngle / 2f, 0) * transform.forward;
+        Vector3 rightConeDirection = Quaternion.Euler(0, visionAngle / 2f, 0) * transform.forward;
+
+        Debug.DrawLine(transform.position, transform.position + leftConeDirection * visionRadius, color);
+        Debug.DrawLine(transform.position, transform.position + rightConeDirection * visionRadius, color);
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        // Draw the main vision radius
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, visionRadius);
 
+        // Draw the small vision zone
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, smallVisionRadius);
+
+        // Draw the vision cone during editing
+        DrawVisionCone(Color.blue);
+    }
 }
