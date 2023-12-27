@@ -1048,6 +1048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9811a6e6f223c2340979dfeeaf9a3bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Display: {fileID: 1293494166}
   playerCam: {fileID: 817206693}
   orientation: {fileID: 587934545}
   moveSpeed: 3000
@@ -1061,7 +1062,7 @@ MonoBehaviour:
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 300
-  maxDashCount: 1
+  maxDashCount: 3
   dashCount: 0
   dashDistance: 5
   dashDuration: 0.2
@@ -1545,6 +1546,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: 916177448}
   speedText: {fileID: 235561553}
+  playerMovement: {fileID: 916177452}
+  countdownText: {fileID: 1305002791}
 --- !u!1 &1305002789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,7 +2282,7 @@ Transform:
   m_GameObject: {fileID: 2353773007374948709}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.336, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2503,13 +2506,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482907658254226799}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.443, y: 0.03, z: 0.006}
+  m_LocalRotation: {x: 0.15657452, y: 0.6781987, z: 0.16151595, w: 0.6996024}
+  m_LocalPosition: {x: 0.443, y: 0.03, z: 0.022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5839381985879384540}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 88.22, z: -694}
 --- !u!4 &4190870855796134173
 Transform:
   m_ObjectHideFlags: 0

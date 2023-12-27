@@ -7,7 +7,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+    public SpeedTracker Display;
     //Assingables
     public Transform playerCam;
     public Transform orientation;
@@ -57,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isDashing = false;
 
+    
+
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     private bool canDash = true;
@@ -103,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
             canDash = false;
             dashCount--; // Decrease dash count
             Invoke(nameof(ResetDashCooldown), dashCooldown * (maxDashCount - dashCount));
+            Display.GetTimer(dashCooldown * (maxDashCount - dashCount));
         }
     }
 
@@ -382,6 +385,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             isDashing = false;
+            
         }
     }
 
