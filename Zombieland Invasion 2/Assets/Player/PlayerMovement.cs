@@ -7,7 +7,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    
     //Assingables
     public Transform playerCam;
     public Transform orientation;
@@ -50,12 +50,19 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 wallNormalVector;
 
     // Dash
+    [SerializeField]
+    private int maxDashCount = 2; // Set your desired maximum dash count
+    [SerializeField]
+    public int dashCount; // Current dash count
+
     private bool isDashing = false;
+
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
-    
     private bool canDash = true;
     public float dashCooldown = 1f; // Set your desired cooldown time
+
+
 
 
     public Transform dashOrientation; // Assign the object in the inspector for calculating dash orientation
@@ -73,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
         playerScale = transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        dashCount = maxDashCount; // Initialize dash count
     }
 
 
@@ -85,14 +94,26 @@ public class PlayerMovement : MonoBehaviour
     {
         MyInput();
         Look();
-
         
+
         // Handle dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCount > 0 && !isDashing)
         {
             StartCoroutine(Dash());
             canDash = false;
-            Invoke(nameof(ResetDashCooldown), dashCooldown);
+            dashCount--; // Decrease dash count
+            Invoke(nameof(ResetDashCooldown), dashCooldown * (maxDashCount - dashCount));
+        }
+    }
+
+
+
+    private void ResetDashCooldown()
+    {
+        canDash = true;
+        if (dashCount < maxDashCount)
+        {
+            dashCount++; // Recharge one dash
         }
     }
 
@@ -332,10 +353,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isDashing = true;
 
-            // Get the input direction in world space based on the assigned orientation
             Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-
-            // Calculate the dash direction using the assigned orientation
             Vector3 dashDirection = dashOrientation.forward * inputDirection.z + dashOrientation.right * inputDirection.x;
 
             Vector3 dashStartPos = transform.position;
@@ -349,16 +367,13 @@ public class PlayerMovement : MonoBehaviour
                 float t = elapsedTime / dashDuration;
                 transform.position = Vector3.Lerp(dashStartPos, dashEndPos, t);
 
-                // Raycast to check for collisions with the "whatisground" layer
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, dashDirection, out hit, dashDistance, whatIsGround))
                 {
-                    // Stop the dash if a collision with the specified layer is detected
                     transform.position = hit.point;
                     break;
                 }
 
-                // Clamp the magnitude to restrict the dash distance
                 Vector3 currentDashVector = transform.position - dashStartPos;
                 transform.position = dashStartPos + Vector3.ClampMagnitude(currentDashVector, dashDistance);
 
@@ -372,17 +387,14 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-   /* bool IsPlayerCloseToTarget()
-    {
-        // Check if the distance between the player and the target object is less than the proximity distance
-        float distance = Vector3.Distance(transform.position, dashOrientation.position);
-        return distance < dashDistance;
-    }*/
+    /* bool IsPlayerCloseToTarget()
+     {
+         // Check if the distance between the player and the target object is less than the proximity distance
+         float distance = Vector3.Distance(transform.position, dashOrientation.position);
+         return distance < dashDistance;
+     }*/
 
-    private void ResetDashCooldown()
-    {
-        canDash = true;
-    }
+    
 
 
 
