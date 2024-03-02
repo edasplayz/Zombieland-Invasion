@@ -30,6 +30,7 @@ public class Arrow : MonoBehaviour
             Enemyhp enemyhp = collision.gameObject.GetComponent<Enemyhp>();
 
             enemyhp.TakeDamage(damage);
+            
         }
 
         // Remove the Collider component
