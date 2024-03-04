@@ -6,6 +6,8 @@ public class PlayerCamera : MonoBehaviour
 {
     public static PlayerCamera instance;
 
+    public Camera cameraObject;
+
     private void Awake()
     {
         // there can only be one instance of this script at one time, if another exist, destroy it

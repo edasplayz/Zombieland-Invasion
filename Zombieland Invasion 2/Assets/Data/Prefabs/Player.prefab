@@ -5145,10 +5145,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6513466212021196407}
-  - component: {fileID: 3563289370840064571}
   - component: {fileID: 4980175010018914291}
   - component: {fileID: 4389576836793244796}
   - component: {fileID: 5961803712316033680}
+  - component: {fileID: -962024993641430823}
   - component: {fileID: -3627923344316134556}
   - component: {fileID: 2911438646937748948}
   - component: {fileID: 7545909901475829304}
@@ -5182,33 +5182,6 @@ Transform:
   - {fileID: 2905117300613954487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &3563289370840064571
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5489235924790319826}
-  serializedVersion: 4
-  m_Mass: 1.5
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!114 &4980175010018914291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5274,6 +5247,22 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &-962024993641430823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489235924790319826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383377ee1f753e04498c8c3b394cad10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkPositionVelocity: {x: 0, y: 0, z: 0}
+  networkPositionSmoothTime: 0.1
 --- !u!114 &-3627923344316134556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5286,6 +5275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744c4d85709fe404ab0328e082e1b78c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
 --- !u!114 &2911438646937748948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10316,7 +10306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  playerRb: {fileID: 3563289370840064571}
+  playerRb: {fileID: 0}
 --- !u!1001 &3007245942304184499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10420,4 +10410,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  playerRb: {fileID: 3563289370840064571}
+  playerRb: {fileID: 0}

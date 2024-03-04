@@ -791,6 +791,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!20 &748819800 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1240277847452360426, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
+  m_PrefabInstance: {fileID: 1560623592378140914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &786350156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1355,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7448248945874893129, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 748819800}
     - target: {fileID: 153325174771938854, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
       propertyPath: m_Name
       value: Player Camera
