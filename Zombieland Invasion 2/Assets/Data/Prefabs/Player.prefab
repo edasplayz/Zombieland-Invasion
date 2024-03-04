@@ -5151,6 +5151,7 @@ GameObject:
   - component: {fileID: 5961803712316033680}
   - component: {fileID: -3627923344316134556}
   - component: {fileID: 2911438646937748948}
+  - component: {fileID: 7545909901475829304}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5234,7 +5235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Display: {fileID: 0}
-  playerCam: {fileID: 0}
+  playerCam: {fileID: 5261085838772621337, guid: a6bd8af1a0310364cb1b755e125b7893, type: 3}
   orientation: {fileID: 3167158100957862461}
   moveSpeed: 3000
   maxSpeed: 10
@@ -5297,6 +5298,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58f4403cadf213468d2af7448b8ae9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalMovement: 0
+  horizontalMovement: 0
+  moveAmount: 0
+  walkingSpeed: 2
+  runningSpeed: 5
+--- !u!143 &7545909901475829304
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489235924790319826}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.58
+  m_Radius: 0.2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5678136915598479431
 GameObject:
   m_ObjectHideFlags: 0

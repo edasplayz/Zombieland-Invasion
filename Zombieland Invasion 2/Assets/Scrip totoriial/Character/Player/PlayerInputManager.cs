@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,9 @@ public class PlayerInputManager : MonoBehaviour
     PlayerControls playerControls;
 
     [SerializeField] Vector2 movementInput;
+    public float verticalInput;
+    public float horizontalInput;
+    public float moveAmount;
 
     private void Awake()
     {
@@ -65,5 +69,29 @@ public class PlayerInputManager : MonoBehaviour
     {
         // if we destroy this object, unsubscribe from this event
         SceneManager.activeSceneChanged -= OnScreneChange;
+    }
+
+    private void Update()
+    {
+        HandleMovementInput();
+    }
+    private void HandleMovementInput()
+    {
+        verticalInput = movementInput.y;
+        horizontalInput = movementInput.x;
+
+        // return the abslute number, number vithout minus - one plus + 
+        moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
+
+        // we clamp the values, so thet are 0, 0.5 or 1
+        if(moveAmount <= 0.5 && moveAmount > 0)
+        {
+            moveAmount = 0.5f;
+
+        }
+        else if(moveAmount > 0.5 && moveAmount <= 1)
+        {
+            moveAmount = 1;
+        }
     }
 }

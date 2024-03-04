@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class CharacterLocomationManager : MonoBehaviour
 {
-    
+    protected virtual void Awake()
+    {
+
+    }
 }
