@@ -791,11 +791,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!20 &748819800 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 1240277847452360426, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
-  m_PrefabInstance: {fileID: 1560623592378140914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &786350156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1342,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08d8217ed0f512643b22f5e019fa0f79, type: 3}
---- !u!1001 &1560623592378140914
+--- !u!1001 &4289345918762590947
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1356,12 +1351,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7448248945874893129, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 748819800}
+      propertyPath: upAndDownRotationSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: -7448248945874893129, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
+      propertyPath: leftAndRightRotationSpeed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 153325174771938854, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
       propertyPath: m_Name
-      value: Player Camera
+      value: Player Camera left and right
       objectReference: {fileID: 0}
     - target: {fileID: 8578978524161490184, guid: 5c63ca0870e61294da05f1eeb473759f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1533,4 +1532,4 @@ SceneRoots:
   - {fileID: 1376244491053533612}
   - {fileID: 6972191838691810848}
   - {fileID: 4460747537737638638}
-  - {fileID: 1560623592378140914}
+  - {fileID: 4289345918762590947}
