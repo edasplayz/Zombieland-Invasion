@@ -5261,8 +5261,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
   networkPositionVelocity: {x: 0, y: 0, z: 0}
   networkPositionSmoothTime: 0.1
+  networkRotationSmoothTime: 0.1
 --- !u!114 &-3627923344316134556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5293,6 +5296,7 @@ MonoBehaviour:
   moveAmount: 0
   walkingSpeed: 2
   runningSpeed: 5
+  rotationSpeed: 15
 --- !u!143 &7545909901475829304
 CharacterController:
   m_ObjectHideFlags: 0

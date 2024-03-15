@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class CharacterManager : NetworkBehaviour
 {
-
+    
     public CharacterController characterController;
 
     CharacterNetworkManager characterNetworkManager;
