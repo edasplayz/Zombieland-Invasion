@@ -10275,10 +10275,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1082271958561512970, guid: e70ba5c08fa7b194d82abacc417e83d8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3374985014238114466, guid: e70ba5c08fa7b194d82abacc417e83d8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e70ba5c08fa7b194d82abacc417e83d8, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 6ba0c0bba6e00564887bae6da41b73d6, type: 2}
+    - target: {fileID: 7435527062741710131, guid: e70ba5c08fa7b194d82abacc417e83d8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
