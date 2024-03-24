@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager Instance;
+    public PlayerManager player;
 
     PlayerControls playerControls;
 
@@ -118,6 +119,16 @@ public class PlayerInputManager : MonoBehaviour
         {
             moveAmount = 1;
         }
+        // why do we pass 0 on the horizontal? becouse we only want non strafing movement 
+        // we use the horizontal when we are strafing on loced on 
+        if(player == null)
+        {
+            return;
+        }
+        // if we are not locked on, only use the move amount 
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+
+        // if we are locked on pass the horizontal movement as well 
     }
 
     private void HandleCameraMovementInput()

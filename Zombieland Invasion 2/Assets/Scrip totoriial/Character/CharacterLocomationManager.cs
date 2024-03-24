@@ -8,4 +8,9 @@ public class CharacterLocomationManager : MonoBehaviour
     {
 
     }
+
+    protected virtual void Update()
+    {
+
+    }
 }
