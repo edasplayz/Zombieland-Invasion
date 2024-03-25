@@ -14,6 +14,9 @@ public class CharacterManager : NetworkBehaviour
 
     [Header("Flags")]
     public bool isPreformingAction = false;
+    public bool applyRootMotion = false;
+    public bool canRotate = true;
+    public bool canMove = true;
     protected virtual void Awake()
     {
         DontDestroyOnLoad(this);

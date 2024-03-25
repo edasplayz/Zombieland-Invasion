@@ -51,6 +51,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
     public void HandleAllMovement()
     {
         // grounded movement
+        
         HandleGroundedMovement();
         HandleRotation();
         // ariel movement
@@ -67,7 +68,12 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 
     private void HandleGroundedMovement()
     {
+        if (!player.canMove)
+        {
+            return;
+        }
         GetMovementValues();
+        
         // our move directionb is based on our cameras facing direction perspective & our movement input
         moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
         moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
@@ -88,6 +94,10 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 
     private void HandleRotation()
     {
+        if(!player.canRotate)
+        {
+            return;
+        }
         targerRotationDirection = Vector3.zero;
         targerRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
         targerRotationDirection = targerRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
@@ -129,6 +139,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         else
         {
             // preforme a backstep animation
+            player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
         }
     }
 }
