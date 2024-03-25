@@ -5,15 +5,20 @@ using UnityEngine;
 public class PlayerLocomotionManager : CharacterLocomationManager
 {
     PlayerManager player;
-    public float verticalMovement;
-    public float horizontalMovement;
-    public float moveAmount;
 
+    [HideInInspector] public float verticalMovement;
+    [HideInInspector] public float horizontalMovement;
+    [HideInInspector] public float moveAmount;
+
+    [Header("Movement Settings")]
     private Vector3 moveDirection;
     private Vector3 targerRotationDirection;
     [SerializeField] float walkingSpeed = 2;
     [SerializeField] float runningSpeed = 5;
     [SerializeField] float rotationSpeed = 15;
+
+    [Header("Dodge")]
+    private Vector3 rollDirection;
     protected override void Awake()
     {
         base.Awake();
@@ -99,5 +104,31 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         transform.rotation = targetRotation;
     }
 
-    
+    public void AttempToPreformeDodge()
+    {
+        if(player.isPreformingAction)
+        {
+            return;
+        }
+        // if we are moving wehn we attempt to dodge we preforme a roll
+        if (PlayerInputManager.Instance.moveAmount > 0)
+        {
+
+            rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.Instance.verticalInput;
+            rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.Instance.horizontalInput;
+
+            rollDirection.y = 0;
+            rollDirection.Normalize();
+            Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
+            player.transform.rotation = playerRotation;
+
+            // preforme a roll animation
+            player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true, true);
+        }
+        // if we are stationary we preform backstep
+        else
+        {
+            // preforme a backstep animation
+        }
+    }
 }
