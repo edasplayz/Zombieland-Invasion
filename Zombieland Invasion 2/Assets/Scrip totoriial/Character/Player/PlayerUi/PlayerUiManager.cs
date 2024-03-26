@@ -25,8 +25,15 @@ public class PlayerUiManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            startGameAsClient = true;
+        }
+
         if (startGameAsClient)
         {
             startGameAsClient = false;
