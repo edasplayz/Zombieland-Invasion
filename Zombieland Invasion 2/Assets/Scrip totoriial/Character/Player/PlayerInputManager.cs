@@ -24,6 +24,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Player action input")]
     [SerializeField] bool dodgeInput = false;
+    [SerializeField] bool sprintInput = false;
 
     private void Awake()
     {
@@ -73,6 +74,11 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement1.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+
+            // holding the input sets the bool to true 
+            playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+            // relese the inmput set the bool to false
+            playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
         }
 
         playerControls.Enable();
@@ -110,6 +116,7 @@ public class PlayerInputManager : MonoBehaviour
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
         HandleDodgeInput();
+        HandleSprinting();
 
     }
 
@@ -139,7 +146,7 @@ public class PlayerInputManager : MonoBehaviour
             return;
         }
         // if we are not locked on, only use the move amount 
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
 
         // if we are locked on pass the horizontal movement as well 
     }
@@ -160,6 +167,20 @@ public class PlayerInputManager : MonoBehaviour
             // preforme dodge
             player.playerLocomotionManager.AttempToPreformeDodge();
 
+        }
+    }
+
+    private void HandleSprinting()
+    {
+        if(sprintInput)
+        {
+            // handel sprinting 
+            player.playerLocomotionManager.HandleSprinting();
+
+        }
+        else
+        {
+            player.playerNetworkManager.isSprinting.Value = false;
         }
     }
 }
