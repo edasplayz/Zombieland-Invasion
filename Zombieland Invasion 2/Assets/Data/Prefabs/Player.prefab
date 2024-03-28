@@ -5147,8 +5147,8 @@ GameObject:
   - component: {fileID: 6513466212021196407}
   - component: {fileID: 4980175010018914291}
   - component: {fileID: 4389576836793244796}
-  - component: {fileID: 5961803712316033680}
   - component: {fileID: -962024993641430823}
+  - component: {fileID: 5961803712316033680}
   - component: {fileID: -3627923344316134556}
   - component: {fileID: 2911438646937748948}
   - component: {fileID: 7545909901475829304}
@@ -5156,6 +5156,7 @@ GameObject:
   - component: {fileID: 4381839196808242794}
   - component: {fileID: -4192970415686797977}
   - component: {fileID: -6976893965694029860}
+  - component: {fileID: 3047772389678758274}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5232,26 +5233,6 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 2.5
   dashOrientation: {fileID: 0}
---- !u!114 &5961803712316033680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5489235924790319826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &-962024993641430823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5277,6 +5258,34 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  endurance:
+    m_InternalValue: 10
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
+    m_InternalValue: 0
+--- !u!114 &5961803712316033680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489235924790319826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &-3627923344316134556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5298,6 +5307,8 @@ MonoBehaviour:
   canMove: 1
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
+  playerNetworkManager: {fileID: 0}
+  playerStatsManager: {fileID: 0}
 --- !u!114 &2911438646937748948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5315,6 +5326,7 @@ MonoBehaviour:
   moveAmount: 0
   walkingSpeed: 2
   runningSpeed: 5
+  sprintingSpeed: 6.5
   rotationSpeed: 15
 --- !u!143 &7545909901475829304
 CharacterController:
@@ -5481,6 +5493,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d95ba9cda89392488e8cb89c537675b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3047772389678758274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489235924790319826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543d299825cd41846b886861fee08256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5678136915598479431
