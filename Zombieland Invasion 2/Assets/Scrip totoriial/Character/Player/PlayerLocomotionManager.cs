@@ -159,7 +159,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         {
             // if we are stationary set sprinting to false
             player.playerNetworkManager.isSprinting.Value = false;
-            Debug.Log("This is a debug message.");
+           // Debug.Log("This is a debug message.");
         }
 
         if(player.playerNetworkManager.isSprinting.Value)
