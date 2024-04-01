@@ -8,7 +8,7 @@ public class WorldSaveGameManager : MonoBehaviour
 {
     public static WorldSaveGameManager instance;
 
-    [SerializeField] private PlayerManager player;
+    public PlayerManager player;
 
     [Header("SAVE/LOAD")]
     [SerializeField] bool saveGame;
@@ -112,12 +112,134 @@ public class WorldSaveGameManager : MonoBehaviour
         return fileName;
     }
 
-    public void CreateNewGame()
+    public void AttemptToCreateNewGame()
     {
-        // create a new file with file name depending on which character slot we are using 
-        saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(currentCharacterSlotBeingUsed);
+        
 
-        currentCharacterData = new CharacterSaveData();
+        saveFileDataWriter = new SaveFileDataWriter();
+        saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_01);
+        
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_02;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_03);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_03;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_04);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_04;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_05);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_05;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_06);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_06;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_07);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_07;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_08);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_08;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_09);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_09;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+        // check to see if we can create a new save file (check for other existing files first)
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_10);
+
+        if (!saveFileDataWriter.CheckToSeeIfFileExist())
+        {
+            // if this profile slot is not taken we make new using this slot
+            currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_10;
+            currentCharacterData = new CharacterSaveData();
+            StartCoroutine(LoadWorldScene());
+            return;
+        }
+
+
+        // if there are no free slots notify player
+        TitleScreenManager.Instance.DisplayNoFreeCharacterSlotsPopUp();
     }
 
     public void LoadGame()
@@ -150,6 +272,18 @@ public class WorldSaveGameManager : MonoBehaviour
         saveFileDataWriter.CreateNewCharaterSaveFile(currentCharacterData);
 
         
+    }
+
+    public void DeleteGame(CharacterSlot characterSlot)
+    {
+        // chose file based on name
+        saveFileDataWriter = new SaveFileDataWriter();
+        saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+        saveFileDataWriter.saveFileName = DecideCharacterFileNameBesedOnCharacterSlotBeingUsed(characterSlot);
+
+        
+        
+        saveFileDataWriter.DeleteSaveFile();
     }
 
     // load all character profiles on divice when starting game
@@ -191,9 +325,17 @@ public class WorldSaveGameManager : MonoBehaviour
     }
     public IEnumerator LoadWorldScene()
     {
+        // if you want 1 world scene use this 
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+
+        // if you want to use different scenes for levels in your project use this
+        //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
+
+        player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
         yield return null;
     }
+
+    
 
     public int GetWorldSceneIndex()
     {

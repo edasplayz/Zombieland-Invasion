@@ -6,8 +6,10 @@ using UnityEngine;
 // since we want to reference this data for every save file, this scipt is not monobehavior and is instead serialzable
 public class CharacterSaveData 
 {
+    [Header("Scene Index")]
+    public int sceneIndex = 1;
     [Header("Character Name")]
-    public string characterName;
+    public string characterName = "Character";
 
     [Header("Time Played")]
     public float secondsPlayed;
