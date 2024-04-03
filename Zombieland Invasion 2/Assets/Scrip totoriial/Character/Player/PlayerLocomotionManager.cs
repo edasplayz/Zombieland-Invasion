@@ -23,6 +23,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
+    [SerializeField] float jumpStaminaCost = 25;
     protected override void Awake()
     {
         base.Awake();
@@ -203,5 +204,44 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         }
 
         player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
+    }
+
+    public void AttempToPreformeJump()
+    {
+        // if we are performing general action we do not want to allow jump (will change when cambat is added)
+        if (player.isPreformingAction)
+        {
+            return;
+        }
+
+        //  id we are out of stamina, we do not wish to allow a jump
+        if (player.playerNetworkManager.currentStamina.Value <= 0)
+        {
+            return;
+        }
+        // if we are already jumping no more jump we need to waint for the jump to finish
+        if (player.isJumping)
+        {
+            return;
+        }
+        // if we are not grounded we do not want to allow jump
+        if (player.isGrounded)
+        {
+            return;
+        }
+
+        // if we are two handling our weapon, play two handed jump animation, otherwise play one handed animation (to do)
+        player.playerAnimatorManager.PlayTargetActionAnimation("Main_jump_01", false);
+
+        player.isJumping = true;
+
+        player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
+
+    }
+
+    public void ApplyJumpingVelocity()
+    {
+        // applly an upward velocity depending on forces in our game
+
     }
 }

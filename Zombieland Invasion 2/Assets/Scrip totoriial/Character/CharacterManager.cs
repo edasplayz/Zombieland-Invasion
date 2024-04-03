@@ -14,6 +14,8 @@ public class CharacterManager : NetworkBehaviour
 
     [Header("Flags")]
     public bool isPreformingAction = false;
+    public bool isJumping = false;
+    public bool isGrounded = true;
     public bool applyRootMotion = false;
     public bool canRotate = true;
     public bool canMove = true;
@@ -30,6 +32,7 @@ public class CharacterManager : NetworkBehaviour
 
     protected virtual void Update()
     {
+        animator.SetBool("isGrounded", isGrounded);
         // if this charater is controlled from our side, then assign its network position to the otherplayers end
         if (IsOwner)
         {

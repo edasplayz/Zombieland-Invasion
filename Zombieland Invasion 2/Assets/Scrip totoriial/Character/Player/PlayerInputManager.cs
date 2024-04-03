@@ -25,6 +25,8 @@ public class PlayerInputManager : MonoBehaviour
     [Header("Player action input")]
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
+    [SerializeField] bool jumpInput = false;
+    
 
     private void Awake()
     {
@@ -74,6 +76,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerCamera.Movement1.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+            playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
 
             // holding the input sets the bool to true 
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -116,7 +119,7 @@ public class PlayerInputManager : MonoBehaviour
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
         HandleDodgeInput();
-        HandleSprinting();
+        HandleSprintInput();
 
     }
 
@@ -170,7 +173,7 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    private void HandleSprinting()
+    private void HandleSprintInput()
     {
         if(sprintInput)
         {
@@ -181,6 +184,19 @@ public class PlayerInputManager : MonoBehaviour
         else
         {
             player.playerNetworkManager.isSprinting.Value = false;
+        }
+    }
+
+    private void HandleJumpInput()
+    {
+        if(jumpInput)
+        {
+            jumpInput = false;
+
+            // if we have a ui window open, simply return without doing anything
+
+            // attemp to perfome jump
+            player.playerLocomotionManager.AttempToPreformeJump();
         }
     }
 }
