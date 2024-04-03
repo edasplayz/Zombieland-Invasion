@@ -5392,7 +5392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58f4403cadf213468d2af7448b8ae9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gavityForce: -4
+  gavityForce: -20
   groundLayer:
     serializedVersion: 2
     m_Bits: 129
