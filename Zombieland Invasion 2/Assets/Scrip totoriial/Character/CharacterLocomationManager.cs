@@ -6,7 +6,7 @@ public class CharacterLocomationManager : MonoBehaviour
 {
     CharacterManager character;
     [Header("Ground Check and Jumping")]
-    [SerializeField] float gavityForce = -5.55f;
+    [SerializeField] protected float gravityForce = -5.55f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float groundCheckSphereRadius = 1;
     [SerializeField] protected Vector3 yVelocity; // the force which our character is pulled up or down( jumping or falling)
@@ -46,7 +46,7 @@ public class CharacterLocomationManager : MonoBehaviour
             inAirTimer = inAirTimer + Time.deltaTime;
             character.animator.SetFloat("InAirTimer", inAirTimer);
 
-            yVelocity.y += gavityForce * Time.deltaTime;
+            yVelocity.y += gravityForce * Time.deltaTime;
 
             
         }

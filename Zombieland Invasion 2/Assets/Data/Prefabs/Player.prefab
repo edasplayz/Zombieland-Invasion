@@ -5392,7 +5392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58f4403cadf213468d2af7448b8ae9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gavityForce: -20
+  gravityForce: -40
   groundLayer:
     serializedVersion: 2
     m_Bits: 129
@@ -5408,8 +5408,10 @@ MonoBehaviour:
   sprintingSpeed: 6.5
   rotationSpeed: 15
   sprintingStaminaCost: 2
-  dodgeStaminaCost: 25
   jumpStaminaCost: 25
+  jumpHight: 4
+  jumpDirection: {x: 0, y: 0, z: 0}
+  dodgeStaminaCost: 25
 --- !u!143 &7545909901475829304
 CharacterController:
   m_ObjectHideFlags: 0

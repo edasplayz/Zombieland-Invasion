@@ -19,11 +19,18 @@ public class PlayerLocomotionManager : CharacterLocomationManager
     [SerializeField] float rotationSpeed = 15;
     [SerializeField] int sprintingStaminaCost = 2;
 
+    [Header("Jump")]
+    [SerializeField] float jumpStaminaCost = 25;
+    [SerializeField] float jumpHight = 4;
+    [SerializeField] float jumpForwardSpeed = 5;
+    [SerializeField] float freeFallingSpeed = 2;
+    [SerializeField] Vector3 jumpDirection;
+
 
     [Header("Dodge")]
     private Vector3 rollDirection;
     [SerializeField] float dodgeStaminaCost = 25;
-    [SerializeField] float jumpStaminaCost = 25;
+    
     protected override void Awake()
     {
         base.Awake();
@@ -67,7 +74,8 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         HandleGroundedMovement();
         HandleRotation();
         // ariel movement
-
+        HandleJumpingMovement();
+        HandleFreeFallMovement();
     } 
 
     private void GetMovementValues()
@@ -111,6 +119,28 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         }
 
         
+    }
+
+    private void HandleJumpingMovement()
+    {
+        if(player.isJumping)
+        {
+            player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+        }
+    }
+
+    private void HandleFreeFallMovement()
+    {
+        if(!player.isGrounded)
+        {
+            Vector3 freeFallDirection;
+
+            freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.Instance.verticalInput;
+            freeFallDirection = freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.Instance.horizontalInput;
+            freeFallDirection.y = 0;
+
+            player.characterController.Move(freeFallDirection * freeFallingSpeed * Time.deltaTime);
+        }
     }
 
     private void HandleRotation()
@@ -225,7 +255,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
             return;
         }
         // if we are not grounded we do not want to allow jump
-        if (player.isGrounded)
+        if (!player.isGrounded)
         {
             return;
         }
@@ -237,11 +267,39 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 
         player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
 
+        jumpDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.Instance.verticalInput;
+        jumpDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.Instance.horizontalInput;
+
+        jumpDirection.y = 0;
+
+        if(jumpDirection != Vector3.zero)
+        {
+            //if we are sprinting, jump direction is at full distance 
+            if (player.playerNetworkManager.isSprinting.Value)
+            {
+                jumpDirection *= 1;
+            }
+            // if we running jump direction is halve the distance
+            else if (PlayerInputManager.Instance.moveAmount > 0.5)
+            {
+                jumpDirection *= 0.5f;
+            }
+            // if we walking jump direction is only 25% distance
+            else if (PlayerInputManager.Instance.moveAmount <= 0.5)
+            {
+                jumpDirection *= 0.25f;
+            }
+        }
+        
+        
+
     }
 
     public void ApplyJumpingVelocity()
     {
         // applly an upward velocity depending on forces in our game
+
+        yVelocity.y = Mathf.Sqrt(jumpHight * -2 * gravityForce);
 
     }
 }
