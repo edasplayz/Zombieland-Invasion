@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterStatManager : MonoBehaviour
@@ -17,6 +18,11 @@ public class CharacterStatManager : MonoBehaviour
     {
         character = GetComponent<CharacterManager>();
     }
+
+    protected virtual void Start()
+    {
+
+    }
     public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
     {
         float stamina = 0;
@@ -25,6 +31,16 @@ public class CharacterStatManager : MonoBehaviour
 
         stamina = endurance * 10;
         return Mathf.RoundToInt(stamina);
+    }
+
+    public int CalculateHealthBasedOnVitalityLevel(int vitality)
+    {
+        float health = 0;
+
+        // create an equation for how you want your stamina to be calculated
+
+        health = vitality * 15;
+        return Mathf.RoundToInt(health);
     }
 
     public virtual void RegenerateStamina()
