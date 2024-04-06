@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : CharacterManager
 {
+    [Header("Debug Menu")]
+    [SerializeField] bool respawnCharacter = false;
+
     [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
     [HideInInspector] public PlayerNetworkManager playerNetworkManager;
@@ -35,6 +38,9 @@ public class PlayerManager : CharacterManager
 
         //regen stamina
         playerStatsManager.RegenerateStamina();
+
+        DebugMenu();
+
     }
 
     protected override void LateUpdate()
@@ -71,6 +77,39 @@ public class PlayerManager : CharacterManager
             
 
         }
+
+        playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
+    }
+
+    public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+    {
+
+        if (IsOwner)
+        {
+            PlayerUiManager.instance.playerUiPopUpManager.SendYouDiedPopUp();
+        }
+
+        
+        return base.ProcessDeathEvent(manuallySelectDeathAnimation);
+
+        // check for players that are alime, if 0 respawn character
+
+
+    }
+
+    public override void ReviveCharacter()
+    {
+        base.ReviveCharacter();
+        
+        if (IsOwner)
+        {
+            playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+            playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
+            // restore focus points
+
+            // play rebirth effects 
+            playerAnimatorManager.PlayTargetActionAnimation("Empty", false);
+        }
     }
 
     public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
@@ -105,5 +144,15 @@ public class PlayerManager : CharacterManager
         playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
         PlayerUiManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
 
+    }
+
+    // debug delete later
+    private void DebugMenu()
+    {
+        if (respawnCharacter)
+        {
+            respawnCharacter = false;
+            ReviveCharacter();
+        }
     }
 }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Zombie
+  - Emiter
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Damage Collider
   - 
   - 
   - 

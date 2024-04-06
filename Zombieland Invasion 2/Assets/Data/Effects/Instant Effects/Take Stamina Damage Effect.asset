@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Take Stamina Damage Effect
   m_EditorClassIdentifier: 
   instantEffectID: 0
-  staminDamage: 0
+  staminDamage: 25

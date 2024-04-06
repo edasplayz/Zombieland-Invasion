@@ -5,12 +5,16 @@ using Unity.Netcode;
 
 public class CharacterManager : NetworkBehaviour
 {
-    
+    [Header("Status")]
+    public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     [HideInInspector] public CharacterController characterController;
 
     [HideInInspector] public Animator animator;
 
     [HideInInspector] public CharacterNetworkManager characterNetworkManager;
+    [HideInInspector] public CharacterEffectsManager characterEffectsManager;
+    [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
 
     [Header("Flags")]
     public bool isPreformingAction = false;
@@ -28,6 +32,8 @@ public class CharacterManager : NetworkBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         characterNetworkManager = GetComponent<CharacterNetworkManager>();
+        characterEffectsManager = GetComponent<CharacterEffectsManager>();
+        characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
     }
 
     protected virtual void Update()
@@ -57,6 +63,38 @@ public class CharacterManager : NetworkBehaviour
     }
 
     protected virtual void LateUpdate()
+    {
+
+    }
+
+    public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+    {
+        if(IsOwner)
+        {
+            characterNetworkManager.currentHealth.Value = 0;
+            isDead.Value = true;
+
+            // reset any flags here that need to be reset 
+            // nothing yet
+
+            // if we are not grounded, play an aerial death animation
+
+            if (!manuallySelectDeathAnimation)
+            {
+                characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
+            }
+        }
+
+        // play some death sfx
+
+        yield return new WaitForSeconds(5);
+
+        // award players with runes
+
+        // disable character 
+    }
+
+    public virtual void ReviveCharacter()
     {
 
     }

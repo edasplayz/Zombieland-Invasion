@@ -245,6 +245,10 @@ public class WorldSaveGameManager : MonoBehaviour
     private void NewGame()
     {
         // save the newly created character stats, and items (when creacion screen is added)
+
+        player.playerNetworkManager.vitality.Value = 15; // temporaly code delete later
+        player.playerNetworkManager.endurance.Value = 10; // temporaly code delete later
+
         SaveGame();
         StartCoroutine(LoadWorldScene());
     }
