@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7901a81736fba7b478f733bc97204cb1, type: 3}
   m_Name: Straight Sword
   m_EditorClassIdentifier: 
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
+  itemName: Straight Sword
+  itemIcon: {fileID: 21300000, guid: 1b6ab6172eb018d469d96b8654cc1a67, type: 3}
+  itemDescription: A Straight Sword
   itemID: 0
-  weaponModel: {fileID: 0}
-  streangthREQ: 0
-  dexREQ: 0
+  weaponModel: {fileID: 7357005724361193139, guid: fb0da7e247b60524c809e71a5c0c0c4c, type: 3}
+  streangthREQ: 10
+  dexREQ: 10
   intREQ: 0
   faitREQ: 0
-  physicalDamage: 0
+  physicalDamage: 118
   magicDamage: 0
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
-  poiseDamage: 10
+  poiseDamage: 25
   baseStaminaCost: 20
