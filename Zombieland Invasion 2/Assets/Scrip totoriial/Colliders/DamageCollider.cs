@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
+
+    [Header("Collider")]
+    protected Collider damageCollider;
+
     [Header("Damage")]
     public float physicalDamage = 0; // on the future will be split into standart, stike , slash and pierce
     public float magicDamage = 0;
@@ -58,5 +62,16 @@ public class DamageCollider : MonoBehaviour
 
         damageTarget.characterEffectsManager.ProccessInstantEffect(damageEffect);
 
+    }
+
+    public virtual void EnableDamageCollider()
+    {
+        damageCollider.enabled = true;
+    }
+
+    public virtual void DisableDamageCollider()
+    {
+        damageCollider.enabled = false;
+        charactersDamaged.Clear(); // we reset the character that have been hit when we reset the collider so they may be hit again
     }
 }

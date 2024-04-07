@@ -5344,6 +5344,10 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  currentRightHandWeaponID:
+    m_InternalValue: 0
+  currentLeftHandWeaponID:
+    m_InternalValue: 0
 --- !u!114 &5961803712316033680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5390,11 +5394,13 @@ MonoBehaviour:
   canRotate: 1
   canMove: 1
   respawnCharacter: 0
+  switchRightWeapon: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
   playerStatsManager: {fileID: 0}
   playerInventoryManager: {fileID: 0}
+  playerEquipmentManager: {fileID: 0}
 --- !u!114 &2911438646937748948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5636,8 +5642,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df14cf9d2834a5458af6086fed2f4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRightHandWeapon: {fileID: 11400000, guid: abf8544dfb8095d48939d6e145c06793, type: 2}
-  currentLeftHandWeapon: {fileID: 11400000, guid: abf8544dfb8095d48939d6e145c06793, type: 2}
+  currentRightHandWeapon: {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  currentLeftHandWeapon: {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  weaponsInRightHandSlots:
+  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  rightHandWeaponIndex: 0
+  weaponsInLeftHandSlots:
+  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  leftHandWeaponIndex: 0
 --- !u!114 &4886310686802824332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5652,6 +5668,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHandSlot: {fileID: 0}
   leftHandSlot: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
   rightHandWeaponModel: {fileID: 0}
   leftHandWeaponModel: {fileID: 0}
 --- !u!1 &5678136915598479431
