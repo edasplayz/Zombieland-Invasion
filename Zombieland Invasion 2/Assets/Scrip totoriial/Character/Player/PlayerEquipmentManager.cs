@@ -149,7 +149,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
             SwitchRightWeapon();
         }
         
-    }
+     }
 
     //left weapon
 

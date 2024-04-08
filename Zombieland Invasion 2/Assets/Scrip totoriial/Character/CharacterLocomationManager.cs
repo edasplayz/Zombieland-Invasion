@@ -62,6 +62,13 @@ public class CharacterLocomationManager : MonoBehaviour
     // draw our ground check sphere in scene view 
     protected void OnDrawGizmosSelected()
     {
-        Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        if (character != null && character.transform != null)
+        {
+            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        }
+        else
+        {
+            //Debug.LogWarning("Character or character transform is null. Gizmos will not be drawn.");
+        }
     }
 }

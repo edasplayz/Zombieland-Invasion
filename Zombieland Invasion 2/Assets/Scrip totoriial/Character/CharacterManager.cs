@@ -36,6 +36,11 @@ public class CharacterManager : NetworkBehaviour
         characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
     }
 
+    protected virtual void Start()
+    {
+        IgnoreMyOwnColliders();
+    }
+
     protected virtual void Update()
     {
         animator.SetBool("isGrounded", isGrounded);
@@ -99,5 +104,29 @@ public class CharacterManager : NetworkBehaviour
 
     }
 
-    
+    protected virtual void IgnoreMyOwnColliders()
+    {
+        Collider characterControllerCollider = GetComponent<Collider>();
+        Collider[] damagebleCharacterColliders = GetComponentsInChildren<Collider>();
+
+        List<Collider> ignoreColliders = new List<Collider>();
+
+        // adds all of our damageble character collidrs, to the list that will be used to ignore collisions
+        foreach (var collider in damagebleCharacterColliders)
+        {
+            ignoreColliders.Add(collider);
+        }
+
+        // adds our character controller locider to the list that will be used to ignore collisions
+        ignoreColliders.Add(characterControllerCollider);
+
+        // goes trough every collider on the lisy and ignores collision with each other
+        foreach(var collider in ignoreColliders)
+        {
+            foreach(var otherCollider in ignoreColliders)
+            {
+                Physics.IgnoreCollision(collider, otherCollider, true);
+            }
+        }
+    }
 }
