@@ -26,6 +26,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
     [SerializeField] bool jumpInput = false;
+    [SerializeField] bool RB_Input = false;
     
 
     private void Awake()
@@ -48,6 +49,12 @@ public class PlayerInputManager : MonoBehaviour
         // when the scene changes, run this logic
         SceneManager.activeSceneChanged += OnScreneChange;
         Instance.enabled = false;
+
+        if (playerControls != null)
+        {
+            playerControls.Disable();
+        }
+        
         
     }
 
@@ -57,12 +64,22 @@ public class PlayerInputManager : MonoBehaviour
         if (NewScene.buildIndex == WorldSaveGameManager.instance.GetWorldSceneIndex())
         {
             Instance.enabled = true;
+
+            if (playerControls != null)
+            {
+                playerControls.Enable();
+            }
         }
         // otherwise we must be at the main menu, disable our player controls
         // this is so our player cant move around if we enter this like a charater creation meniu
         else
         {
             Instance.enabled = false;
+
+            if (playerControls != null)
+            {
+                playerControls.Disable();
+            }
         }
     }
 
@@ -77,6 +94,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerCamera.Movement1.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+            playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
             // holding the input sets the bool to true 
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -121,6 +139,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleDodgeInput();
         HandleSprintInput();
         HandleJumpInput();
+        HandleRBInput();
 
     }
 
@@ -198,6 +217,22 @@ public class PlayerInputManager : MonoBehaviour
 
             // attemp to perfome jump
             player.playerLocomotionManager.AttempToPreformeJump();
+        }
+    }
+
+    private void HandleRBInput()
+    {
+        if(RB_Input)
+        {
+            RB_Input = false;
+
+            // TODO: IF WE HAVE A UI WINDOW OPEN RETURN AND DO NOTHING 
+
+            player.playerNetworkManager.SetCharacterActionHand(true);
+
+            // todo: if we are two handing the weapon use the two handed action
+
+            player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
         }
     }
 }

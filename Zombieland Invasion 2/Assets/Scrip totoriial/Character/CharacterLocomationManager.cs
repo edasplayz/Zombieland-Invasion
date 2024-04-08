@@ -37,7 +37,7 @@ public class CharacterLocomationManager : MonoBehaviour
         else
         {
             // if we are not jumping ant our falling velocity has not ben set
-            if(!character.isJumping && !fallingVelocityHasBeenSet)
+            if(!character.characterNetworkManager.isJumping.Value && !fallingVelocityHasBeenSet)
             {
                 fallingVelocityHasBeenSet = true;
                 yVelocity.y = fallStartYVelocity;

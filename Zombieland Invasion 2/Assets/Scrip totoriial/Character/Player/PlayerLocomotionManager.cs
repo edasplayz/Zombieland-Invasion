@@ -123,7 +123,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 
     private void HandleJumpingMovement()
     {
-        if(player.isJumping)
+        if(player.characterNetworkManager.isJumping.Value)
         {
             player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
         }
@@ -250,7 +250,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
             return;
         }
         // if we are already jumping no more jump we need to waint for the jump to finish
-        if (player.isJumping)
+        if (player.characterNetworkManager.isJumping.Value)
         {
             return;
         }
@@ -263,7 +263,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         // if we are two handling our weapon, play two handed jump animation, otherwise play one handed animation (to do)
         player.playerAnimatorManager.PlayTargetActionAnimation("Main_jump_01", false);
 
-        player.isJumping = true;
+        player.characterNetworkManager.isJumping.Value = true;
 
         player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
 

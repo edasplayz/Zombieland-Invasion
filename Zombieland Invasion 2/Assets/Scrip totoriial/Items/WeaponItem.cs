@@ -42,6 +42,8 @@ public class WeaponItem : Item
 
 
     // item based action (rb, rt, lb, lt)
+    [Header("Actions")]
+    public WeaponItemAction oh_RB_Action; // one handed right bumper action
 
     // ash of war
 
