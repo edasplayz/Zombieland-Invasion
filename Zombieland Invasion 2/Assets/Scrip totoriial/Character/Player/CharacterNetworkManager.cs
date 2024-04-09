@@ -87,4 +87,108 @@ public class CharacterNetworkManager : NetworkBehaviour
         character.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(animationID, 0.2f);
     }
+
+    
+    // attack animation
+
+    [ServerRpc]
+    public void NotifyTheServerOfAttackActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)
+    {
+        // if this character is the server/host then activate the client rpc
+        if (IsServer)
+        {
+            PlayAttackActionAnimationForAllClientsClientRpc(clientID, animationID, applyRootMotion);
+        }
+    }
+
+    
+    [ClientRpc]
+    public void PlayAttackActionAnimationForAllClientsClientRpc(ulong clientID, string animationID, bool applyRootMotion)
+    {
+        // we make sure to not run the funcion on the charater wo sent it (so we dont play the animation)
+        if (clientID != NetworkManager.Singleton.LocalClientId)
+        {
+            PerformAttackActionAnimationFromServer(animationID, applyRootMotion);
+        }
+    }
+
+    private void PerformAttackActionAnimationFromServer(string animationID, bool applyRootMotion)
+    {
+        character.applyRootMotion = applyRootMotion;
+        character.animator.CrossFade(animationID, 0.2f);
+    }
+
+    // damage
+    [ServerRpc(RequireOwnership = false)]
+    public void NotifyTheServerOfCharacterDamageServerRpc(
+        ulong damagedCharacterID, 
+        ulong characterCausingDamageID,
+        float physicalDamage, 
+        float magicDamage, 
+        float fireDamage, 
+        float holyDamage, 
+        float lightningDamage, 
+        float poiseDamage, 
+        float angleHitFrom,
+        float contactPointX,
+        float contactPointY,
+        float contactPointZ)
+    {
+        if(IsServer)
+        {
+            NotifyTheServerOfCharacterDamageClientRpc(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, holyDamage, lightningDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ);
+        }
+    }
+
+    [ClientRpc]
+    public void NotifyTheServerOfCharacterDamageClientRpc(
+        ulong damagedCharacterID,
+        ulong characterCausingDamage,
+        float physicalDamage,
+        float magicDamage,
+        float fireDamage,
+        float holyDamage,
+        float lightningDamage,
+        float poiseDamage,
+        float angleHitFrom,
+        float contactPointX,
+        float contactPointY,
+        float contactPointZ)
+    {
+        ProcessCharacterDamageFromServer(damagedCharacterID, characterCausingDamage, physicalDamage, magicDamage, fireDamage, holyDamage, lightningDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ);
+    }
+
+    public void ProcessCharacterDamageFromServer(
+        ulong damagedCharacterID,
+        ulong characterCausingDamageID,
+        float physicalDamage,
+        float magicDamage,
+        float fireDamage,
+        float holyDamage,
+        float lightningDamage,
+        float poiseDamage,
+        float angleHitFrom,
+        float contactPointX,
+        float contactPointY,
+        float contactPointZ)
+    {
+        CharacterManager damagedCharacter = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damagedCharacterID].gameObject.GetComponent<CharacterManager>();
+        CharacterManager characterCausingDamage = NetworkManager.Singleton.SpawnManager.SpawnedObjects[characterCausingDamageID].gameObject.GetComponent<CharacterManager>();
+
+        TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+
+
+        damageEffect.physicalDamage = physicalDamage;
+        damageEffect.magicDamage = magicDamage;
+        damageEffect.fireDamage = fireDamage;
+        damageEffect.holyDamage = holyDamage;
+        damageEffect.lightningDamage = lightningDamage;
+        damageEffect.poiseDamage = poiseDamage;
+        damageEffect.angleHitFrom = angleHitFrom;
+        damageEffect.contactPoint = new Vector3(contactPointX, contactPointY, contactPointZ);   
+        damageEffect.characterCausingDamage = characterCausingDamage;
+
+        damagedCharacter.characterEffectsManager.ProccessInstantEffect(damageEffect);
+
+    }
 }

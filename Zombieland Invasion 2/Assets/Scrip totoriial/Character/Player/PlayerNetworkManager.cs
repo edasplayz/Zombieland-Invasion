@@ -69,4 +69,38 @@ public class PlayerNetworkManager : CharacterNetworkManager
         player.playerCombatManager.currentWeaponBeingUsed = newWeapon;
         
     }
+
+    // item actions
+    [ServerRpc]
+    public void NotifyTheServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)
+    {
+        if (IsServer)
+        {
+            NotifyTheServerOfWeaponActionClientRpc(clientID, actionID, weaponID);
+        }
+    }
+
+    [ClientRpc]
+    private void NotifyTheServerOfWeaponActionClientRpc(ulong clientID, int actionID, int weaponID)
+    {
+        // we do not play the action again for the character who called it becouse thet already played it locally
+        if(clientID != NetworkManager.Singleton.LocalClientId)
+        {
+            PerformWeaponBasedAction(actionID, weaponID);
+
+        }
+    }
+
+    private void PerformWeaponBasedAction(int actionID, int weaponID)
+    {
+        WeaponItemAction weaponAction = WorldActionManager.Instance.GetWeaponItemActionByID(actionID);
+        if (weaponAction != null)
+        {
+            weaponAction.AttemptToPreformAction(player, WorldItemDatabase.Instance.GetWeaponByID(weaponID));
+        }
+        else
+        {
+            Debug.LogError("Weapon action is null");
+        }
+    }
 }

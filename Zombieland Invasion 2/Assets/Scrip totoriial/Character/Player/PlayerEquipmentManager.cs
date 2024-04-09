@@ -174,5 +174,38 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
     }
 
 
+    // damage colliders 
+
+    public void OpenDamageCollider()
+    {
+        // open right weapon damage collider
+        if(player.playerNetworkManager.isUsingRightHand.Value)
+        {
+            rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+        }
+        // open left weapon damage collider
+        else if (player.playerNetworkManager.isUsingLeftHand.Value)
+        {
+            leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+        }
+
+        // play whoosh sfx
+    }
+
+    public void CloseDamageCollider()
+    {
+        // open right weapon damage collider
+        if (player.playerNetworkManager.isUsingRightHand.Value)
+        {
+            rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+        }
+        // open left weapon damage collider
+        else if (player.playerNetworkManager.isUsingLeftHand.Value)
+        {
+            leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
+        }
+
+        // play whoosh sfx
+    }
 
 }

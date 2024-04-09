@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] MeleeWeaponDamageCollider meleeDamageCollider;
+    public MeleeWeaponDamageCollider meleeDamageCollider;
 
     private void Awake()
     {
@@ -19,5 +19,7 @@ public class WeaponManager : MonoBehaviour
         meleeDamageCollider.fireDamage = weapon.fireDamage;
         meleeDamageCollider.lightningDamage = weapon.lightningDamage;
         meleeDamageCollider.holyDamage = weapon.holyDamage;
+
+        meleeDamageCollider.light_Attack_01_Modifiers = weapon.light_Attack_01_Modifier;
     }
 }
