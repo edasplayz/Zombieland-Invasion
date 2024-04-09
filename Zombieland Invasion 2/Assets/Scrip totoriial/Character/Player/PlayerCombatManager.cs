@@ -46,12 +46,13 @@ public class PlayerCombatManager : CharacterCombatManager
         switch (currentAttackType)
         {
             case AttackType.LightAttack01:
-                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.light_Attack_01_Modifier;
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
                 break;
             default:
                 break;
         }
 
+        Debug.Log("Stamina deducted: " + staminaDeducted);
         player.playerNetworkManager.currentStamina.Value -= Mathf.RoundToInt(staminaDeducted);
         
     }
