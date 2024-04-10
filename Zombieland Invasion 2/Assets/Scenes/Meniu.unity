@@ -2637,6 +2637,24 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1125051838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3431662816596322990, guid: 9e11a4f02a7592c41bdc5d101bf8cba2, type: 3}
+  m_PrefabInstance: {fileID: 1357406430028561149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1125051842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125051838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e361dfd26c4d03468e2bf8bd6544962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
 --- !u!1001 &1147217746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5231,7 +5249,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3431662816596322990, guid: 9e11a4f02a7592c41bdc5d101bf8cba2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1125051842}
   m_SourcePrefab: {fileID: 100100000, guid: 9e11a4f02a7592c41bdc5d101bf8cba2, type: 3}
 --- !u!1001 &1376244491053533612
 PrefabInstance:
@@ -6000,6 +6021,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 993533743281181346, guid: a912e824c201f494d922356bceb10132, type: 3}
+      propertyPath: physicalDamageSFX.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 993533743281181346, guid: a912e824c201f494d922356bceb10132, type: 3}
+      propertyPath: physicalDamageSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
+    - target: {fileID: 993533743281181346, guid: a912e824c201f494d922356bceb10132, type: 3}
+      propertyPath: physicalDamageSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3df9bbbc130ccb344af5f3fc793a630f, type: 3}
     - target: {fileID: 3505619257010407694, guid: a912e824c201f494d922356bceb10132, type: 3}
       propertyPath: m_Name
       value: World Sound FX Manager

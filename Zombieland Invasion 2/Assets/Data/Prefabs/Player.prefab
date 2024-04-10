@@ -5397,6 +5397,8 @@ MonoBehaviour:
   characterNetworkManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
   isPreformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -5504,6 +5506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2c3367a55908e4f806c6bbdcef6950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hit_Forward_Medium_01: hit_Forward_Medium_01
+  hit_Backwards_Medium_01: hit_Backwards_Medium_01
+  hit_Left_Medium_01: hit_Left_Medium_01
+  hit_Right_Medium_01: hit_Right_Medium_01
 --- !u!82 &-4192970415686797977
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5638,6 +5644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d9c7175b65ec44bf83963e246a5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplatterVFX: {fileID: 0}
   effectToTest: {fileID: 11400000, guid: 99d7d74d1f6c05040aabf0df4da47681, type: 2}
   processEffect: 0
 --- !u!114 &-6688064351650958022
@@ -5657,7 +5664,7 @@ MonoBehaviour:
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
-  - {fileID: 11400000, guid: abf8544dfb8095d48939d6e145c06793, type: 2}
+  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
   rightHandWeaponIndex: 0
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
@@ -5721,6 +5728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a22f792cd90c8f419b3cca88c700203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAttackType: 0
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!1 &5678136915598479431
 GameObject:

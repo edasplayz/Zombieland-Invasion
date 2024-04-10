@@ -12,6 +12,9 @@ public class CharacterEffectsManager : MonoBehaviour
 
     CharacterManager character;
 
+    [Header("VFX")]
+    [SerializeField] GameObject bloodSplatterVFX;
+
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
@@ -22,5 +25,20 @@ public class CharacterEffectsManager : MonoBehaviour
         // take in an effect 
         // process it 
         effect.ProccesEffect(character);
+    }
+
+    public void PlayBloodSplatterVFX(Vector3 contactPoint)
+    {
+        // if we manualy have placed a blood splatter vfx on this model play its version
+        if(bloodSplatterVFX != null)
+        {
+            GameObject bloodSplatter = Instantiate(bloodSplatterVFX, contactPoint, Quaternion.identity);
+
+        }
+        // else use the generic (default version) we have elswere
+        else
+        {
+            GameObject bloodSplatter = Instantiate(WorldCharacterEffectsManager.instance.bloodSplatterVFX, contactPoint, Quaternion.identity);
+        }
     }
 }
