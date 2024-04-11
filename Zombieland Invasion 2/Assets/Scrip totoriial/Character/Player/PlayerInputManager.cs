@@ -22,6 +22,9 @@ public class PlayerInputManager : MonoBehaviour
     public float cameraVerticalInput;
     public float cameraHorizontalInput;
 
+    [Header("Lock On Input")]
+    [SerializeField] bool lockOn_Input;
+
     [Header("Player action input")]
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
@@ -96,6 +99,9 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
             playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
+            // lock on
+            playerControls.PlayerActions.LockOn.performed += i => lockOn_Input = true;
+
             // holding the input sets the bool to true 
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
             // relese the inmput set the bool to false
@@ -140,7 +146,47 @@ public class PlayerInputManager : MonoBehaviour
         HandleSprintInput();
         HandleJumpInput();
         HandleRBInput();
+        HandleLockOnInput();
 
+    }
+
+    // lock on
+    private void HandleLockOnInput()
+    {
+        // check for dead target 
+        if(player.playerNetworkManager.isLockedOn.Value)
+        {
+            if(player.playerCombatManager.currentTarget == null)
+            {
+                return;
+            }
+            if(player.playerCombatManager.currentTarget.isDead.Value)
+            {
+                player.playerNetworkManager.isLockedOn.Value = false;
+            }
+
+            // attempt to find new target
+        }
+
+        if(lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
+        {
+            lockOn_Input = false;
+            // disable lock on
+            return;
+            
+
+        }
+
+        if (lockOn_Input && !player.playerNetworkManager.isLockedOn.Value)
+        {
+            lockOn_Input = false;
+            // if we are aiming using ranged weapon return (do not allow lock whilst aiming)
+
+            // enable lock on
+
+            PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+        }
     }
 
     // movement

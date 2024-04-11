@@ -4967,6 +4967,37 @@ Transform:
   - {fileID: 7711393973190821264}
   m_Father: {fileID: 6513466212021196407}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1573739457250376280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7119517015563215951}
+  m_Layer: 10
+  m_Name: Lock On Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7119517015563215951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573739457250376280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.00046, z: 0.00031}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 553427368575775387}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2129332919874428231
 GameObject:
   m_ObjectHideFlags: 0
@@ -5263,6 +5294,8 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
@@ -5506,10 +5539,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2c3367a55908e4f806c6bbdcef6950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastDamageAnimationPlayed: 
   hit_Forward_Medium_01: hit_Forward_Medium_01
+  hit_Forward_Medium_02: hit_Forward_Medium_02
   hit_Backwards_Medium_01: hit_Backwards_Medium_01
+  hit_Backwards_Medium_02: hit_Backwards_Medium_02
   hit_Left_Medium_01: hit_Left_Medium_01
+  hit_Left_Medium_02: hit_Left_Medium_02
   hit_Right_Medium_01: hit_Right_Medium_01
+  hit_Right_Medium_02: hit_Right_Medium_02
+  forward_Medium_Damage: []
+  backward_Medium_Damage: []
+  left_Medium_Damage: []
+  right_Medium_Damage: []
 --- !u!82 &-4192970415686797977
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5728,7 +5770,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a22f792cd90c8f419b3cca88c700203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
   currentAttackType: 0
+  lockOnTransform: {fileID: 7119517015563215951}
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!1 &5678136915598479431
 GameObject:
@@ -11779,6 +11823,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4309357956253244656, guid: a4b4a8202ac59c5418b897464c27c1ac, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 7119517015563215951}
     - targetCorrespondingSourceObject: {fileID: 8575165561914546611, guid: a4b4a8202ac59c5418b897464c27c1ac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5895873687573866061}
@@ -11844,6 +11891,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3422994707052956842}
   m_SourcePrefab: {fileID: 100100000, guid: a4b4a8202ac59c5418b897464c27c1ac, type: 3}
+--- !u!4 &553427368575775387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4309357956253244656, guid: a4b4a8202ac59c5418b897464c27c1ac, type: 3}
+  m_PrefabInstance: {fileID: 4351534389340565099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &639266520139198209 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3800159556805853546, guid: a4b4a8202ac59c5418b897464c27c1ac, type: 3}

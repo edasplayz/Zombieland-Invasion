@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -31,6 +32,12 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] float upAndDownLookAngle;
     private float cameraZPosition; // values used for camera position
     private float targetCameraZPosition; // values used for camera position
+
+    [Header("Lock On")]
+    [SerializeField] float lockOnRadius = 20;
+    [SerializeField] float minimumViewableAngle = -50;
+    [SerializeField] float maximumViewableAngle = 50;
+    [SerializeField] float maximumLockOnDistance = 20;
 
 
     private void Awake()
@@ -127,5 +134,63 @@ public class PlayerCamera : MonoBehaviour
         // we then apply our final position using a lerp over a time of 0.2f
         cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
         cameraObject.transform.localPosition = cameraObjectPosition;
+    }
+
+    public void HandleLocatingLockOnTargets()
+    {
+        float shortestDistance = Mathf.Infinity; // will be used to determine the target closest to us
+        float shortestDistanceOfRightTarget = Mathf.Infinity; // will be used to determine shortest distance on on axis to the right of current target + (closest to the right of current target )
+        float shortestDistanceOfLeftTarget = -Mathf.Infinity; // will be used to determine shortest distance on on axis to the left of current target - (closest to the Left of current target )
+
+        // to do use a layermask
+        Collider[] colliders = Physics.OverlapSphere(player.transform.position, lockOnRadius, WorldUtilityManager.Instance.GetCharacterLayers()); 
+
+        for(int i = 0; i < colliders.Length; i++)
+        {
+            CharacterManager lockOnTarget = colliders[i].GetComponent<CharacterManager>();
+
+            if(lockOnTarget != null)
+            {
+                // heck if they are within our field of view 
+                Vector3 lockOnTargetDirection = lockOnTarget.transform.position - player.transform.position;
+                float distanceFromTarget = Vector3.Distance(player.transform.position, lockOnTarget.transform.position);
+                float viewableAngle = Vector3.Angle(lockOnTargetDirection, cameraObject.transform.forward);
+
+                // if target is dead check the next potensial target
+                if(lockOnTarget.isDead.Value)
+                {
+                    continue;
+                }
+                // if target is us check the next potensial target
+                if(lockOnTarget.transform.root == player.transform.root)
+                {
+                    continue;
+                }
+                // if target is to far away check the next potensial target
+                if (distanceFromTarget > maximumLockOnDistance)
+                {
+                    continue;
+                }
+
+                if(viewableAngle > minimumViewableAngle && viewableAngle < maximumViewableAngle)
+                {
+                    RaycastHit hit;
+
+                    // todo addd layer mask for enviromental layer only
+                    if(Physics.Linecast(player.playerCombatManager.lockOnTransform.position, 
+                        lockOnTarget.characterCombatManager.lockOnTransform.position, 
+                        out hit, WorldUtilityManager.Instance.GetEnviroLayers()))
+                    {
+                        // we hit something we cannot see our lock on target
+                        continue;
+                    }
+                    else
+                    {
+                        Debug.Log("WE made it");
+                    }
+                }
+
+            }
+        }
     }
 }
