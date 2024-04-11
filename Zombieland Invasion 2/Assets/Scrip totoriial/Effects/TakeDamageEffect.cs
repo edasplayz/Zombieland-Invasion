@@ -126,6 +126,10 @@ public class TakeDamageEffect : InstantCharacterEffect
             return; 
         }
 
+        if(character.isDead.Value)
+        {
+            return;
+        }
 
         // calculate if poise is broken
         poiseIsBroken = true;
