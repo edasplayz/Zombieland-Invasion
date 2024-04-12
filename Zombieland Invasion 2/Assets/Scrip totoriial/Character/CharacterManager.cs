@@ -17,6 +17,7 @@ public class CharacterManager : NetworkBehaviour
     [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
     [HideInInspector] public CharacterCombatManager characterCombatManager;
     [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
+    [HideInInspector] public CharacterLocomationManager characterLocomationManager;
 
     [Header("Flags")]
     public bool isPreformingAction = false;
@@ -37,6 +38,7 @@ public class CharacterManager : NetworkBehaviour
         characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         characterCombatManager = GetComponent<CharacterCombatManager>();
         characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
+        characterLocomationManager = GetComponent<CharacterLocomationManager>();
     }
 
     protected virtual void Start()

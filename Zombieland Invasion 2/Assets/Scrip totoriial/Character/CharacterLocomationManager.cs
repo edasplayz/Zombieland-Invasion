@@ -14,6 +14,9 @@ public class CharacterLocomationManager : MonoBehaviour
     [SerializeField] protected float fallStartYVelocity = -5; // the force at which our character beggins to fall when they become ungrounded (rises ads they fall longer)
     protected bool fallingVelocityHasBeenSet = false;
     protected float inAirTimer = 0;
+
+    [Header("Flags")]
+    public bool isRolling = false;
     
     protected virtual void Awake()
     {

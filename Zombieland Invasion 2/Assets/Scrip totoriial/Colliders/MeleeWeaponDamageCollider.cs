@@ -8,8 +8,9 @@ public class MeleeWeaponDamageCollider : DamageCollider
     public CharacterManager characterCausingDamage; // when calculating damage this is used to check for attackers damage modifiers, effects ect
 
     [Header("Weapon Attack Modifiers")]
-    public float light_Attack_01_Modifiers;
-
+    public float light_Attack_01_Modifier;
+    public float heavy_Attack_01_Modifier;
+    public float charge_Attack_01_Modifier;
     protected override void Awake()
     {
         base.Awake();
@@ -71,15 +72,23 @@ public class MeleeWeaponDamageCollider : DamageCollider
         switch (characterCausingDamage.characterCombatManager.currentAttackType)
         {
             case AttackType.LightAttack01:
-                ApplyAttackDamageModifiers(light_Attack_01_Modifiers, damageEffect);
+                ApplyAttackDamageModifiers(light_Attack_01_Modifier, damageEffect);
+                break;
+            case AttackType.HeavyAttack01:
+                ApplyAttackDamageModifiers(heavy_Attack_01_Modifier, damageEffect);
+                break;
+            case AttackType.ChargeAttack01:
+                ApplyAttackDamageModifiers(charge_Attack_01_Modifier, damageEffect);
                 break;
             default:
                 break;
         }
 
+
+        
         //damageTarget.characterEffectsManager.ProccessInstantEffect(damageEffect);
 
-        if(characterCausingDamage.IsOwner)
+        if (characterCausingDamage.IsOwner)
         {
             //send a damage request to the server
             damageTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId,

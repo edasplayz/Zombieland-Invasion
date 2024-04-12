@@ -61,8 +61,13 @@ MonoBehaviour:
   lockOnRadius: 20
   minimumViewableAngle: -50
   maximumViewableAngle: 50
+  lockOnTargetFallowSpeed: 1
+  setCameraHeightSpeed: 0.05
+  unlockedCameraHeight: 1.29
+  lockedCameraHeight: 1.68
   nearestLockOnTarget: {fileID: 0}
-  lockOnTargetFallowSpeed: 0.2
+  leftLockOnTarget: {fileID: 0}
+  rightLockOnTarget: {fileID: 0}
 --- !u!1 &3151828338368417467
 GameObject:
   m_ObjectHideFlags: 0

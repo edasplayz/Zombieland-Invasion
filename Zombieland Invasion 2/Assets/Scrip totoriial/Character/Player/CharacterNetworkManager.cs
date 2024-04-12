@@ -28,6 +28,8 @@ public class CharacterNetworkManager : NetworkBehaviour
     public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isChargingAttack = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
 
     [Header("Resources")]
@@ -77,6 +79,11 @@ public class CharacterNetworkManager : NetworkBehaviour
         {
             character.characterCombatManager.currentTarget = null;
         }
+    }
+
+    public void OnIsChargingAttackCharge(bool ondStatus, bool newStatus)
+    {
+        character.animator.SetBool("IsChargingAttack", isChargingAttack.Value);
     }
 
 

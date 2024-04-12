@@ -101,6 +101,7 @@ public class TakeDamageEffect : InstantCharacterEffect
         character.characterNetworkManager.currentHealth.Value -= finalDamage;
 
         // calculate poise damage to determine if the character will be stunned 
+        Debug.Log("Target has taken " + finalDamage + " damage.");
     }
 
     private void PlayDamageVFX(CharacterManager character)

@@ -32,6 +32,8 @@ public class WeaponItem : Item
     [Header("Attack Modifiers")]
     public float light_Attack_01_Modifier = 1.1f;
     // heavy attack modifier
+    public float heavy_Attack_01_Modifier = 1.4f;
+    public float charge_Attack_01_Modifier = 2.0f;
     // critical damage modifiers ect
 
     [Header("Stamina Costs Modifiers")]
@@ -45,10 +47,11 @@ public class WeaponItem : Item
     // item based action (rb, rt, lb, lt)
     [Header("Actions")]
     public WeaponItemAction oh_RB_Action; // one handed right bumper action
+    public WeaponItemAction oh_RT_Action; // one handed right trigger action
 
     // ash of war
 
     // blocking sounds
 
-    
+
 }

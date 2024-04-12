@@ -24,12 +24,25 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Lock On Input")]
     [SerializeField] bool lockOn_Input;
+    [SerializeField] bool lockOn_Left_Input;
+    [SerializeField] bool lockOn_Right_Input;
+    private Coroutine lockOnCorotine;
+    [SerializeField] float snapThreshold = 25f;
 
     [Header("Player action input")]
     [SerializeField] bool dodgeInput = false;
     [SerializeField] bool sprintInput = false;
     [SerializeField] bool jumpInput = false;
+
+    [Header("Bumper Inputs")]
     [SerializeField] bool RB_Input = false;
+
+    [Header("Trigger Inputs")]
+    [SerializeField] bool RT_Input = false;
+    [SerializeField] bool Hold_RT_Input = false;
+
+    
+
     
 
     private void Awake()
@@ -97,10 +110,54 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerCamera.Movement1.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+
+            // bumpers
             playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
+            // triggers
+            playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
+            playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
+
             // lock on
+            playerControls.PlayerActions.RT.performed += i => RT_Input = true;
             playerControls.PlayerActions.LockOn.performed += i => lockOn_Input = true;
+            playerControls.PlayerActions.SeekLeftLockedOnTarget.performed += i => lockOn_Left_Input = true;
+            playerControls.PlayerActions.SeekRightLockedOnTarget1.performed += i => lockOn_Right_Input = true;
+
+            // should be mouse controls when locked on 
+            playerControls.PlayerCamera.Movement1.performed += i =>
+            {
+                Vector2 mouseDelta = i.ReadValue<Vector2>();
+
+                // Check if the mouse movement exceeds the snap threshold
+                if (Mathf.Abs(mouseDelta.x) > snapThreshold)
+                {
+                    // Check if the mouse movement is to the left and exceeds the snap threshold
+                    if (mouseDelta.x < 0)
+                    {
+                        lockOn_Left_Input = true;
+                        lockOn_Right_Input = false; // Reset right input if moving left
+                    }
+                    // Check if the mouse movement is to the right and exceeds the snap threshold
+                    else if (mouseDelta.x > 0)
+                    {
+                        lockOn_Right_Input = true;
+                        lockOn_Left_Input = false; // Reset left input if moving right
+                    }
+                }
+                else
+                {
+                    // If no significant horizontal movement, reset both inputs
+                    lockOn_Left_Input = false;
+                    lockOn_Right_Input = false;
+                }
+
+                // Assign mouse delta movement input to cameraInput
+                cameraInput = mouseDelta;
+            };
+
+
+
 
             // holding the input sets the bool to true 
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -147,7 +204,9 @@ public class PlayerInputManager : MonoBehaviour
         HandleJumpInput();
         HandleRBInput();
         HandleLockOnInput();
-
+        HandleLockOnSwitchTargetInput();
+        HandleRTInput();
+        HandleChargeRTInput();
     }
 
     // lock on
@@ -163,9 +222,18 @@ public class PlayerInputManager : MonoBehaviour
             if(player.playerCombatManager.currentTarget.isDead.Value)
             {
                 player.playerNetworkManager.isLockedOn.Value = false;
+                // attempt to find new target
+
+                // this assures us that the coroutine nevert runs multiple times overlaping itself
+                if (lockOnCorotine != null)
+                {
+                    StopCoroutine(lockOnCorotine);
+                }
+                lockOnCorotine = StartCoroutine(PlayerCamera.instance.WaitThenFindNewTarget());
+
             }
 
-            // attempt to find new target
+            
         }
 
         if(lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
@@ -198,6 +266,39 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
+    private void HandleLockOnSwitchTargetInput()
+    {
+        if (lockOn_Left_Input)
+        {
+            lockOn_Left_Input = false;
+
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                if(PlayerCamera.instance.leftLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.leftLockOnTarget);
+                }
+            }
+        }
+
+        if (lockOn_Right_Input)
+        {
+            lockOn_Right_Input = false;
+
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                if (PlayerCamera.instance.rightLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.rightLockOnTarget);
+                }
+            }
+        }
+    }
+
     // movement
     private void HandlePlayerMovementInput()
     {
@@ -224,7 +325,16 @@ public class PlayerInputManager : MonoBehaviour
             return;
         }
         // if we are not locked on, only use the move amount 
-        player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+        if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+        {
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+        }
+        else
+        {
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
+
+        }
+        
 
         // if we are locked on pass the horizontal movement as well 
     }
@@ -288,6 +398,31 @@ public class PlayerInputManager : MonoBehaviour
             // todo: if we are two handing the weapon use the two handed action
 
             player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+        }
+    }
+
+    private void HandleRTInput()
+    {
+        if (RT_Input)
+        {
+            RT_Input = false;
+
+            // TODO: IF WE HAVE A UI WINDOW OPEN RETURN AND DO NOTHING 
+
+            player.playerNetworkManager.SetCharacterActionHand(true);
+
+            // todo: if we are two handing the weapon use the two handed action
+
+            player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RT_Action, player.playerInventoryManager.currentRightHandWeapon);
+        }
+    }
+
+    private void HandleChargeRTInput()
+    {
+        // we only want to check for a charge if we are in an action that requiers it (attacking)
+        if (player.isPreformingAction)
+        {
+            player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
         }
     }
 }
