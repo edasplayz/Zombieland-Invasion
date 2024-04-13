@@ -5294,11 +5294,15 @@ MonoBehaviour:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
+    m_InternalValue: 0
+  isChargingAttack:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
@@ -5432,13 +5436,12 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterLocomationManager: {fileID: 0}
   isPreformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
   canRotate: 1
   canMove: 1
-  respawnCharacter: 0
-  switchRightWeapon: 0
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
@@ -5466,6 +5469,7 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  isRolling: 0
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -5706,12 +5710,12 @@ MonoBehaviour:
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
-  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  - {fileID: 11400000, guid: abf8544dfb8095d48939d6e145c06793, type: 2}
   rightHandWeaponIndex: 0
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
-  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  - {fileID: 11400000, guid: abf8544dfb8095d48939d6e145c06793, type: 2}
   leftHandWeaponIndex: 0
 --- !u!114 &4886310686802824332
 MonoBehaviour:

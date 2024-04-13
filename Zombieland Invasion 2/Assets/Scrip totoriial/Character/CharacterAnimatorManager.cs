@@ -170,6 +170,7 @@ public class CharacterAnimatorManager : MonoBehaviour
         // decide if our attack can be parried
         // tell the network our (isattacking) floag is active (for counter damage ect)
         character.characterCombatManager.currentAttackType = attackType;
+        character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
         character.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
         character.isPreformingAction = isPerformingAction;
@@ -178,5 +179,15 @@ public class CharacterAnimatorManager : MonoBehaviour
 
         // tell the server/host we player an animation, and to play that animation for everyone else present 
         character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+    }
+
+    public virtual void EnableCanDoCombos()
+    {
+        
+    }
+
+    public virtual void DisableCnDoCombos()
+    {
+        
     }
 }

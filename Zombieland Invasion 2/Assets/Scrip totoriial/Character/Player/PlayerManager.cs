@@ -6,9 +6,11 @@ using Unity.Netcode;
 
 public class PlayerManager : CharacterManager
 {
+    /*
     [Header("Debug Menu")]
     [SerializeField] bool respawnCharacter = false;
     [SerializeField] bool switchRightWeapon = false;
+    */
 
     [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
     [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
@@ -47,7 +49,7 @@ public class PlayerManager : CharacterManager
         //regen stamina
         playerStatsManager.RegenerateStamina();
 
-        DebugMenu();
+        //DebugMenu();
 
     }
 
@@ -248,7 +250,7 @@ public class PlayerManager : CharacterManager
     }
 
     // debug delete later
-    private void DebugMenu()
+    /*private void DebugMenu()
     {
         if (respawnCharacter)
         {
@@ -260,5 +262,5 @@ public class PlayerManager : CharacterManager
             switchRightWeapon = false;
             playerEquipmentManager.SwitchRightWeapon();
         }
-    }
+    }*/
 }

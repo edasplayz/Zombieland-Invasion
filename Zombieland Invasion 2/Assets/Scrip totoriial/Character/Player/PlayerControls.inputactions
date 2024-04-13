@@ -398,6 +398,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Switch Right Weapon",
+                    "type": "Button",
+                    "id": "e7f470c8-a225-4c1a-9ed1-943e9b10727b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Left Weapon",
+                    "type": "Button",
+                    "id": "91678b29-2758-49a5-9110-ac55d33194ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Seek Left Locked On Target",
                     "type": "Button",
                     "id": "2836a61e-2dde-4aab-87f9-ae26c2f099aa",
@@ -658,6 +676,50 @@
                     "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "096caf52-9616-48ef-b40b-232008f2d8a2",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fea0a35-07cb-4adc-82e0-9e50016363a6",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c64fc0c-996a-43f1-bd6b-c21e24497f0c",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Left Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd3604f7-c94b-40e8-8100-b07eeee481d0",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Left Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
