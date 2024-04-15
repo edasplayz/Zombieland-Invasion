@@ -332,6 +332,16 @@ public class PlayerInputManager : MonoBehaviour
         {
             return;
         }
+
+        if(moveAmount != 0)
+        {
+            player.playerNetworkManager.isMoving.Value = true;
+        }
+        else
+        {
+            player.playerNetworkManager.isMoving.Value = false;
+        }
+
         // if we are not locked on, only use the move amount 
         if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
         {

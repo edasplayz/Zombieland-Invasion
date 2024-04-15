@@ -10,14 +10,13 @@ public class IdleState : AIState
         if(aICharacter.characterCombatManager.currentTarget != null)
         {
             //return the pursue target state(change the state to the pursue target state)
-            Debug.Log("We have a target");
-            return this;
+            return SwitchState(aICharacter, aICharacter.pursueTarget);
+            
         }
         else
         {
             // return this state to continually search for a target (keep the state here until a target is found)
             aICharacter.aICharacterCombatManager.FindATargetViaLineOfSight(aICharacter);
-            Debug.Log("searching far a target");
             return this;
         }
 
