@@ -5178,8 +5178,8 @@ GameObject:
   - component: {fileID: 6513466212021196407}
   - component: {fileID: 4980175010018914291}
   - component: {fileID: 4389576836793244796}
-  - component: {fileID: -962024993641430823}
   - component: {fileID: 5961803712316033680}
+  - component: {fileID: -962024993641430823}
   - component: {fileID: -3627923344316134556}
   - component: {fileID: 2911438646937748948}
   - component: {fileID: 7545909901475829304}
@@ -5269,6 +5269,27 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 2.5
   dashOrientation: {fileID: 0}
+--- !u!114 &5961803712316033680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489235924790319826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1093615376
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &-962024993641430823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5288,6 +5309,8 @@ MonoBehaviour:
   networkPositionVelocity: {x: 0, y: 0, z: 0}
   networkPositionSmoothTime: 0.1
   networkRotationSmoothTime: 0.1
+  isMoving:
+    m_InternalValue: 0
   horizontalMovement:
     m_InternalValue: 0
   verticalMovement:
@@ -5395,26 +5418,6 @@ MonoBehaviour:
     m_InternalValue: 0
   isUsingLeftHand:
     m_InternalValue: 0
---- !u!114 &5961803712316033680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5489235924790319826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &-3627923344316134556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5437,6 +5440,7 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   characterLocomationManager: {fileID: 0}
+  characterGroup: 0
   isPreformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -5774,10 +5778,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a22f792cd90c8f419b3cca88c700203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 7119517015563215951}
   currentWeaponBeingUsed: {fileID: 0}
+  canComboWithMainHandWeapon: 0
 --- !u!1 &5678136915598479431
 GameObject:
   m_ObjectHideFlags: 0

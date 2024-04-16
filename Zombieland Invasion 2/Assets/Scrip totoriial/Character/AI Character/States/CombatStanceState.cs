@@ -26,7 +26,7 @@ public class CombatStanceState : AIState
     protected bool hasRolledForComboChance = false; // if we have already rolled for the chance during this state
 
     [Header("Engagement Distance")]
-    [SerializeField] protected float maximumEngagementDistance = 5; // the distance we have to be away from the target before we enter the pursue target state
+    [SerializeField] public float maximumEngagementDistance = 5; // the distance we have to be away from the target before we enter the pursue target state
 
     public override AIState Tick(AICharacterManager aICharacter)
     {
@@ -34,6 +34,8 @@ public class CombatStanceState : AIState
         {
             return this;
         }
+
+        
         if(!aICharacter.navMeshAgent.enabled)
         {
             aICharacter.navMeshAgent.enabled = true;
@@ -49,6 +51,7 @@ public class CombatStanceState : AIState
         }
 
         // rotate to face our target 
+        aICharacter.aICharacterCombatManager.RotateTowardsAgent(aICharacter);
 
         // if our target is no longer present switch back to idle
         if(aICharacter.aICharacterCombatManager.currentTarget == null)
@@ -63,10 +66,9 @@ public class CombatStanceState : AIState
         }
         else
         {
-            // check recovery timer
-            // pass attack to attack state
+            aICharacter.attack.currentAttack = choosenAttack;
             // roll for combo chance
-            // switch state
+            return SwitchState(aICharacter, aICharacter.attack);
         }
         // if we are outside of the combat engagement distance switch to pursue target state
         if(aICharacter.aICharacterCombatManager.distanceFromTarget > maximumEngagementDistance)
@@ -87,7 +89,9 @@ public class CombatStanceState : AIState
     {
         potensialAttacks = new List<AICharacterAttackAction>();
 
-        foreach (var potentialAttack in potensialAttacks)
+
+
+        foreach (var potentialAttack in aICharacterAttacks)
         {
             // if we are to close for this attack check the next
             if(potentialAttack.minimumAttackDistance > aICharacter.aICharacterCombatManager.distanceFromTarget)
@@ -139,6 +143,7 @@ public class CombatStanceState : AIState
                 choosenAttack = attack;
                 previousAttack = choosenAttack;
                 hasAttack = true;
+                return;
             } 
         }
         
@@ -166,5 +171,7 @@ public class CombatStanceState : AIState
 
         
     }
+
+
 
 }

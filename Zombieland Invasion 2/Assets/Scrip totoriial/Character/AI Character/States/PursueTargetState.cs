@@ -41,6 +41,20 @@ public class PursueTargetState : AIState
 
         // if we are within combat range of a target switch state to combat stance state
 
+        // option 1 
+        /*if(aICharacter.aICharacterCombatManager.distanceFromTarget <= aICharacter.combatStance.maximumEngagementDistance)
+        {
+            return SwitchState(aICharacter, aICharacter.combatStance);
+        }*/
+
+        // option 2
+        if (aICharacter.aICharacterCombatManager.distanceFromTarget <= aICharacter.navMeshAgent.stoppingDistance)
+        {
+            return SwitchState(aICharacter, aICharacter.combatStance);
+        }
+        
+
+
         // if the target is not reachable and they are far away return home
 
         // pursue the target
