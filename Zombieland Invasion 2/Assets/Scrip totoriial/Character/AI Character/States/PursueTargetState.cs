@@ -31,11 +31,11 @@ public class PursueTargetState : AIState
         }
 
         // if our target goes outside of the character f.o.v pivot to face them 
-        /*if(aICharacter.aICharacterCombatManager.viewableAngle < aICharacter.aICharacterCombatManager.minimumFOV 
+        if(aICharacter.aICharacterCombatManager.viewableAngle < aICharacter.aICharacterCombatManager.minimumFOV 
             || aICharacter.aICharacterCombatManager.viewableAngle > aICharacter.aICharacterCombatManager.maximumFOV)
         {
             aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
-        }*/
+        }
 
         aICharacter.aICharacterLocomotionManager.RotateTowardsAgent(aICharacter);
 
