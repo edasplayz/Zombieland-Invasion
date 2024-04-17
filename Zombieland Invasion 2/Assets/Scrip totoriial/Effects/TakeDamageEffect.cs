@@ -116,6 +116,7 @@ public class TakeDamageEffect : InstantCharacterEffect
     {
         AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
         character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
+        character.characterSoundFXManager.PlayDamageGrunt();
         // if fire damage is greater than 0 play burn sfx
         // if lightning famage is greater then 0 play zap sfx
     }

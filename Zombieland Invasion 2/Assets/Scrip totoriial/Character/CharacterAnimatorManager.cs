@@ -10,6 +10,9 @@ public class CharacterAnimatorManager : MonoBehaviour
     int vertical;
     int horizontal;
 
+    [Header("Flags")]
+    public bool applyRootMotion = false;
+
     [Header("Damage Animations")]
     public string lastDamageAnimationPlayed;
 
@@ -142,15 +145,15 @@ public class CharacterAnimatorManager : MonoBehaviour
     {
         Debug.Log("Playing animation: " + targetAnimation);
 
-        character.applyRootMotion = applyRootMotion;
+        this.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
         // can be used to stop character form attemting new action
         // form exaple if you get damaged and begin performing a damage animation
         // this flag will turn true if you are stunned 
         // we can then check for this before attempting new actions
         character.isPreformingAction = isPerformingAction;
-        character.canRotate = canRotate;
-        character.canMove = canMove;
+        character.characterLocomationManager.canRotate = canRotate;
+        character.characterLocomationManager.canMove = canMove;
 
         // tell the server/host we player an animation, and to play that animation for everyone else present 
         character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
@@ -171,11 +174,11 @@ public class CharacterAnimatorManager : MonoBehaviour
         // tell the network our (isattacking) floag is active (for counter damage ect)
         character.characterCombatManager.currentAttackType = attackType;
         character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
-        character.applyRootMotion = applyRootMotion;
+        character.characterAnimatorManager.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
         character.isPreformingAction = isPerformingAction;
-        character.canRotate = canRotate;
-        character.canMove = canMove;
+        character.characterLocomationManager.canRotate = canRotate;
+        character.characterLocomationManager.canMove = canMove;
 
         // tell the server/host we player an animation, and to play that animation for everyone else present 
         character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);

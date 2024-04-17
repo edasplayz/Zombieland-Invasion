@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AICharacterCombatManager : CharacterCombatManager
 {
+    protected AICharacterManager aiCharacter;
+
     [Header("Action Recovery")]
     public float actionRecoveryTimer = 0;
 
@@ -20,6 +22,17 @@ public class AICharacterCombatManager : CharacterCombatManager
 
     [Header("Attack Rotation Speed")]
     public float attackRotationSpeed = 25;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        aiCharacter = GetComponent<AICharacterManager>();
+
+        lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
+
+
+    }
     public void FindATargetViaLineOfSight(AICharacterManager aICharacter)
     {
         if(currentTarget != null)
@@ -134,7 +147,7 @@ public class AICharacterCombatManager : CharacterCombatManager
             return;
         }
 
-        if (!aICharacter.canRotate)
+        if (!aICharacter.characterLocomationManager.canRotate)
         {
             return;
         }

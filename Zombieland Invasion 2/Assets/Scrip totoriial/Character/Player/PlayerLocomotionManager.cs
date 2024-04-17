@@ -95,7 +95,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 
     private void HandleGroundedMovement()
     {
-        if (!player.canMove)
+        if (!player.characterLocomationManager.canMove)
         {
             return;
         }
@@ -138,7 +138,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 
     private void HandleFreeFallMovement()
     {
-        if(!player.isGrounded)
+        if(!player.characterLocomationManager.isGrounded)
         {
             Vector3 freeFallDirection;
 
@@ -156,7 +156,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         {
             return;
         }
-        if(!player.canRotate)
+        if(!player.characterLocomationManager.canRotate)
         {
             return;
         }
@@ -310,7 +310,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
             return;
         }
         // if we are not grounded we do not want to allow jump
-        if (!player.isGrounded)
+        if (!player.characterLocomationManager.isGrounded)
         {
             return;
         }

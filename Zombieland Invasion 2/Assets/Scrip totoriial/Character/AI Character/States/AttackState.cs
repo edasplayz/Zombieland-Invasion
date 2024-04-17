@@ -29,6 +29,8 @@ public class AttackState : AIState
         }
 
         // rotate towards the target whilst attakink
+        aICharacter.aICharacterCombatManager.RotateTowardsTargetWhilstAttacking(aICharacter);
+
 
         // set movement values to 0
         aICharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
@@ -44,6 +46,11 @@ public class AttackState : AIState
             }
         }
 
+        if (aICharacter.isPreformingAction)
+        {
+            return this;
+        }
+
         if (!hasPerformedAttack)
         {
             // if we arre still recovering from an action wait before performing another
@@ -51,10 +58,7 @@ public class AttackState : AIState
             {
                 return this;
             }
-            if(aICharacter.isPreformingAction)
-            {
-                return this;
-            }
+            
             PerformAttack(aICharacter);
 
 

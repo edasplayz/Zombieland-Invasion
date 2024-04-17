@@ -16,9 +16,9 @@ public class ResetActionFlag : StateMachineBehaviour
 
         // this is called when an action ends, and the state returns to empty
         character.isPreformingAction = false;
-        character.applyRootMotion = false;
-        character.canMove = true;
-        character.canRotate = true;
+        character.characterAnimatorManager.applyRootMotion = false;
+        character.characterLocomationManager.canMove = true;
+        character.characterLocomationManager.canRotate = true;
         character.characterLocomationManager.isRolling = false;
         character.characterAnimatorManager.DisableCnDoCombos();
 

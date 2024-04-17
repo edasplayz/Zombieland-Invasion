@@ -17,7 +17,10 @@ public class CharacterLocomationManager : MonoBehaviour
 
     [Header("Flags")]
     public bool isRolling = false;
-    
+    public bool canRotate = true;
+    public bool canMove = true;
+    public bool isGrounded = true;
+
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
@@ -27,7 +30,7 @@ public class CharacterLocomationManager : MonoBehaviour
     {
         HandleGroundCheck();
 
-        if (character.isGrounded)
+        if (character.characterLocomationManager.isGrounded)
         {
             // if we arre not attemting to jump or move upward
             if(yVelocity.y < 0)
@@ -59,7 +62,7 @@ public class CharacterLocomationManager : MonoBehaviour
 
     protected void HandleGroundCheck()
     {
-        character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
+        character.characterLocomationManager.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
     }
 
     // draw our ground check sphere in scene view 
@@ -73,5 +76,14 @@ public class CharacterLocomationManager : MonoBehaviour
         {
             //Debug.LogWarning("Character or character transform is null. Gizmos will not be drawn.");
         }
+    }
+
+    public void EnableCanRotate()
+    {
+        canRotate = true;
+    }
+    public void DisableCanRotate()
+    {
+        canRotate = false;
     }
 }
