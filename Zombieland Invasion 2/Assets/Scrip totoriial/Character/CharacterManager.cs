@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.TextCore.Text;
 
 public class CharacterManager : NetworkBehaviour
 {
@@ -86,13 +87,19 @@ public class CharacterManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        animator.SetBool("isMoving", characterNetworkManager.isMoving.Value);
+        characterNetworkManager.OnIsActiveChanged(false, characterNetworkManager.isActive.Value);
+
+
         characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
+        characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
     }
 
     public override void OnNetworkDespawn()
     {
         base.OnNetworkDespawn();
         characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
+        characterNetworkManager.isActive.OnValueChanged -= characterNetworkManager.OnIsActiveChanged;
     }
 
 
