@@ -25,6 +25,8 @@ public class CombatStanceState : AIState
     [SerializeField] protected int chanceToPerformCombo = 25; // the chance (in percent) of the character to perform a combo on the next attack
     protected bool hasRolledForComboChance = false; // if we have already rolled for the chance during this state
 
+    [Header("Pivot")]
+
     [Header("Engagement Distance")]
     [SerializeField] public float maximumEngagementDistance = 5; // the distance we have to be away from the target before we enter the pursue target state
 
