@@ -15,9 +15,9 @@ public class CombatStanceState : AIState
 
     [Header("Attacks")]
     public List<AICharacterAttackAction> aICharacterAttacks; // a list of all possible attacks this character can do 
-    protected List<AICharacterAttackAction> potensialAttacks; // all attacks possible in this situasion (based on angle distance ect)
-    private AICharacterAttackAction choosenAttack;
-    private AICharacterAttackAction previousAttack;
+    [SerializeField] protected List<AICharacterAttackAction> potensialAttacks; // all attacks possible in this situasion (based on angle distance ect)
+    [SerializeField] private AICharacterAttackAction choosenAttack;
+    [SerializeField] private AICharacterAttackAction previousAttack;
     protected bool hasAttack = false;
 
     [Header("Combo")]
@@ -25,7 +25,7 @@ public class CombatStanceState : AIState
     [SerializeField] protected int chanceToPerformCombo = 25; // the chance (in percent) of the character to perform a combo on the next attack
     protected bool hasRolledForComboChance = false; // if we have already rolled for the chance during this state
 
-    [Header("Pivot")]
+    
 
     [Header("Engagement Distance")]
     [SerializeField] public float maximumEngagementDistance = 5; // the distance we have to be away from the target before we enter the pursue target state
@@ -43,14 +43,19 @@ public class CombatStanceState : AIState
             aICharacter.navMeshAgent.enabled = true;
         }
 
+
         // if you want the ai character to face and turn towards its target when its outside its fov include this
-        if (!aICharacter.aICharacterNetworkManager.isMoving.Value)
+        if (aICharacter.aICharacterCombatManager.enablePivot)
         {
-            if(aICharacter.aICharacterCombatManager.viewableAngle < -30 || aICharacter.aICharacterCombatManager.viewableAngle > 30)
+            if (!aICharacter.aICharacterNetworkManager.isMoving.Value)
             {
-                aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
+                if (aICharacter.aICharacterCombatManager.viewableAngle < -30 || aICharacter.aICharacterCombatManager.viewableAngle > 30)
+                {
+                    aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
+                }
             }
         }
+       
 
         // rotate to face our target 
         aICharacter.aICharacterCombatManager.RotateTowardsAgent(aICharacter);

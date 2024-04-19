@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7ff45774a326e409a1727db88a6e1a, type: 3}
   m_Name: Knight boss Pursue Target State
   m_EditorClassIdentifier: 
+  enablePivot: 0

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class AICharacterCombatManager : CharacterCombatManager
 
     [Header("Action Recovery")]
     public float actionRecoveryTimer = 0;
+
+    [Header("Pivot")]
+    public bool enablePivot = true;
 
     [Header("Target Information")]
     public float distanceFromTarget;
@@ -82,14 +86,19 @@ public class AICharacterCombatManager : CharacterCombatManager
                         targetDirection = targetCharacter.transform.position - transform.position;
                         viewableAngle = WorldUtilityManager.Instance.GetAngleOfTarget(transform, targetsDirection);
                         aICharacter.characterCombatManager.SetTarget(targetCharacter);
-                        PivotTowardsTarget(aICharacter);
+
+                        if(enablePivot)
+                        {
+                            PivotTowardsTarget(aICharacter);
+                        }
+                        
                     }
                 }
             }
         }
     }
 
-    public void PivotTowardsTarget(AICharacterManager aICharacter)
+    public virtual void PivotTowardsTarget(AICharacterManager aICharacter)
     {
         // play a pivot animation depending on viewable angle of target
         if (aICharacter.isPreformingAction)

@@ -7,6 +7,7 @@ using UnityEngine.AI;
 [CreateAssetMenu(menuName = "A.I/States/Pursue Target")]
 public class PursueTargetState : AIState
 {
+    
     public override AIState Tick(AICharacterManager aICharacter)
     {
 
@@ -32,11 +33,15 @@ public class PursueTargetState : AIState
 
         // if our target goes outside of the character f.o.v pivot to face them 
         // this is the part that makes character rotate randomly on zombie its ok bu on smarter enemy is bad 
-        /*if(aICharacter.aICharacterCombatManager.viewableAngle < aICharacter.aICharacterCombatManager.minimumFOV 
-            || aICharacter.aICharacterCombatManager.viewableAngle > aICharacter.aICharacterCombatManager.maximumFOV)
+        if(aICharacter.aICharacterCombatManager.enablePivot)
         {
-            aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
-        }*/
+            if (aICharacter.aICharacterCombatManager.viewableAngle < aICharacter.aICharacterCombatManager.minimumFOV
+            || aICharacter.aICharacterCombatManager.viewableAngle > aICharacter.aICharacterCombatManager.maximumFOV)
+            {
+                aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
+            }
+        }
+        
 
         aICharacter.aICharacterLocomotionManager.RotateTowardsAgent(aICharacter);
 

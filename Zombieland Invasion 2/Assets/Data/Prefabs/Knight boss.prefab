@@ -71,7 +71,6 @@ Transform:
   - {fileID: 4953201225076272}
   - {fileID: 4642600978035454}
   - {fileID: 4020653143090514}
-  - {fileID: 8829419166454010296}
   m_Father: {fileID: 4414241541260316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7883927839080865361
@@ -184,7 +183,7 @@ MonoBehaviour:
   - {fileID: 4937836013735474}
   - {fileID: 4405754220443382}
   - {fileID: 4194383280466272}
-  - {fileID: 8829419166454010296}
+  - {fileID: 0}
 --- !u!1 &1045482021221226
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +598,8 @@ MonoBehaviour:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
     m_InternalValue: 0
+  isInvulnerable:
+    m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
   isSprinting:
@@ -961,6 +962,7 @@ MonoBehaviour:
   currentAttackType: 0
   lockOnTransform: {fileID: 0}
   actionRecoveryTimer: 0
+  enablePivot: 1
   distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}
@@ -969,11 +971,14 @@ MonoBehaviour:
   maximumFOV: 35
   attackRotationSpeed: 25
   knightSwordDamageCollider: {fileID: 1653105772433631981}
+  knightsStompingFoot: {fileID: 4194383280466272}
+  stompAttackAOERadius: 1.5
   baseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.4
   attack03DamageModifier: 1.6
   attack04DamageModifier: 1.8
+  stompDamage: 25
 --- !u!1 &1196216015583102
 GameObject:
   m_ObjectHideFlags: 0
@@ -4256,52 +4261,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4043608404727298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3213268515557919141
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8829419166454010296}
-  - component: {fileID: 1086514208685455692}
-  m_Layer: 0
-  m_Name: Rig 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8829419166454010296
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213268515557919141}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.010000002, z: 0.010000002}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4125976597218238}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1086514208685455692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3213268515557919141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Weight: 1
-  m_Effectors: []
 --- !u!1 &4264548106555665585
 GameObject:
   m_ObjectHideFlags: 0
@@ -4347,7 +4306,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 240
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -4508,7 +4467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageCollider: {fileID: 3256517491354128895}
-  physicalDamage: 0
+  physicalDamage: 35
   magicDamage: 0
   fireDamage: 0
   lightningDamage: 0

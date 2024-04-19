@@ -19,5 +19,5 @@ MonoBehaviour:
   actionRecoveeryTime: 0.2
   minimumAttackAngle: -35
   maximumAttackAngle: 35
-  minimumAttackDistance: 2
+  minimumAttackDistance: 0
   maximumAttackDistance: 3
