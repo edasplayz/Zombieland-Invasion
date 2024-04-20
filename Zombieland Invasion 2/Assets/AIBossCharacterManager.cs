@@ -7,35 +7,43 @@ public class AIBossCharacterManager : AICharacterManager
 {
     // GIVE THIS A,I a unique if
     public int bossID = 0;
-    [SerializeField] bool hasBeenDefeated = false;
-    [SerializeField] bool hasBeenAwakened = false;
+
+    [Header("Status")]
+    public NetworkVariable<bool> hasBeenDefeated = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> hasBeenAwakened = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] List<FogWallInteractable> fogWalls;
+    [SerializeField] string sleepAnimation;
+    [SerializeField] string awakenAnimation;
+
+    [Header("States")]
+    [SerializeField] BossSleepState sleepState;
+
     // when this ai is spawned check our save file (dictonary)
     // if the save file does not contain a boss monster with this i.d add it
     // if it is present cheeck if boss has been defeted
     // if the boss has been defeted disable the game object
     // if the boss has not been defeted allow this object to continue to be active
 
-    [Header("Debug")]
-    [SerializeField] bool wakeBossUp = false;
-
-
-    protected override void Update()
+    protected override void Awake()
     {
-        base.Update();
+        base.Awake();
 
-        if (wakeBossUp)
-        {
-            wakeBossUp = false;
-            WakeBoss();
-        }
+        
+        
     }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
 
+        if (IsOwner)
+        {
+            sleepState = Instantiate(sleepState);
+            currentState = sleepState;
+        }
+
         // if this is the host world
-        if(IsServer)
+        if (IsServer)
         {
             // if our save data does not contain information on this boss add it now 
             if(!WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.ContainsKey(bossID))
@@ -46,8 +54,8 @@ public class AIBossCharacterManager : AICharacterManager
             // otherwise load the data that already exist on this boss
             else
             {
-                hasBeenDefeated = WorldSaveGameManager.instance.currentCharacterData.bossesDefeated[bossID];
-                hasBeenAwakened = WorldSaveGameManager.instance.currentCharacterData.bossesAwakened[bossID];
+                hasBeenDefeated.Value = WorldSaveGameManager.instance.currentCharacterData.bossesDefeated[bossID];
+                hasBeenAwakened.Value = WorldSaveGameManager.instance.currentCharacterData.bossesAwakened[bossID];
 
                 
             }
@@ -57,7 +65,7 @@ public class AIBossCharacterManager : AICharacterManager
 
             // if boss has been awakened enable the fog walls
 
-            if (hasBeenAwakened)
+            if (hasBeenAwakened.Value)
             {
                 for (int i = 0; i < fogWalls.Count; i++)
                 {
@@ -66,7 +74,7 @@ public class AIBossCharacterManager : AICharacterManager
             }
 
             // if the bos has been defeted disable fog walls
-            if (hasBeenDefeated)
+            if (hasBeenDefeated.Value)
             {
                 for (int i = 0; i < fogWalls.Count; i++)
                 {
@@ -76,6 +84,11 @@ public class AIBossCharacterManager : AICharacterManager
             }
 
 
+        }
+
+        if (!hasBeenAwakened.Value)
+        {
+            characterAnimatorManager.PlayTargetActionAnimation(sleepAnimation, true);
         }
     }
 
@@ -118,7 +131,7 @@ public class AIBossCharacterManager : AICharacterManager
                 characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
             }
 
-            hasBeenDefeated = true;
+            hasBeenDefeated.Value = true;
 
             // if our save data does not contain information on this boss add it now 
             if (!WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.ContainsKey(bossID))
@@ -152,27 +165,42 @@ public class AIBossCharacterManager : AICharacterManager
 
     public void WakeBoss()
     {
-        hasBeenAwakened = true;
-        // if our save data does not contain information on this boss add it now 
-        if (!WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.ContainsKey(bossID))
+        if(IsOwner)
         {
-            WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Add(bossID, true);
+
+            if (!hasBeenAwakened.Value)
+            {
+
+                characterAnimatorManager.PlayTargetActionAnimation(awakenAnimation, true);
+            }
+            hasBeenAwakened.Value = true;
+            currentState = idle;
+            // if our save data does not contain information on this boss add it now 
+            if (!WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.ContainsKey(bossID))
+            {
+                WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Add(bossID, true);
+
+            }
+            // otherwise load the data that already exist on this boss
+            else
+            {
+                WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Remove(bossID);
+
+                WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Add(bossID, true);
+
+
+            }
+
+            for (int i = 0; i < fogWalls.Count; i++)
+            {
+                fogWalls[i].isActive.Value = true;
+            }
+
             
         }
-        // otherwise load the data that already exist on this boss
-        else
-        {
-            WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Remove(bossID);
-           
-            WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Add(bossID, true);
-           
 
-        }
+        
 
-        for (int i = 0; i < fogWalls.Count; i++)
-        {
-            fogWalls[i].isActive.Value = true;
-        }
     }
 }
 

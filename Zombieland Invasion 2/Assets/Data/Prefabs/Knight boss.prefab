@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 38089895
+  GlobalObjectIdHash: 3777077614
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -727,10 +727,14 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 66f6cf7f03cba0e4a96fe8d18d2b5ec7, type: 2}
   attack: {fileID: 11400000, guid: 9ff889d01da5eea4486492206aa79e67, type: 2}
   bossID: 0
-  hasBeenDefeated: 0
-  hasBeenAwakened: 0
+  hasBeenDefeated:
+    m_InternalValue: 1
+  hasBeenAwakened:
+    m_InternalValue: 1
   fogWalls: []
-  wakeBossUp: 0
+  sleepAnimation: Sleep_01
+  awakenAnimation: Awaken_01
+  sleepState: {fileID: 11400000, guid: 782546da9263b0e4382a1347ba980fc2, type: 2}
   knightSoundFXManager: {fileID: 0}
   knightCombatManager: {fileID: 0}
 --- !u!114 &7356898253521269656

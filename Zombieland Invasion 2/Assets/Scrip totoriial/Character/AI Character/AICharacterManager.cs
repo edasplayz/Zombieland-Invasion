@@ -13,7 +13,7 @@ public class AICharacterManager : CharacterManager
     public NavMeshAgent navMeshAgent;
 
     [Header("Current State")]
-    [SerializeField] AIState currentState;
+    [SerializeField] protected AIState currentState;
 
     [Header("States")]
     public IdleState idle;
@@ -32,10 +32,20 @@ public class AICharacterManager : CharacterManager
         navMeshAgent = GetComponentInChildren<NavMeshAgent>();
 
         // use a copy of the scriptable object so the originals are not modified
-        idle = Instantiate(idle);
-        pursueTarget = Instantiate(pursueTarget);
+        
+        
+    }
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
 
-        currentState = idle;
+        if (IsOwner)
+        {
+            idle = Instantiate(idle);
+            pursueTarget = Instantiate(pursueTarget);
+
+            currentState = idle;
+        }
     }
 
     protected override void Update()
