@@ -41,4 +41,5 @@ MonoBehaviour:
   whooshes:
   - {fileID: 8300000, guid: 01999991d21504b5abb7a554bba05227, type: 3}
   - {fileID: 8300000, guid: 1785fff83652f42399d9b2017b05656c, type: 3}
-  - {fileID: 8300000, guid: 8bd18ee79d79043aebebadafe742f378, type: 3}
+  - {fileID: 8300000, guid: 2b12810371183da4c9f7fad4811f2e31, type: 3}
+  - {fileID: 8300000, guid: deb777176bc5bbf46bce8937c43fbe9e, type: 3}

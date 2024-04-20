@@ -35,4 +35,24 @@ public class WorldSoundFXManager : MonoBehaviour
 
         return array[index];
     }
+
+    //sound method number 2
+    /*
+    public AudioClip ChooseRandomFootStepSoundBasedOnGround(GameObject steppedOnObject, CharacterManager character)
+    {
+        if(steppedOnObject.tag == ("Untagged"))
+        {
+            return ChooseRandomSFXFromArray(character.characterSoundFXManager.footSteps);
+        }
+        else if(steppedOnObject.tag == ("Dirt"))
+        {
+            return ChooseRandomSFXFromArray(character.characterSoundFXManager.footStepsDirt);
+        }
+        else if (steppedOnObject.tag == ("Stone"))
+        {
+            return ChooseRandomSFXFromArray(character.characterSoundFXManager.footStepsDirt);
+        }
+        return null;
+    }
+    */
 }

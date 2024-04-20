@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class AIKnightCombatManager : AICharacterCombatManager
 {
+    AIKnightCharacterManager aiKnightManager;
+
     [Header("Damage Colliders")]
     [SerializeField] KnightSwordDamageCollider knightSwordDamageCollider;
-    [SerializeField] Transform knightsStompingFoot;
-    [SerializeField] float stompAttackAOERadius = 1.5f;
+    [SerializeField] KnightStompCollider knightStompCollider;
+    public float stompAttackAOERadius = 1.5f;
    // [SerializeField] UndeadHandDamageCollider leftHandDamageCollider;
 
 
@@ -17,36 +19,54 @@ public class AIKnightCombatManager : AICharacterCombatManager
     [SerializeField] float attack02DamageModifier = 1.4f;
     [SerializeField] float attack03DamageModifier = 1.6f;
     [SerializeField] float attack04DamageModifier = 1.8f;
-    [SerializeField] float stompDamage = 25;
+    public float stompDamage = 25;
+
+    [Header("VFX")]
+    public GameObject knightImpactVFX;
+    [SerializeField] GameObject vfxSpawnPoint;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        aiKnightManager = GetComponent<AIKnightCharacterManager>();
+    }
 
     public void SetAttack01Damage()
     {
+        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
       //  leftHandDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
     }
 
     public void SetAttack02Damage()
     {
+        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
        // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
     }
 
     public void SetAttack03Damage()
     {
+        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack03DamageModifier;
         // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
     }
 
     public void SetAttack04Damage()
     {
+        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
+
+        
         knightSwordDamageCollider.physicalDamage = baseDamage * attack04DamageModifier;
         // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
     }
 
     public void OpenClubDamageCollider()
     {
-        aiCharacter.characterSoundFXManager.PlayAttackGrunt();
+        
         knightSwordDamageCollider.EnableDamageCollider();
+        aiKnightManager.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(aiKnightManager.knightSoundFXManager.swordWhooshes));
     }
 
     public void CloseClubDamageCollider()
@@ -56,39 +76,10 @@ public class AIKnightCombatManager : AICharacterCombatManager
 
     public void ActivateKnightStomp()
     {
-        Collider[] colliders = Physics.OverlapSphere(knightsStompingFoot.position, stompAttackAOERadius, WorldUtilityManager.Instance.GetCharacterLayers());
-        List<CharacterManager> charactersDamaged = new List<CharacterManager>();
+        GameObject stompVFX = Instantiate(knightImpactVFX, vfxSpawnPoint.transform);
 
 
-        foreach (var collider in colliders)
-        {
-            CharacterManager character = collider.GetComponentInParent<CharacterManager>();
-
-            if(character != null)
-            {
-                if (charactersDamaged.Contains(character))
-                {
-                    continue;
-                }
-
-                charactersDamaged.Add(character);
-
-                // we only process damage if the character isowner so thay only get damaged if the collider connects on theyr client
-                // meaning if you are hit on the host screen but not on your own you will not be hit
-                if (character.IsOwner)
-                {
-                    // check for block
-                    TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
-                    damageEffect.physicalDamage = stompDamage;
-                    damageEffect.poiseDamage = stompDamage;
-
-
-                    character.characterEffectsManager.ProccessInstantEffect(damageEffect);
-                }
-            }
-
-            
-        }
+        knightStompCollider.StompAttack();
     }
 
     public override void PivotTowardsTarget(AICharacterManager aICharacter)
