@@ -717,6 +717,7 @@ MonoBehaviour:
   characterLocomationManager: {fileID: 0}
   characterGroup: 1
   isPreformingAction: 0
+  characterName: Dark Knight, The Hardest Enemy In Dark Souls
   aICharacterNetworkManager: {fileID: 0}
   aICharacterCombatManager: {fileID: 0}
   aICharacterLocomotionManager: {fileID: 0}
@@ -727,6 +728,8 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 66f6cf7f03cba0e4a96fe8d18d2b5ec7, type: 2}
   attack: {fileID: 11400000, guid: 9ff889d01da5eea4486492206aa79e67, type: 2}
   bossID: 0
+  bossFightIsActive:
+    m_InternalValue: 0
   hasBeenDefeated:
     m_InternalValue: 1
   hasBeenAwakened:

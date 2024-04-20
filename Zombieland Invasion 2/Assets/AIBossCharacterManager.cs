@@ -9,6 +9,7 @@ public class AIBossCharacterManager : AICharacterManager
     public int bossID = 0;
 
     [Header("Status")]
+    public NetworkVariable<bool> bossFightIsActive = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> hasBeenDefeated = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> hasBeenAwakened = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] List<FogWallInteractable> fogWalls;
@@ -35,6 +36,9 @@ public class AIBossCharacterManager : AICharacterManager
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+
+        bossFightIsActive.OnValueChanged += OnBossFightIsActiveChanged;
+        OnBossFightIsActiveChanged(false, bossFightIsActive.Value); // so if you join when the fight is already active you will get a hp bar
 
         if (IsOwner)
         {
@@ -92,6 +96,13 @@ public class AIBossCharacterManager : AICharacterManager
         }
     }
 
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        bossFightIsActive.OnValueChanged -= OnBossFightIsActiveChanged;
+    }
+
     private IEnumerator GetFogWallsFromWorldObjectManager()
     {
         while (WorldObjectManager.instance.fogWalls.Count == 0)
@@ -120,6 +131,8 @@ public class AIBossCharacterManager : AICharacterManager
         {
             characterNetworkManager.currentHealth.Value = 0;
             isDead.Value = true;
+
+            bossFightIsActive.Value = false;
 
             // reset any flags here that need to be reset 
             // nothing yet
@@ -173,6 +186,7 @@ public class AIBossCharacterManager : AICharacterManager
 
                 characterAnimatorManager.PlayTargetActionAnimation(awakenAnimation, true);
             }
+            bossFightIsActive.Value = true;
             hasBeenAwakened.Value = true;
             currentState = idle;
             // if our save data does not contain information on this boss add it now 
@@ -201,6 +215,19 @@ public class AIBossCharacterManager : AICharacterManager
 
         
 
+    }
+
+    private void OnBossFightIsActiveChanged(bool oldStatus, bool newStatus)
+    {
+        if (bossFightIsActive.Value)
+        {
+            GameObject bossHealthBar = Instantiate(PlayerUiManager.instance.playerUIHudManager.bossHealthBarObject, PlayerUiManager.instance.playerUIHudManager.bossHealthBarParent);
+
+            UI_Boss_HP_Bar bossHPBar = bossHealthBar.GetComponentInChildren<UI_Boss_HP_Bar>();
+            bossHPBar.EnableBossHPBar(this);
+        }
+
+        
     }
 }
 
