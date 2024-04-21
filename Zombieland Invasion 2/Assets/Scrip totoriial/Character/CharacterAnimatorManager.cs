@@ -184,13 +184,5 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
     }
 
-    public virtual void EnableCanDoCombos()
-    {
-        
-    }
-
-    public virtual void DisableCnDoCombos()
-    {
-        
-    }
+    
 }

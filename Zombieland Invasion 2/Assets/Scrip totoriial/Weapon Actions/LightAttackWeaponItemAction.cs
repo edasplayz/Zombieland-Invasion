@@ -5,9 +5,19 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Character Actions/Weapon Actions/ Light Attack Action")]
 public class LightAttackWeaponItemAction : WeaponItemAction
 {
+    [Header("Light Attacks")]
     [SerializeField] string light_Attack_01 = "Main_Light_Attack_01"; // right hand
     [SerializeField] string light_Attack_02 = "Main_Light_Attack_02";
     [SerializeField] string light_Attack_03 = "Main_Light_Attack_03";
+
+    [Header("Running Attacks")]
+    [SerializeField] string run_Attack_01 = "Main_Run_Attack_01";
+
+    [Header("Rolling Attacks")]
+    [SerializeField] string roll_Attack_01 = "Main_Roll_Attack_01";
+
+    [Header("Backstep Attacks")]
+    [SerializeField] string backstep_Attack_01 = "Main_BacStep_Attack_01 ";
     public override void AttemptToPreformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
     {
 
@@ -24,10 +34,31 @@ public class LightAttackWeaponItemAction : WeaponItemAction
             return;
         }
 
-        /*if(!playerPerformingAction.isGrounded )
+        if(!playerPerformingAction.characterLocomationManager.isGrounded)
         {
             return;
-        }*/
+        }
+
+        // if we are sprinting perform a running atack
+        if (playerPerformingAction.characterNetworkManager.isSprinting.Value)
+        {
+            PerformRunningAttack(playerPerformingAction, weaponPerformingAction);
+            return;
+        }
+
+        // if we are rolling perform a rolling atack
+        if (playerPerformingAction.characterCombatManager.canPerformRollingAttack)
+        {
+            PerformRollingAttack(playerPerformingAction, weaponPerformingAction);
+            return;
+        }
+
+        // if we are backsteping perform a backstep atack
+        if (playerPerformingAction.characterCombatManager.canPerformBackStepAttack)
+        {
+            PerformBackstepAttack(playerPerformingAction, weaponPerformingAction);
+            return;
+        }
 
         PerformLightAttack(playerPerformingAction, weaponPerformingAction);
     }
@@ -60,5 +91,35 @@ public class LightAttackWeaponItemAction : WeaponItemAction
         }
         
         
+    }
+
+    private void PerformRunningAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+    {
+        // if we are two handing our weapon perform a two hand run attack (to do)
+        // else perform a one hand tun attack
+
+        playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RunningAttack01, run_Attack_01, true);
+
+
+    }
+
+    private void PerformRollingAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+    {
+        // if we are two handing our weapon perform a two hand run attack (to do)
+        // else perform a one hand tun attack
+        playerPerformingAction.playerCombatManager.canPerformRollingAttack = false;
+        playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RollingAttack01, roll_Attack_01, true);
+
+
+    }
+
+    private void PerformBackstepAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+    {
+        // if we are two handing our weapon perform a two hand run attack (to do)
+        // else perform a one hand tun attack
+        playerPerformingAction.playerCombatManager.canPerformBackStepAttack = false;
+        playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.BackstepAttack01, backstep_Attack_01, true);
+
+
     }
 }

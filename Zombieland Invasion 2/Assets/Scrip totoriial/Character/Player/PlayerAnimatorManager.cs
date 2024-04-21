@@ -20,23 +20,5 @@ public class PlayerAnimatorManager : CharacterAnimatorManager
         }
     }
 
-    // animation event calls
-    public override void EnableCanDoCombos()
-    {
-        if (player.playerNetworkManager.isUsingRightHand.Value)
-        {
-            player.playerCombatManager.canComboWithMainHandWeapon = true;
-        }
-        else
-        {
-            // enable off hand combos
-            //player.playerCombatManager.canComboWithOffHandWeapon = true;
-        }
-    }
 
-    public override void DisableCnDoCombos()
-    {
-        player.playerCombatManager.canComboWithMainHandWeapon = false;
-        //player.playerCombatManager.canComboWithOffHandWeapon = false;
-    }
 }

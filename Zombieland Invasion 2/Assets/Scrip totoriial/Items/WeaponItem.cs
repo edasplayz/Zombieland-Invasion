@@ -39,13 +39,24 @@ public class WeaponItem : Item
 
     public float charge_Attack_01_Modifier = 2.0f;
     public float charge_Attack_02_Modifier = 2.2f;
+
+    public float running_Attack_01_Modifier = 1.1f;
+
+    public float rolling_Attack_01_Modifier = 1.1f;
+
+    public float backstep_Attack_01_Modifier = 1.1f;
     // critical damage modifiers ect
 
     [Header("Stamina Costs Modifiers")]
     public int baseStaminaCost = 20;
     // running attack stamina cost modifier
     // light attack stamina cost modifier
-    public float lightAttackStaminaCostMultiplier = 0.9f;
+    public float lightAttackStaminaCostMultiplier = 1f;
+    public float heavyAttackStaminaCostMultiplier = 1.3f;
+    public float chargeAttackStaminaCostMultiplier = 1.5f;
+    public float runningAttackStaminaCostMultiplier = 1.1f;
+    public float rollingAttackStaminaCostMultiplier = 1.1f;
+    public float backstepAttackStaminaCostMultiplier = 1.1f;
     // heavy attack modiefier 
 
 

@@ -51,9 +51,38 @@ public class PlayerCombatManager : CharacterCombatManager
             case AttackType.LightAttack01:
                 staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
                 break;
+            case AttackType.LightAttack02:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
+                break;
+            case AttackType.LightAttack03:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
+                break;
+            case AttackType.HeavyAttack01:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultiplier;
+                break;
+            case AttackType.HeavyAttack02:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultiplier;
+                break;
+            case AttackType.ChargeAttack01:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargeAttackStaminaCostMultiplier;
+                break;
+            case AttackType.ChargeAttack02:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargeAttackStaminaCostMultiplier;
+                break;
+            case AttackType.RunningAttack01:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.runningAttackStaminaCostMultiplier;
+                break;
+            case AttackType.RollingAttack01:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.rollingAttackStaminaCostMultiplier;
+                break;
+            case AttackType.BackstepAttack01:
+                staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.backstepAttackStaminaCostMultiplier;
+                break;
             default:
                 break;
         }
+
+
 
         Debug.Log("Stamina deducted: " + staminaDeducted);
         player.playerNetworkManager.currentStamina.Value -= Mathf.RoundToInt(staminaDeducted);
@@ -71,7 +100,27 @@ public class PlayerCombatManager : CharacterCombatManager
 
     }
 
-    
+    // animation event calls
+    public override void EnableCanDoCombos()
+    {
+        if (player.playerNetworkManager.isUsingRightHand.Value)
+        {
+            player.playerCombatManager.canComboWithMainHandWeapon = true;
+        }
+        else
+        {
+            // enable off hand combos
+            //player.playerCombatManager.canComboWithOffHandWeapon = true;
+        }
+    }
+
+    public override void DisableCnDoCombos()
+    {
+        player.playerCombatManager.canComboWithMainHandWeapon = false;
+        //player.playerCombatManager.canComboWithOffHandWeapon = false;
+    }
+
+
 
 
 }

@@ -57,13 +57,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3975924
-        functionName: PlayRollSoundFX
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0
         functionName: EnableIsInvulnerable
         data: 
@@ -71,8 +64,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.3975924
+        functionName: PlayRollSoundFX
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.53972125
         functionName: DisableIsInvulnerable
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5738333
+        functionName: EnableCanDoRollinAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

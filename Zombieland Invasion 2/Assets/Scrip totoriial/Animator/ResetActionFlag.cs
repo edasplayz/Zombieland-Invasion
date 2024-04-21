@@ -20,9 +20,11 @@ public class ResetActionFlag : StateMachineBehaviour
         character.characterLocomationManager.canMove = true;
         character.characterLocomationManager.canRotate = true;
         character.characterLocomationManager.isRolling = false;
-        character.characterAnimatorManager.DisableCnDoCombos();
+        character.characterCombatManager.DisableCnDoCombos();
+        character.characterCombatManager.DisableCanDoRollinAttack();
+        character.characterCombatManager.DisableCanDoBackStepAttack();
 
-        if(character.IsOwner)
+        if (character.IsOwner)
         {
             character.characterNetworkManager.isJumping.Value = false;
             character.characterNetworkManager.isInvulnerable.Value = false;
