@@ -17,6 +17,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ade519217d25f2144b9eae970c119e97, type: 2}
   - {fileID: 11400000, guid: 646822aaef3b7474d94cf9beeb0e6c23, type: 2}
   - {fileID: 11400000, guid: 3723518699e40ee4583214f731d216de, type: 2}
+  potensialAttacks: []
+  choosenAttack: {fileID: 0}
+  previousAttack: {fileID: 0}
   canPerformCombo: 0
   chanceToPerformCombo: 25
   maximumEngagementDistance: 5

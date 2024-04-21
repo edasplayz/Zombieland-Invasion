@@ -552,7 +552,6 @@ GameObject:
   - component: {fileID: 4414241541260316}
   - component: {fileID: 95600535493549228}
   - component: {fileID: -6153723575954524564}
-  - component: {fileID: -6964411254416167427}
   - component: {fileID: 2950243166644678567}
   - component: {fileID: 7356898253521269656}
   - component: {fileID: 4359725537800976761}
@@ -565,6 +564,7 @@ GameObject:
   - component: {fileID: -2752465890460789800}
   - component: {fileID: -152149276784987815}
   - component: {fileID: -720512481729340990}
+  - component: {fileID: -1652550068003633495}
   m_Layer: 9
   m_Name: Knight boss
   m_TagString: Untagged
@@ -640,59 +640,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-6964411254416167427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160187163381128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b08ed30ec792f664abd0265ccf89bb8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive:
-    m_InternalValue: 1
-  networkPosition:
-    m_InternalValue: {x: 0, y: 0, z: 0}
-  networkRotation:
-    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
-  networkPositionVelocity: {x: 0, y: 0, z: 0}
-  networkPositionSmoothTime: 0.1
-  networkRotationSmoothTime: 0.1
-  isMoving:
-    m_InternalValue: 0
-  horizontalMovement:
-    m_InternalValue: 0
-  verticalMovement:
-    m_InternalValue: 0
-  moveAmount:
-    m_InternalValue: 0
-  currentTargetNetworkObjectID:
-    m_InternalValue: 0
-  isInvulnerable:
-    m_InternalValue: 0
-  isLockedOn:
-    m_InternalValue: 0
-  isSprinting:
-    m_InternalValue: 0
-  isJumping:
-    m_InternalValue: 0
-  isChargingAttack:
-    m_InternalValue: 0
-  currentStamina:
-    m_InternalValue: 0
-  maxStamina:
-    m_InternalValue: 0
-  currentHealth:
-    m_InternalValue: 0
-  maxHealth:
-    m_InternalValue: 0
-  vitality:
-    m_InternalValue: 1
-  endurance:
-    m_InternalValue: 1
 --- !u!114 &2950243166644678567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,6 +675,8 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 66f6cf7f03cba0e4a96fe8d18d2b5ec7, type: 2}
   attack: {fileID: 11400000, guid: 9ff889d01da5eea4486492206aa79e67, type: 2}
   bossID: 0
+  bossIntroClip: {fileID: 8300000, guid: e50bb1cca390d8748bbf683e4cb13c0e, type: 3}
+  bossBattleLoopClip: {fileID: 8300000, guid: e4efc810dba7da14b9856bbf1178d66f, type: 3}
   bossFightIsActive:
     m_InternalValue: 0
   hasBeenDefeated:
@@ -737,6 +686,9 @@ MonoBehaviour:
   fogWalls: []
   sleepAnimation: Sleep_01
   awakenAnimation: Awaken_01
+  minimumHealthProcentageToShift: 50
+  phaseShiftAnimation: Phase_Change_01
+  phase02CombatStanceState: {fileID: 11400000, guid: ac3379b41a11a6348a9a38679858fff9, type: 2}
   sleepState: {fileID: 11400000, guid: 782546da9263b0e4382a1347ba980fc2, type: 2}
   knightSoundFXManager: {fileID: 0}
   knightCombatManager: {fileID: 0}
@@ -1092,6 +1044,59 @@ MonoBehaviour:
   stompDamage: 25
   knightImpactVFX: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   vfxSpawnPoint: {fileID: 7265155652049779354}
+--- !u!114 &-1652550068003633495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160187163381128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cb0703a1287524faa90ad5f77a22cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive:
+    m_InternalValue: 1
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
+  networkPositionVelocity: {x: 0, y: 0, z: 0}
+  networkPositionSmoothTime: 0.1
+  networkRotationSmoothTime: 0.1
+  isMoving:
+    m_InternalValue: 0
+  horizontalMovement:
+    m_InternalValue: 0
+  verticalMovement:
+    m_InternalValue: 0
+  moveAmount:
+    m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isInvulnerable:
+    m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  isJumping:
+    m_InternalValue: 0
+  isChargingAttack:
+    m_InternalValue: 0
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
+    m_InternalValue: 0
+  currentHealth:
+    m_InternalValue: 0
+  maxHealth:
+    m_InternalValue: 0
+  vitality:
+    m_InternalValue: 1
+  endurance:
+    m_InternalValue: 1
 --- !u!1 &1196216015583102
 GameObject:
   m_ObjectHideFlags: 0

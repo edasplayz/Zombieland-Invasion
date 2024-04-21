@@ -8,6 +8,10 @@ public class AIBossCharacterManager : AICharacterManager
     // GIVE THIS A,I a unique if
     public int bossID = 0;
 
+    [Header("Music")]
+    [SerializeField] AudioClip bossIntroClip;
+    [SerializeField] AudioClip bossBattleLoopClip;
+
     [Header("Status")]
     public NetworkVariable<bool> bossFightIsActive = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> hasBeenDefeated = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -15,6 +19,11 @@ public class AIBossCharacterManager : AICharacterManager
     [SerializeField] List<FogWallInteractable> fogWalls;
     [SerializeField] string sleepAnimation;
     [SerializeField] string awakenAnimation;
+
+    [Header("Phase Shift")]
+    public float minimumHealthProcentageToShift = 50;
+    [SerializeField] string phaseShiftAnimation = "Phase_Change_01";
+    [SerializeField] CombatStanceState phase02CombatStanceState;
 
     [Header("States")]
     [SerializeField] BossSleepState sleepState;
@@ -127,12 +136,19 @@ public class AIBossCharacterManager : AICharacterManager
 
     public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
     {
+
+        PlayerUiManager.instance.playerUiPopUpManager.SendBossDefeatedPopUp("Great foa felled");
         if (IsOwner)
         {
             characterNetworkManager.currentHealth.Value = 0;
             isDead.Value = true;
 
             bossFightIsActive.Value = false;
+
+            foreach (var fogwall in fogWalls)
+            {
+                fogwall.isActive.Value = false;
+            }
 
             // reset any flags here that need to be reset 
             // nothing yet
@@ -221,13 +237,26 @@ public class AIBossCharacterManager : AICharacterManager
     {
         if (bossFightIsActive.Value)
         {
+            WorldSoundFXManager.instance.PlayBossTrack(bossIntroClip, bossBattleLoopClip);
+
             GameObject bossHealthBar = Instantiate(PlayerUiManager.instance.playerUIHudManager.bossHealthBarObject, PlayerUiManager.instance.playerUIHudManager.bossHealthBarParent);
 
             UI_Boss_HP_Bar bossHPBar = bossHealthBar.GetComponentInChildren<UI_Boss_HP_Bar>();
             bossHPBar.EnableBossHPBar(this);
         }
+        else
+        {
+            WorldSoundFXManager.instance.StopBossMusic();
+        }
 
         
+    }
+
+    public void PhaseShift()
+    {
+        characterAnimatorManager.PlayTargetActionAnimation(phaseShiftAnimation, true);
+        combatStance = Instantiate(phase02CombatStanceState);
+        currentState = combatStance;
     }
 }
 

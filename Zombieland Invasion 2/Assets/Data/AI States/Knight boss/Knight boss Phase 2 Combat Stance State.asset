@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e21a230c5aa6f4f9956ab88fbfab80, type: 3}
+  m_Name: Knight boss Phase 2 Combat Stance State
+  m_EditorClassIdentifier: 
+  aICharacterAttacks:
+  - {fileID: 11400000, guid: 0d5ad838f16fe7d45b2c3b3e0d4e76f5, type: 2}
+  - {fileID: 11400000, guid: cba6c87adc61ce347be569c9b2c7a968, type: 2}
+  - {fileID: 11400000, guid: 123a2c5394a13644ab333754f863cc74, type: 2}
+  - {fileID: 11400000, guid: 55f263314d283244094eeb5de4b9af0b, type: 2}
+  potensialAttacks: []
+  choosenAttack: {fileID: 0}
+  previousAttack: {fileID: 0}
+  canPerformCombo: 0
+  chanceToPerformCombo: 25
+  maximumEngagementDistance: 5

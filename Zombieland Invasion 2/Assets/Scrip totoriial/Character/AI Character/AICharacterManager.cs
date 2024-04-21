@@ -46,9 +46,20 @@ public class AICharacterManager : CharacterManager
         {
             idle = Instantiate(idle);
             pursueTarget = Instantiate(pursueTarget);
+            combatStance = Instantiate(combatStance);
+            attack = Instantiate(attack);
 
             currentState = idle;
         }
+
+        aICharacterNetworkManager.currentHealth.OnValueChanged += aICharacterNetworkManager.CheckHP;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        aICharacterNetworkManager.currentHealth.OnValueChanged -= aICharacterNetworkManager.CheckHP;
     }
 
     protected override void Update()

@@ -492,7 +492,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Main_Light_Attack_01
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1310075550621305836}
@@ -716,7 +716,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Main_Light_Attack_03
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6449659848779089521}
@@ -792,7 +792,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Main_Light_Attack_02
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7659684746067459493}
@@ -1916,7 +1916,7 @@ AnimatorStateMachine:
     m_Position: {x: 1100, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3632090650461347638}
-    m_Position: {x: 1110, y: 250, z: 0}
+    m_Position: {x: 1110, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5322417015673383740}
     m_Position: {x: 820, y: 690, z: 0}
