@@ -353,9 +353,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RB",
+                    "name": "Que RB",
                     "type": "Button",
-                    "id": "7d119e04-946b-4b9d-9df8-a69f30221c9d",
+                    "id": "4e4b8091-3e53-413c-900f-03bf79696260",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -371,12 +371,30 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Que RT",
+                    "type": "Button",
+                    "id": "ebd06555-d4fd-4dfd-a1fc-9940db397b84",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Hold RT",
                     "type": "PassThrough",
                     "id": "890f3e2f-5f2a-424f-845b-3ac64ae786e2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(pressPoint=0.1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RB",
+                    "type": "Button",
+                    "id": "7d119e04-946b-4b9d-9df8-a69f30221c9d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -498,28 +516,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b13aace1-cf13-4404-856a-ebd968186433",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RB",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "65320970-53d4-4bff-84c0-38f5c3ec634f",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -718,6 +714,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "Switch Left Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3daa2318-a5d4-43ff-ab35-5bda20dd6f5d",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b2a1fbe-6e9e-4342-aaae-8f4629d65625",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7b2ebe6-71ba-45d9-ab56-ad7b6d0a4272",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Heavy attack mouse and keybord",
+                    "id": "feb66357-9610-47c0-9017-2c5c1d2ee727",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RT",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "c0f7f487-88ce-4065-825d-77c9158de844",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RT",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "5653dab0-a720-4353-8591-347a94b79f13",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RT",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "b13aace1-cf13-4404-856a-ebd968186433",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65320970-53d4-4bff-84c0-38f5c3ec634f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

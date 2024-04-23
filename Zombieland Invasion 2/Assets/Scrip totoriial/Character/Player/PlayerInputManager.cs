@@ -36,6 +36,13 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] bool switch_Right_Weapon_Input = false;
     [SerializeField] bool switch_Left_Weapon_Input = false;
 
+    [Header("Qued inputs")]
+    [SerializeField] private bool input_Que_Is_Active = false; 
+    [SerializeField] float que_Input_Timer = 0;
+    [SerializeField] float default_Que_Input_Timer = 0.35f;
+    [SerializeField] bool que_RB_Input = false;
+    [SerializeField] bool que_RT_Input = false;
+
     [Header("Bumper Inputs")]
     [SerializeField] bool RB_Input = false;
 
@@ -117,12 +124,12 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
             playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
 
-            // bumpers
-            playerControls.PlayerActions.RB.performed += i => RB_Input = true;
-
             // triggers
             playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
             playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
+
+            // bumpers
+            playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
             // lock on
             playerControls.PlayerActions.RT.performed += i => RT_Input = true;
@@ -169,6 +176,11 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
             // relese the inmput set the bool to false
             playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+
+            // qued inputs
+            playerControls.PlayerActions.QueRB.performed += i => QueInput(ref que_RB_Input);
+            playerControls.PlayerActions.QueRT.performed += i => QueInput(ref que_RT_Input);
+
         }
 
         playerControls.Enable();
@@ -215,6 +227,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleChargeRTInput();
         HandleSwitchRightWeaponInput();
         HandleSwitchLeftWeaponInput();
+        HandleQuedInputs();
     }
 
     // lock on
@@ -459,6 +472,63 @@ public class PlayerInputManager : MonoBehaviour
         {
             switch_Left_Weapon_Input = false;
             player.playerEquipmentManager.SwitchLeftWeapon();
+        }
+    }
+
+    private void QueInput(ref bool quedInput) // passing a reference means we pass a specific bool and not  the value og that bool (true or false)
+    {
+        // reset all qued inputs so only one can que at a time
+        que_RB_Input = false;
+        que_RT_Input = false;
+        //que_LB_Input = false;
+        //que_LT_Input = false;
+
+        // check for ui window being open if its open return
+
+        if(player.isPreformingAction || player.playerNetworkManager.isJumping.Value)
+        {
+            quedInput = true;
+            // attempt this new input for x amount of time
+            que_Input_Timer = default_Que_Input_Timer;
+            input_Que_Is_Active = true;
+        }
+    }
+
+    private void ProcessQuedInputs()
+    {
+        if (player.isDead.Value)
+        {
+            return;
+        }
+        if(que_RB_Input)
+        {
+            RB_Input = true;
+        }
+        if (que_RT_Input)
+        {
+            RB_Input = true;
+        }
+    }
+
+    private void HandleQuedInputs()
+    {
+        if (input_Que_Is_Active)
+        {
+            // while the timer is above keep attempting to press the input{
+            if(que_Input_Timer > 0)
+            {
+                que_Input_Timer -= Time.deltaTime;
+                ProcessQuedInputs();
+            }
+            else
+            {
+                // reset all qued inputs
+                que_RB_Input = false;
+                que_RT_Input = false;
+
+                input_Que_Is_Active = false;
+                que_Input_Timer = 0;
+            }
         }
     }
 }

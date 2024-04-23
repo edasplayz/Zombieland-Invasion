@@ -16,7 +16,7 @@ public class PlayerCamera : MonoBehaviour
 
     // change those to tweak camera settngs
     [Header("Camra Settings")]
-    private float cameraSmoothSpeed = 1; // the biger the longer it takes camera to move towards player
+    [SerializeField] private float cameraSmoothSpeed = 1; // the biger the longer it takes camera to move towards player
     [SerializeField] float leftAndRightRotationSpeed = 220;
     [SerializeField] float upAndDownRotationSpeed = 220;
     [SerializeField] float minimumPivot = -30; // the lowest poin you can look down
