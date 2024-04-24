@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UI_StatBar : MonoBehaviour
 {
-    private Slider slider;
-    private RectTransform rectTransform;
+    protected Slider slider;
+    protected RectTransform rectTransform;
 
     // variable to scale bar size depending on stats (higher stat = longer bar acros screen)
     [SerializeField] protected bool scaleBarLenghtWithStats = true;
@@ -20,6 +20,11 @@ public class UI_StatBar : MonoBehaviour
             slider = GetComponent<Slider>();
             rectTransform = GetComponent<RectTransform>();
         }
+    }
+
+    protected virtual void Start()
+    {
+
     }
 
     public virtual void SetStat(int newValue)

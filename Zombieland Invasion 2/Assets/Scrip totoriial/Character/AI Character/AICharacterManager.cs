@@ -62,6 +62,27 @@ public class AICharacterManager : CharacterManager
         aICharacterNetworkManager.currentHealth.OnValueChanged -= aICharacterNetworkManager.CheckHP;
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        if(characterUIManager.hasFloatingHPBar)
+        {
+            characterNetworkManager.currentHealth.OnValueChanged += characterUIManager.OnHpChange;
+        }
+        
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        if (characterUIManager.hasFloatingHPBar)
+        {
+            characterNetworkManager.currentHealth.OnValueChanged -= characterUIManager.OnHpChange;
+        }
+        
+    }
+
     protected override void Update()
     {
         base.Update();
