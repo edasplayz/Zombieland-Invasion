@@ -8,5 +8,7 @@ public class UI_Character_HP_Bar : UI_StatBar
 {
     private CharacterManager character;
 
-   // [SerializeField] 
+    [SerializeField] bool displayCharacterNameOnDamage = false;
+    [SerializeField] float deaultTimeBeforeBarHides = 3;
+
 }
