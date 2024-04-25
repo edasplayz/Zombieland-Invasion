@@ -13,6 +13,10 @@ public class PlayerUiManager : MonoBehaviour
     [HideInInspector] public PlayerUIHudManager playerUIHudManager;
     [HideInInspector] public PlayerUiPopUpManager playerUiPopUpManager;
 
+    [Header("UI Flags")]
+    public bool menuWindowIsOpen = false; // inventory sceen equipment menu blacksmith menu ect
+    public bool popUpWindowIsOpen = false; // item pick up dialogues pop up ect
+
     private void Awake()
     {
         if (instance == null)
@@ -50,4 +54,6 @@ public class PlayerUiManager : MonoBehaviour
             NetworkManager.Singleton.StartClient();
         }
     }
+
+    
 }

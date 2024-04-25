@@ -20,7 +20,7 @@ TagManager:
   - Player
   - Character
   - Damageble Character
-  - 
+  - Interactable
   - 
   - Damage Collider
   - 

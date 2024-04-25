@@ -5,6 +5,10 @@ using TMPro;
 
 public class PlayerUiPopUpManager : MonoBehaviour
 {
+    [Header("Message Pop Up")]
+    [SerializeField] TextMeshProUGUI popUpMessageText;
+    [SerializeField] GameObject popUpMessageGameObject;
+
     [Header("you died Pop Up")]
     [SerializeField] GameObject youDiedPopUpGameObject;
     [SerializeField] TextMeshProUGUI youDiedPopUpBackgroundText;
@@ -17,6 +21,19 @@ public class PlayerUiPopUpManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
     [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup; // allows us to set alpha fade over time 
 
+    public void CloseAllPopUpWindows()
+    {
+        popUpMessageGameObject.SetActive(false);
+
+        PlayerUiManager.instance.popUpWindowIsOpen = false;
+    }
+
+    public void SendPlayerMessagePopUp(string messageText)
+    {
+        PlayerUiManager.instance.popUpWindowIsOpen = true;
+        popUpMessageText.text = messageText;
+        popUpMessageGameObject.SetActive(true);
+    }
     public void SendYouDiedPopUp()
     {
         // activate post processing effects

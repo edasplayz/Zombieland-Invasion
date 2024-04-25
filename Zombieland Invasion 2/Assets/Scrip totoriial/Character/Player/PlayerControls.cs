@@ -420,6 +420,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""888dbf23-328c-4630-a7e6-96900fa2508f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Sprint"",
                     ""type"": ""PassThrough"",
                     ""id"": ""1be481a8-393a-43e7-86c7-752c062ba66d"",
@@ -826,6 +835,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""189be76a-8f78-4497-9ef0-00747b8e4116"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2c5e1ad-6bee-4050-a065-8bcd3b8536c4"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -887,6 +918,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_QueRT = m_PlayerActions.FindAction("Que RT", throwIfNotFound: true);
         m_PlayerActions_HoldRT = m_PlayerActions.FindAction("Hold RT", throwIfNotFound: true);
         m_PlayerActions_RB = m_PlayerActions.FindAction("RB", throwIfNotFound: true);
+        m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerActions_LockOn = m_PlayerActions.FindAction("Lock On", throwIfNotFound: true);
         m_PlayerActions_SwitchRightWeapon = m_PlayerActions.FindAction("Switch Right Weapon", throwIfNotFound: true);
@@ -1064,6 +1096,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_QueRT;
     private readonly InputAction m_PlayerActions_HoldRT;
     private readonly InputAction m_PlayerActions_RB;
+    private readonly InputAction m_PlayerActions_Interact;
     private readonly InputAction m_PlayerActions_Sprint;
     private readonly InputAction m_PlayerActions_LockOn;
     private readonly InputAction m_PlayerActions_SwitchRightWeapon;
@@ -1081,6 +1114,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @QueRT => m_Wrapper.m_PlayerActions_QueRT;
         public InputAction @HoldRT => m_Wrapper.m_PlayerActions_HoldRT;
         public InputAction @RB => m_Wrapper.m_PlayerActions_RB;
+        public InputAction @Interact => m_Wrapper.m_PlayerActions_Interact;
         public InputAction @Sprint => m_Wrapper.m_PlayerActions_Sprint;
         public InputAction @LockOn => m_Wrapper.m_PlayerActions_LockOn;
         public InputAction @SwitchRightWeapon => m_Wrapper.m_PlayerActions_SwitchRightWeapon;
@@ -1117,6 +1151,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RB.started += instance.OnRB;
             @RB.performed += instance.OnRB;
             @RB.canceled += instance.OnRB;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
@@ -1160,6 +1197,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RB.started -= instance.OnRB;
             @RB.performed -= instance.OnRB;
             @RB.canceled -= instance.OnRB;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
@@ -1259,6 +1299,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnQueRT(InputAction.CallbackContext context);
         void OnHoldRT(InputAction.CallbackContext context);
         void OnRB(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
         void OnSwitchRightWeapon(InputAction.CallbackContext context);
