@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 4414241541260316}
   - component: {fileID: 95600535493549228}
   - component: {fileID: -6153723575954524564}
-  - component: {fileID: 2950243166644678567}
+  - component: {fileID: -6172594933703303678}
   - component: {fileID: 7356898253521269656}
   - component: {fileID: 4359725537800976761}
   - component: {fileID: -5759724600618200542}
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 38089895
+  GlobalObjectIdHash: 3777077614
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -642,7 +642,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &2950243166644678567
+--- !u!114 &-6172594933703303678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -683,9 +683,9 @@ MonoBehaviour:
   bossFightIsActive:
     m_InternalValue: 0
   hasBeenDefeated:
-    m_InternalValue: 1
+    m_InternalValue: 0
   hasBeenAwakened:
-    m_InternalValue: 1
+    m_InternalValue: 0
   fogWalls: []
   sleepAnimation: Sleep_01
   awakenAnimation: Awaken_01
@@ -4983,7 +4983,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
-  knightCharacterManager: {fileID: 2950243166644678567}
+  knightCharacterManager: {fileID: 0}
 --- !u!136 &9056068210475794857
 CapsuleCollider:
   m_ObjectHideFlags: 0
