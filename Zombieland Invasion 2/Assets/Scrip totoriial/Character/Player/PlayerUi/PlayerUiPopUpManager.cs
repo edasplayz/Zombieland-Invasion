@@ -9,6 +9,8 @@ public class PlayerUiPopUpManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI popUpMessageText;
     [SerializeField] GameObject popUpMessageGameObject;
 
+    // if you plan on making all of those popups function identically you could just make 1 pop up gameobject and change the text values as needed
+    // instead of making several different groups for pop up functionality
     [Header("you died Pop Up")]
     [SerializeField] GameObject youDiedPopUpGameObject;
     [SerializeField] TextMeshProUGUI youDiedPopUpBackgroundText;
@@ -20,6 +22,12 @@ public class PlayerUiPopUpManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bossDefeatedPopUpBackgroundText;
     [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
     [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup; // allows us to set alpha fade over time 
+
+    [Header("Site Of Grace Pop Up")]
+    [SerializeField] GameObject graceRestoredPopUpGameObject;
+    [SerializeField] TextMeshProUGUI graceRestoredPopUpBackgroundText;
+    [SerializeField] TextMeshProUGUI graceRestoredPopUpText;
+    [SerializeField] CanvasGroup graceRestoredPopUpCanvasGroup; // allows us to set alpha fade over time 
 
     public void CloseAllPopUpWindows()
     {
@@ -61,6 +69,21 @@ public class PlayerUiPopUpManager : MonoBehaviour
         StartCoroutine(FadeInPopUpOverTime(bossDefeatedPopUpCanvasGroup, 5));
         // wait then fade out the pop up
         StartCoroutine(WaitThenFadeOutPopUpOverTime(bossDefeatedPopUpCanvasGroup, 2, 5));
+    }
+
+    public void SendGraceRestoredPopUp(string graceRestoredMessage)
+    {
+        // activate post processing effects
+        graceRestoredPopUpText.text = graceRestoredMessage;
+        graceRestoredPopUpBackgroundText.text = graceRestoredMessage;
+        graceRestoredPopUpGameObject.SetActive(true);
+        graceRestoredPopUpBackgroundText.characterSpacing = 0;
+        // strech out the pop up
+        StartCoroutine(StretchPopUpTextOverTime(graceRestoredPopUpBackgroundText, 8, 19));
+        // fade in the pop up
+        StartCoroutine(FadeInPopUpOverTime(graceRestoredPopUpCanvasGroup, 5));
+        // wait then fade out the pop up
+        StartCoroutine(WaitThenFadeOutPopUpOverTime(graceRestoredPopUpCanvasGroup, 2, 5));
     }
 
     private IEnumerator StretchPopUpTextOverTime(TextMeshProUGUI text, float duration, float stretchAmount) 
