@@ -143,7 +143,7 @@ public class CharacterAnimatorManager : MonoBehaviour
 
     public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
     {
-        Debug.Log("Playing animation: " + targetAnimation);
+        //Debug.Log("Playing animation: " + targetAnimation);
 
         this.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);

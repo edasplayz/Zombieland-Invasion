@@ -56,6 +56,12 @@ public class MeleeWeaponDamageCollider : DamageCollider
         }
     }
 
+    protected override void GetBlockingDotValues(CharacterManager damageTarget)
+    {
+        directionFromAttackToDamageTarget = characterCausingDamage.transform.position - damageTarget.transform.position;
+        dotValueFromAttackToDamageTarget = Vector3.Dot(directionFromAttackToDamageTarget, damageTarget.transform.position);
+    }
+
     protected override void DamageTarget(CharacterManager damageTarget)
     {
         // we don't want to damage the same target more then once in a single attack

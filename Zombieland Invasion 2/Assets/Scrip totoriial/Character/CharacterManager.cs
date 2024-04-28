@@ -20,6 +20,7 @@ public class CharacterManager : NetworkBehaviour
     [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
     [HideInInspector] public CharacterCombatManager characterCombatManager;
     [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
+    [HideInInspector] public CharacterStatManager characterStatManager;
     [HideInInspector] public CharacterLocomationManager characterLocomationManager;
     [HideInInspector] public CharacterUIManager characterUIManager;
 
@@ -45,6 +46,7 @@ public class CharacterManager : NetworkBehaviour
         characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         characterLocomationManager = GetComponent<CharacterLocomationManager>();
         characterUIManager = GetComponent<CharacterUIManager>();
+        characterStatManager = GetComponent<CharacterStatManager>();
     }
 
     protected virtual void Start()

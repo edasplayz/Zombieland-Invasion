@@ -14,6 +14,15 @@ public class CharacterStatManager : MonoBehaviour
     private float staminaTickTimer = 0;
     [SerializeField] float staminaRegenerationDelay = 2;
 
+    [Header("Blocking Absorbtions")]
+    public float blockingPhysicalAbsobtion;
+    public float blockingFireAbsobtion;
+    public float blockingMagicAbsobtion;
+    public float blockingLightningAbsobtion;
+    public float blockingHolyAbsobtion;
+
+
+
     protected virtual void Awake()
     {
         character = GetComponent<CharacterManager>();
