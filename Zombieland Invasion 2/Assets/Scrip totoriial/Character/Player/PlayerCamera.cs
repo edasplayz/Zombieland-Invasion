@@ -13,7 +13,9 @@ public class PlayerCamera : MonoBehaviour
     public PlayerManager player;
     [SerializeField] Transform cameraPivotTransform;
 
-
+    [Header("Cursor Settings")]
+    [SerializeField] private bool lockCursorByDefault = false;
+    private bool cursorLocked; // Current state of cursor lock
     // change those to tweak camera settngs
     [Header("Camra Settings")]
     [SerializeField] private float cameraSmoothSpeed = 1; // the biger the longer it takes camera to move towards player
@@ -68,6 +70,32 @@ public class PlayerCamera : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         cameraZPosition = cameraObject.transform.localPosition.z;
+
+
+        // Initialize cursor lock state
+        cursorLocked = lockCursorByDefault;
+        // Apply cursor lock state
+        ApplyCursorLockState();
+    }
+
+    // Method to apply cursor lock state based on the value of cursorLocked
+    private void ApplyCursorLockState()
+    {
+        Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !cursorLocked;
+    }
+
+    // Method to toggle cursor lock state
+    public void ToggleCursorLock()
+    {
+        cursorLocked = !cursorLocked; // Invert cursorLocked
+        ApplyCursorLockState(); // Apply the new cursor lock state
+    }
+    // Method to update cursor lock state dynamically
+    public void SetCursorLockState(bool locked)
+    {
+        cursorLocked = locked; // Update cursorLocked based on the provided parameter
+        ApplyCursorLockState(); // Apply the new cursor lock state
     }
 
     public void HandleAllCameraActions()

@@ -47,7 +47,8 @@ public class TitleScreenManager : MonoBehaviour
     public void StartNewGame()
     {
         WorldSaveGameManager.instance.AttemptToCreateNewGame();
-        
+
+        PlayerCamera.instance.SetCursorLockState(true);
     }
 
     public void OpenLoadGameMenu()
@@ -59,6 +60,8 @@ public class TitleScreenManager : MonoBehaviour
 
         // select the return button first
         LoadMenuReturnButton.Select();
+
+        
     }
 
     public void CloseLoadGameMenu()
