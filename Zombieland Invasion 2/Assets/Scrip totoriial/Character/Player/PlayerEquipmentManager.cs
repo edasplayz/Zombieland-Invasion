@@ -69,7 +69,7 @@ public class PlayerEquipmentManager : CharacterEquipmentManager
             rightHandSlot.LoadWeapon(rightHandWeaponModel);
             rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
             rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
-            // assign weapon damage, to its collider
+            player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
         }
     }
 

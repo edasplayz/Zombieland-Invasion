@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponItem : Item
 {
     // animator controller override (change attack animation based on weapon you are currently using)
+    [Header("Animations")]
+    public AnimatorOverrideController weaponAnimator;
 
     [Header("Weapon Model")]
     public GameObject weaponModel;
@@ -21,6 +23,12 @@ public class WeaponItem : Item
     public int fireDamage = 0;
     public int holyDamage = 0;
     public int lightningDamage = 0;
+
+    [Header("Animation Speed Modifiers")]
+    public float light_Attack_Speed_Modifier = 1.0f;
+    public float running_Attack_Speed_Modifier = 1.0f;
+    public float rolling_Attack_Speed_Modifier = 1.0f;
+    public float backstep_Attack_Speed_Modifier = 1.0f;
 
     // weapon guard absorbtions (blocking power)
 

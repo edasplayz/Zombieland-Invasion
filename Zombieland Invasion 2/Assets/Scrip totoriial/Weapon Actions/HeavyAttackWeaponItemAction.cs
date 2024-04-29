@@ -41,17 +41,17 @@ public class HeavyAttackWeaponItemAction : WeaponItemAction
             // perform an attack based on the previos attack we just played
             if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == heavy_Attack_01)
             {
-                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.HeavyAttack02, heavy_Attack_02, true);
+                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.HeavyAttack02, heavy_Attack_02, true);
             }
             else
             {
-                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.HeavyAttack01, heavy_Attack_01, true);
+                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.HeavyAttack01, heavy_Attack_01, true);
             }
         }
         // otherwise if we are not already attacking just perform a regular attack
         else if (!playerPerformingAction.isPreformingAction)
         {
-            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.HeavyAttack01, heavy_Attack_01, true);
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.HeavyAttack01, heavy_Attack_01, true);
         }
 
 

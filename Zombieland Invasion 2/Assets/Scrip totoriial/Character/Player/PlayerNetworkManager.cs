@@ -78,6 +78,16 @@ public class PlayerNetworkManager : CharacterNetworkManager
         WeaponItem newWeapon = Instantiate(WorldItemDatabase.Instance.GetWeaponByID(newID));
         player.playerCombatManager.currentWeaponBeingUsed = newWeapon;
         
+        // we dont need to run this code if we are the owner because we already done so locally
+        if(player.IsOwner)
+        {
+            return;
+        }
+
+        if(player.playerCombatManager.currentWeaponBeingUsed != null)
+        {
+            player.playerAnimatorManager.UpdateAnimatorController(player.playerCombatManager.currentWeaponBeingUsed.weaponAnimator);
+        }
     }
 
     // item actions

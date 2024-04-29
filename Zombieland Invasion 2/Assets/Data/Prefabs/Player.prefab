@@ -5324,6 +5324,8 @@ MonoBehaviour:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
     m_InternalValue: 0
+  isBlocking:
+    m_InternalValue: 0
   isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
@@ -5446,6 +5448,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterStatManager: {fileID: 0}
   characterLocomationManager: {fileID: 0}
   characterUIManager: {fileID: 0}
   characterGroup: 0
@@ -5457,6 +5460,7 @@ MonoBehaviour:
   playerInventoryManager: {fileID: 0}
   playerEquipmentManager: {fileID: 0}
   playerCombatManager: {fileID: 0}
+  playerInteractionManager: {fileID: 0}
 --- !u!114 &2911438646937748948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5701,6 +5705,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRegenerationAmount: 2
   staminaRegenerationDelay: 0.1
+  blockingPhysicalAbsobtion: 0
+  blockingFireAbsobtion: 0
+  blockingMagicAbsobtion: 0
+  blockingLightningAbsobtion: 0
+  blockingHolyAbsobtion: 0
 --- !u!114 &8059869962959655636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5732,7 +5741,7 @@ MonoBehaviour:
   currentLeftHandWeapon: {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
-  - {fileID: 11400000, guid: 5ce103cde1f68204cadb27a7915b1bf0, type: 2}
+  - {fileID: 11400000, guid: 3d4179c5c7605d542bb95f7cf55eb6d0, type: 2}
   - {fileID: 11400000, guid: abf8544dfb8095d48939d6e145c06793, type: 2}
   rightHandWeaponIndex: 0
   weaponsInLeftHandSlots:

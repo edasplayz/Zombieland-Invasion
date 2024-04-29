@@ -25,6 +25,11 @@ public class AICharacterAttackAction : ScriptableObject
 
     public void AttemptToPerformAction(AICharacterManager aiCharacter)
     {
-        aiCharacter.characterAnimatorManager.PlayTargetAttackActionAnimation(attackType, attackAnimation, true);
+        // if ai is smarter use equipment based
+        //aiCharacter.characterAnimatorManager.PlayTargetActionAnimation(attackType, attackAnimation, true);
+
+
+        // for simple ai attacks (not item equipment based)
+        aiCharacter.characterAnimatorManager.PlayTargetActionAnimation(attackAnimation, true);
     }
 }

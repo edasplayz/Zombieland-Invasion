@@ -159,7 +159,9 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
     }
 
-    public virtual void PlayTargetAttackActionAnimation(AttackType attackType, 
+    public virtual void PlayTargetAttackActionAnimation(
+        WeaponItem weapon,
+        AttackType attackType, 
         string targetAnimation, 
         bool isPerformingAction, 
         bool applyRootMotion = true, 
@@ -174,6 +176,8 @@ public class CharacterAnimatorManager : MonoBehaviour
         // tell the network our (isattacking) floag is active (for counter damage ect)
         character.characterCombatManager.currentAttackType = attackType;
         character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
+        UpdateAnimatorController(weapon.weaponAnimator);
+
         character.characterAnimatorManager.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
         character.isPreformingAction = isPerformingAction;
@@ -184,5 +188,8 @@ public class CharacterAnimatorManager : MonoBehaviour
         character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
     }
 
-    
+    public void UpdateAnimatorController(AnimatorOverrideController weaponController)
+    {
+        character.animator.runtimeAnimatorController = weaponController;
+    }
 }
