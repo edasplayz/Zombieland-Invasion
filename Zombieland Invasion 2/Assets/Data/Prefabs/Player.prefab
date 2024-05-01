@@ -5493,10 +5493,10 @@ MonoBehaviour:
   sprintingSpeed: 6.5
   rotationSpeed: 15
   sprintingStaminaCost: 2
-  jumpStaminaCost: 25
+  jumpStaminaCost: 5
   jumpHight: 4
   jumpForwardSpeed: 5
-  freeFallingSpeed: 2
+  freeFallingSpeed: 0
   jumpDirection: {x: 0, y: 0, z: 0}
   dodgeStaminaCost: 25
 --- !u!143 &7545909901475829304
@@ -5703,7 +5703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543d299825cd41846b886861fee08256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaRegenerationAmount: 2
+  staminaRegenerationAmount: 4
   staminaRegenerationDelay: 0.1
   blockingPhysicalAbsobtion: 0
   blockingFireAbsobtion: 0
