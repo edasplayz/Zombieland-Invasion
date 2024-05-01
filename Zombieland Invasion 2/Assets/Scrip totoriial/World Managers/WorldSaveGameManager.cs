@@ -9,6 +9,8 @@ public class WorldSaveGameManager : MonoBehaviour
 {
     public static WorldSaveGameManager instance;
 
+    public PlayerCamera camera;
+
     public PlayerManager player;
 
     [Header("SAVE/LOAD")]
@@ -250,8 +252,15 @@ public class WorldSaveGameManager : MonoBehaviour
         player.playerNetworkManager.vitality.Value = 15; // temporaly code delete later
         player.playerNetworkManager.endurance.Value = 10; // temporaly code delete later
 
+
         SaveGame();
         LoadWorldScene(worldSceneIndex);
+
+        player.transform.position = new Vector3(0f, 4f, -7.948008f);
+        player.transform.rotation = Quaternion.Euler(0, -0.423f, 0);
+        //camera.cameraObject.transform.rotation = Quaternion.Euler(0, 91.028f, 0);
+
+        SaveGame();
     }
 
     public void LoadGame()

@@ -663,6 +663,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterStatManager: {fileID: 0}
   characterLocomationManager: {fileID: 0}
   characterUIManager: {fileID: 0}
   characterGroup: 1
@@ -709,6 +710,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRegenerationAmount: 2
   staminaRegenerationDelay: 0.1
+  blockingPhysicalAbsobtion: 0
+  blockingFireAbsobtion: 0
+  blockingMagicAbsobtion: 0
+  blockingLightningAbsobtion: 0
+  blockingHolyAbsobtion: 0
 --- !u!114 &4359725537800976761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,7 +1040,7 @@ MonoBehaviour:
   distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}
-  detectionRadius: 15
+  detectionRadius: 360
   minimumFOV: -35
   maximumFOV: 35
   attackRotationSpeed: 25
@@ -1079,6 +1085,8 @@ MonoBehaviour:
   moveAmount:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isBlocking:
     m_InternalValue: 0
   isInvulnerable:
     m_InternalValue: 0

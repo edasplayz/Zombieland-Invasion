@@ -137,7 +137,7 @@ public class AIBossCharacterManager : AICharacterManager
     public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
     {
 
-        PlayerUiManager.instance.playerUiPopUpManager.SendBossDefeatedPopUp("Great foa felled");
+        PlayerUiManager.instance.playerUiPopUpManager.SendBossDefeatedPopUp("Boss Defeated");
         if (IsOwner)
         {
             characterNetworkManager.currentHealth.Value = 0;
