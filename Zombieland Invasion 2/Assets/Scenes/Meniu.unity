@@ -1397,6 +1397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6245b7b6efab7849937033146569bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MovePlayerToLocation: {fileID: 0}
   titleScreenManinMenu: {fileID: 405033064}
   titleScreenLoadMenu: {fileID: 218935541}
   LoadMenuReturnButton: {fileID: 8529782218114342512}

@@ -191,6 +191,7 @@ public class UI_Character_Save_Slot : MonoBehaviour
         WorldSaveGameManager.instance.currentCharacterSlotBeingUsed = characterSlot;
         WorldSaveGameManager.instance.LoadGame();
         PlayerCamera.instance.SetCursorLockState(true);
+
     }
 
     public void SelectCurrentSlot()

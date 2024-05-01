@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class TitleScreenManager : MonoBehaviour
 {
+    
+
     public static TitleScreenManager Instance;
     [Header("Menus")]
     [SerializeField] GameObject titleScreenManinMenu;
@@ -43,12 +45,16 @@ public class TitleScreenManager : MonoBehaviour
     public void StartNetworkAsHost()
     {
         NetworkManager.Singleton.StartHost();
+
+        
     }
     public void StartNewGame()
     {
         WorldSaveGameManager.instance.AttemptToCreateNewGame();
 
         PlayerCamera.instance.SetCursorLockState(true);
+
+        
     }
 
     public void OpenLoadGameMenu()
