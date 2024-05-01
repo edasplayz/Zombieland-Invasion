@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7901a81736fba7b478f733bc97204cb1, type: 3}
   m_Name: Unarmed
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Arms
   itemIcon: {fileID: 0}
-  itemDescription: 
+  itemDescription: Arms
   itemID: 0
+  weaponAnimator: {fileID: 22100000, guid: 4e7aa276222d442469d06a90a9b03b24, type: 2}
   weaponModel: {fileID: 8628329999486663192, guid: 960ff7470b757d9458543cca937f46fd, type: 3}
   streangthREQ: 0
   dexREQ: 0
@@ -26,5 +27,32 @@ MonoBehaviour:
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
+  light_Attack_Speed_Modifier: 1
+  running_Attack_Speed_Modifier: 1
+  rolling_Attack_Speed_Modifier: 1
+  backstep_Attack_Speed_Modifier: 1
   poiseDamage: 10
+  light_Attack_01_Modifier: 1
+  light_Attack_02_Modifier: 1.2
+  light_Attack_03_Modifier: 1.4
+  heavy_Attack_01_Modifier: 1.4
+  heavy_Attack_02_Modifier: 1.6
+  charge_Attack_01_Modifier: 2
+  charge_Attack_02_Modifier: 2.2
+  running_Attack_01_Modifier: 1.1
+  rolling_Attack_01_Modifier: 1.1
+  backstep_Attack_01_Modifier: 1.1
   baseStaminaCost: 5
+  lightAttackStaminaCostMultiplier: 1
+  heavyAttackStaminaCostMultiplier: 1.3
+  chargeAttackStaminaCostMultiplier: 1.5
+  runningAttackStaminaCostMultiplier: 1.1
+  rollingAttackStaminaCostMultiplier: 1.1
+  backstepAttackStaminaCostMultiplier: 1.1
+  oh_RB_Action: {fileID: 11400000, guid: ded1bd3f512f83d468222dd28f947619, type: 2}
+  oh_RT_Action: {fileID: 11400000, guid: 7856a34b84b624f439d0cbdd0a2d8e11, type: 2}
+  whooshes:
+  - {fileID: 8300000, guid: 01999991d21504b5abb7a554bba05227, type: 3}
+  - {fileID: 8300000, guid: 1785fff83652f42399d9b2017b05656c, type: 3}
+  - {fileID: 8300000, guid: 2b12810371183da4c9f7fad4811f2e31, type: 3}
+  - {fileID: 8300000, guid: deb777176bc5bbf46bce8937c43fbe9e, type: 3}

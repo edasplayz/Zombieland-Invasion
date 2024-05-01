@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1352165709
+  GlobalObjectIdHash: 2853364488
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -221,6 +221,8 @@ MonoBehaviour:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
     m_InternalValue: 0
+  isBlocking:
+    m_InternalValue: 0
   isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
@@ -232,13 +234,13 @@ MonoBehaviour:
   isChargingAttack:
     m_InternalValue: 0
   currentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 300
   maxStamina:
-    m_InternalValue: 0
+    m_InternalValue: 300
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 300
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 300
   vitality:
     m_InternalValue: 1
   endurance:
@@ -264,6 +266,7 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterStatManager: {fileID: 0}
   characterLocomationManager: {fileID: 0}
   characterUIManager: {fileID: 0}
   characterGroup: 1
@@ -292,6 +295,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRegenerationAmount: 2
   staminaRegenerationDelay: 0.1
+  blockingPhysicalAbsobtion: 0
+  blockingFireAbsobtion: 0
+  blockingMagicAbsobtion: 0
+  blockingLightningAbsobtion: 0
+  blockingHolyAbsobtion: 0
 --- !u!114 &1671731723939344099
 MonoBehaviour:
   m_ObjectHideFlags: 0
