@@ -8,6 +8,9 @@ public class WeaponItem : Item
     [Header("Animations")]
     public AnimatorOverrideController weaponAnimator;
 
+    [Header("Model Instantiation")]
+    public WeaponModelType weaponModelType;
+
     [Header("Weapon Model")]
     public GameObject weaponModel;
 
@@ -67,11 +70,20 @@ public class WeaponItem : Item
     public float backstepAttackStaminaCostMultiplier = 1.1f;
     // heavy attack modiefier 
 
+    [Header("Weapon Blocking Absorbtion")]
+    public float physicalBaseDamageAbsorption = 50;
+    public float magicalBaseDamageAbsorption = 50;
+    public float fireBaseDamageAbsorption = 50;
+    public float holyBaseDamageAbsorption = 50;
+    public float lightningBaseDamageAbsorption = 50;
+    public float stability = 50; // reduces stamina lost from block
+
 
     // item based action (rb, rt, lb, lt)
     [Header("Actions")]
     public WeaponItemAction oh_RB_Action; // one handed right bumper action
     public WeaponItemAction oh_RT_Action; // one handed right trigger action
+    public WeaponItemAction oh_LB_Action; // one handed left bumper action
 
     // ash of war
 

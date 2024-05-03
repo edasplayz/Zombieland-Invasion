@@ -39,6 +39,11 @@ public class LightAttackWeaponItemAction : WeaponItemAction
             return;
         }
 
+        if (playerPerformingAction)
+        {
+            playerPerformingAction.playerNetworkManager.isAttacking.Value = true;
+        }
+
         // if we are sprinting perform a running atack
         if (playerPerformingAction.characterNetworkManager.isSprinting.Value)
         {

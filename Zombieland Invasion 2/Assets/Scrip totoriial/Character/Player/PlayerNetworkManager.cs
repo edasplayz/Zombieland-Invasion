@@ -90,6 +90,21 @@ public class PlayerNetworkManager : CharacterNetworkManager
         }
     }
 
+    public override void OnIsBlockingChnage(bool oldStatus, bool newStatus)
+    {
+        base.OnIsBlockingChnage(oldStatus, newStatus);
+
+        if(IsOwner)
+        {
+            player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.physicalBaseDamageAbsorption;
+            player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.magicalBaseDamageAbsorption;
+            player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.fireBaseDamageAbsorption;
+            player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.holyBaseDamageAbsorption;
+            player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.lightningBaseDamageAbsorption;
+
+        }
+    }
+
     // item actions
     [ServerRpc]
     public void NotifyTheServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)

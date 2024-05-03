@@ -30,6 +30,7 @@ public class CharacterNetworkManager : NetworkBehaviour
 
     [Header("Flags")]
     public NetworkVariable<bool> isBlocking = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isAttacking = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isInvulnerable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -104,7 +105,12 @@ public class CharacterNetworkManager : NetworkBehaviour
         gameObject.SetActive(isActive.Value);
     }
 
+    public virtual void OnIsBlockingChnage(bool oldStatus, bool newStatus)
+    {
+        character.animator.SetBool("isBlocking", isBlocking.Value);
 
+
+    }
     // a server rpc is a funcion called from a client, to the server (in our case the host)
     [ServerRpc]
     public void NotifyTheServerOfActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7901a81736fba7b478f733bc97204cb1, type: 3}
+  m_Name: Sheald
+  m_EditorClassIdentifier: 
+  itemName: Shield
+  itemIcon: {fileID: 0}
+  itemDescription: Arms
+  itemID: 3
+  weaponAnimator: {fileID: 22100000, guid: 06063b265c59bec4d9e29fb77d31cc2f, type: 2}
+  weaponModelType: 1
+  weaponModel: {fileID: 711134613797766603, guid: 6b0a997d987774244a87d3d6f6e43df8, type: 3}
+  streangthREQ: 0
+  dexREQ: 0
+  intREQ: 0
+  faitREQ: 0
+  physicalDamage: 8
+  magicDamage: 0
+  fireDamage: 0
+  holyDamage: 0
+  lightningDamage: 0
+  light_Attack_Speed_Modifier: 1
+  running_Attack_Speed_Modifier: 1
+  rolling_Attack_Speed_Modifier: 1
+  backstep_Attack_Speed_Modifier: 1
+  poiseDamage: 10
+  light_Attack_01_Modifier: 1
+  light_Attack_02_Modifier: 1.2
+  light_Attack_03_Modifier: 1.4
+  heavy_Attack_01_Modifier: 1.4
+  heavy_Attack_02_Modifier: 1.6
+  charge_Attack_01_Modifier: 2
+  charge_Attack_02_Modifier: 2.2
+  running_Attack_01_Modifier: 1.1
+  rolling_Attack_01_Modifier: 1.1
+  backstep_Attack_01_Modifier: 1.1
+  baseStaminaCost: 5
+  lightAttackStaminaCostMultiplier: 1
+  heavyAttackStaminaCostMultiplier: 1.3
+  chargeAttackStaminaCostMultiplier: 1.5
+  runningAttackStaminaCostMultiplier: 1.1
+  rollingAttackStaminaCostMultiplier: 1.1
+  backstepAttackStaminaCostMultiplier: 1.1
+  physicalBaseDamageAbsorption: 100
+  magicalBaseDamageAbsorption: 35
+  fireBaseDamageAbsorption: 64
+  holyBaseDamageAbsorption: 23
+  lightningBaseDamageAbsorption: 73
+  stability: 66
+  oh_RB_Action: {fileID: 11400000, guid: ded1bd3f512f83d468222dd28f947619, type: 2}
+  oh_RT_Action: {fileID: 11400000, guid: 7856a34b84b624f439d0cbdd0a2d8e11, type: 2}
+  oh_LB_Action: {fileID: 11400000, guid: 17a86b2ccdefd8348b5a6f0ccbf63658, type: 2}
+  whooshes:
+  - {fileID: 8300000, guid: 01999991d21504b5abb7a554bba05227, type: 3}
+  - {fileID: 8300000, guid: 1785fff83652f42399d9b2017b05656c, type: 3}
+  - {fileID: 8300000, guid: 2b12810371183da4c9f7fad4811f2e31, type: 3}
+  - {fileID: 8300000, guid: deb777176bc5bbf46bce8937c43fbe9e, type: 3}

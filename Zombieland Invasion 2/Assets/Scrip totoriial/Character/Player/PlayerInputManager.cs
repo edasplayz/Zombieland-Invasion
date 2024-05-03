@@ -46,6 +46,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Bumper Inputs")]
     [SerializeField] bool RB_Input = false;
+    [SerializeField] bool LB_Input = false;
 
     [Header("Trigger Inputs")]
     [SerializeField] bool RT_Input = false;
@@ -132,6 +133,8 @@ public class PlayerInputManager : MonoBehaviour
 
             // bumpers
             playerControls.PlayerActions.RB.performed += i => RB_Input = true;
+            playerControls.PlayerActions.LB.performed += i => LB_Input = true;
+            playerControls.PlayerActions.LB.canceled += i => player.playerNetworkManager.isBlocking.Value = false;
 
             // lock on
             playerControls.PlayerActions.RT.performed += i => RT_Input = true;
@@ -223,6 +226,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleSprintInput();
         HandleJumpInput();
         HandleRBInput();
+        HandleLBInput();
         HandleLockOnInput();
         HandleLockOnSwitchTargetInput();
         HandleRTInput();
@@ -432,6 +436,22 @@ public class PlayerInputManager : MonoBehaviour
             // todo: if we are two handing the weapon use the two handed action
 
             player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+        }
+    }
+
+    private void HandleLBInput()
+    {
+        if (LB_Input)
+        {
+            LB_Input = false;
+
+            // TODO: IF WE HAVE A UI WINDOW OPEN RETURN AND DO NOTHING 
+
+            player.playerNetworkManager.SetCharacterActionHand(false);
+
+            // todo: if we are two handing the weapon use the two handed action
+
+            player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
         }
     }
 

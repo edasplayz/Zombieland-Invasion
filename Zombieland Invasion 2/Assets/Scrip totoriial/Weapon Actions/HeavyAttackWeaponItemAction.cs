@@ -23,10 +23,15 @@ public class HeavyAttackWeaponItemAction : WeaponItemAction
             return;
         }
 
-        /*if(!playerPerformingAction.isGrounded )
+        if(!playerPerformingAction.characterLocomationManager.isGrounded)
         {
             return;
-        }*/
+        }
+
+        if (playerPerformingAction)
+        {
+            playerPerformingAction.playerNetworkManager.isAttacking.Value = true;
+        }
 
         PerformHeavyAttack(playerPerformingAction, weaponPerformingAction);
     }
