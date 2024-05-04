@@ -15,6 +15,7 @@ public class AIKnightCombatManager : AICharacterCombatManager
 
     [Header("Damage")]
     [SerializeField] int baseDamage = 25;
+    [SerializeField] int basePoiseDamage = 25;
     [SerializeField] float attack01DamageModifier = 1.0f;
     [SerializeField] float attack02DamageModifier = 1.4f;
     [SerializeField] float attack03DamageModifier = 1.6f;
@@ -36,20 +37,24 @@ public class AIKnightCombatManager : AICharacterCombatManager
     {
         aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
-      //  leftHandDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
+        knightSwordDamageCollider.poiseDamage = basePoiseDamage * attack01DamageModifier;
+
+        //  leftHandDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
     }
 
     public void SetAttack02Damage()
     {
         aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
-       // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
+        knightSwordDamageCollider.poiseDamage = basePoiseDamage * attack02DamageModifier;
+        // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
     }
 
     public void SetAttack03Damage()
     {
         aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack03DamageModifier;
+        knightSwordDamageCollider.poiseDamage = basePoiseDamage * attack03DamageModifier;
         // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
     }
 
@@ -59,6 +64,7 @@ public class AIKnightCombatManager : AICharacterCombatManager
 
         
         knightSwordDamageCollider.physicalDamage = baseDamage * attack04DamageModifier;
+        knightSwordDamageCollider.poiseDamage = basePoiseDamage * attack04DamageModifier;
         // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
     }
 

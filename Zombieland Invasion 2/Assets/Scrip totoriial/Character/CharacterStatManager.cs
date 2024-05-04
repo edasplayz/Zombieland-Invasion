@@ -20,6 +20,7 @@ public class CharacterStatManager : MonoBehaviour
     public float blockingMagicAbsobtion;
     public float blockingLightningAbsobtion;
     public float blockingHolyAbsobtion;
+    public float blockingStability;
 
 
 

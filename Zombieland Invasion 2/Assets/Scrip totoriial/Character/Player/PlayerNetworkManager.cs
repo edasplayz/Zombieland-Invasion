@@ -101,6 +101,7 @@ public class PlayerNetworkManager : CharacterNetworkManager
             player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.fireBaseDamageAbsorption;
             player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.holyBaseDamageAbsorption;
             player.playerStatsManager.blockingPhysicalAbsobtion = player.playerCombatManager.currentWeaponBeingUsed.lightningBaseDamageAbsorption;
+            player.playerStatsManager.blockingStability = player.playerCombatManager.currentWeaponBeingUsed.stability;
 
         }
     }

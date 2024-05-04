@@ -80,6 +80,7 @@ public class MeleeWeaponDamageCollider : DamageCollider
         damageEffect.fireDamage = fireDamage;
         damageEffect.holyDamage = holyDamage;
         damageEffect.lightningDamage = lightningDamage;
+        damageEffect.poiseDamage = poiseDamage;
         damageEffect.contactPoint = contactPoint;
         damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, damageTarget.transform.forward, Vector3.up);
 

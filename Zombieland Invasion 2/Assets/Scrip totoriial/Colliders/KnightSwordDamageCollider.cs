@@ -32,6 +32,7 @@ public class KnightSwordDamageCollider : DamageCollider
         damageEffect.fireDamage = fireDamage;
         damageEffect.holyDamage = holyDamage;
         damageEffect.lightningDamage = lightningDamage;
+        damageEffect.poiseDamage = poiseDamage;
         damageEffect.contactPoint = contactPoint;
         damageEffect.angleHitFrom = Vector3.SignedAngle(bossCharacter.transform.forward, damageTarget.transform.forward, Vector3.up);
 

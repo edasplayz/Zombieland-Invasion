@@ -25,6 +25,8 @@ public class TakeDamageEffect : InstantCharacterEffect
     [Header("Poise")]
     public float poiseDamage = 0;
     public bool poiseIsBroken = false; // if a character poise is broken, they will be stunned and play a damage animation
+
+
     // to do
     // build ups
     // build up effects amount

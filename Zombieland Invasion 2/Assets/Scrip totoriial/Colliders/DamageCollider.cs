@@ -15,6 +15,9 @@ public class DamageCollider : MonoBehaviour
     public float lightningDamage = 0;
     public float holyDamage = 0;
 
+    [Header("Poise")]
+    public float poiseDamage = 0;
+
     [Header("Contack Point")]
     protected Vector3 contactPoint;
 
@@ -82,6 +85,8 @@ public class DamageCollider : MonoBehaviour
             damageEffect.fireDamage = fireDamage;
             damageEffect.holyDamage = holyDamage;
             damageEffect.lightningDamage = lightningDamage;
+            damageEffect.poiseDamage = poiseDamage;
+            damageEffect.staminaDamage = poiseDamage; // if you want to give samina damage its own varieble instead of using poise
             damageEffect.contactPoint = contactPoint;
 
             // apply blocked character damage to target
@@ -116,6 +121,7 @@ public class DamageCollider : MonoBehaviour
         damageEffect.fireDamage = fireDamage;
         damageEffect.holyDamage = holyDamage;
         damageEffect.lightningDamage = lightningDamage;
+        damageEffect.poiseDamage = poiseDamage;
         damageEffect.contactPoint = contactPoint;
 
         damageTarget.characterEffectsManager.ProccessInstantEffect(damageEffect);

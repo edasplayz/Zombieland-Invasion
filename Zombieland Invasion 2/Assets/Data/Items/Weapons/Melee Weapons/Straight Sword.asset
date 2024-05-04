@@ -17,6 +17,7 @@ MonoBehaviour:
   itemDescription: A Straight Sword
   itemID: 1
   weaponAnimator: {fileID: 22100000, guid: c99eee1f883164e449f7d5d954a7bf88, type: 2}
+  weaponModelType: 0
   weaponModel: {fileID: 7357005724361193139, guid: fb0da7e247b60524c809e71a5c0c0c4c, type: 3}
   streangthREQ: 10
   dexREQ: 10
@@ -49,9 +50,16 @@ MonoBehaviour:
   runningAttackStaminaCostMultiplier: 1.1
   rollingAttackStaminaCostMultiplier: 1.1
   backstepAttackStaminaCostMultiplier: 1.1
+  physicalBaseDamageAbsorption: 50
+  magicalBaseDamageAbsorption: 50
+  fireBaseDamageAbsorption: 50
+  holyBaseDamageAbsorption: 50
+  lightningBaseDamageAbsorption: 50
+  stability: 15
   oh_RB_Action: {fileID: 11400000, guid: ded1bd3f512f83d468222dd28f947619, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: 7856a34b84b624f439d0cbdd0a2d8e11, type: 2}
   oh_LB_Action: {fileID: 11400000, guid: 17a86b2ccdefd8348b5a6f0ccbf63658, type: 2}
+  blocking: []
   whooshes:
   - {fileID: 8300000, guid: 01999991d21504b5abb7a554bba05227, type: 3}
   - {fileID: 8300000, guid: 1785fff83652f42399d9b2017b05656c, type: 3}

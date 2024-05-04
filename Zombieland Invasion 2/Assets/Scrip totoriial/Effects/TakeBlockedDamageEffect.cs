@@ -27,6 +27,10 @@ public class TakeBlockedDamageEffect : InstantCharacterEffect
     // build ups
     // build up effects amount
 
+    [Header("Stamina")]
+    public float staminaDamage = 0;
+    public float finalStaminaDamage = 0;
+
     [Header("Animation")]
     public bool playDamageAnimation = true;
     public bool manuallySelectDamageAnimation = false;
@@ -60,6 +64,7 @@ public class TakeBlockedDamageEffect : InstantCharacterEffect
 
         // calculate damage
         CalculateDamage(character);
+        CalculateStaminaDamage(character);
         // check whick direction damage came from
         // play a damage animation
         PlayDirectionalBasedBlockingAnimation(character);
@@ -70,6 +75,8 @@ public class TakeBlockedDamageEffect : InstantCharacterEffect
         PlayDamageVFX(character);
 
         // if character is a.i check for new target if character causing damage is present
+
+        CheckForGuardBreak(character);
     }
 
     private void CalculateDamage(CharacterManager character)
@@ -97,8 +104,9 @@ public class TakeBlockedDamageEffect : InstantCharacterEffect
         physicalDamage -= (physicalDamage * (character.characterStatManager.blockingPhysicalAbsobtion / 100));
         magicDamage -= (magicDamage * (character.characterStatManager.blockingMagicAbsobtion / 100));   
         fireDamage -= (fireDamage * (character.characterStatManager.blockingFireAbsobtion / 100));
-        lightningDamage -= (lightningDamage * (character.characterStatManager.blockingLightningAbsobtion / 100));
         holyDamage -= (holyDamage * (character.characterStatManager.blockingHolyAbsobtion / 100));
+        lightningDamage -= (lightningDamage * (character.characterStatManager.blockingLightningAbsobtion / 100));
+        
 
         finalDamage = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
 
@@ -115,6 +123,39 @@ public class TakeBlockedDamageEffect : InstantCharacterEffect
        // Debug.Log("Target has taken " + finalDamage + " damage.");
     }
 
+    private void CalculateStaminaDamage(CharacterManager character)
+    {
+        if(!character.IsOwner) 
+        { 
+            return; 
+        }
+
+        finalStaminaDamage = staminaDamage;
+        float staminaDamageAbsorbtion = finalStaminaDamage * (character.characterStatManager.blockingStability / 100);
+        float staminaDamageAfterAbsorbtion = finalStaminaDamage - staminaDamageAbsorbtion;
+
+        character.characterNetworkManager.currentStamina.Value -= staminaDamageAfterAbsorbtion;
+    }
+
+    private void CheckForGuardBreak(CharacterManager character)
+    {
+        // if(character.characterNetworkManager.currentStamina.Value <= 0)
+        // {
+        // play sfx
+        // }
+        
+        if (character.IsOwner)
+        {
+            return;
+        }
+        if(character.characterNetworkManager.currentStamina.Value <= 0)
+        {
+            character.characterAnimatorManager.PlayTargetActionAnimation("collosal_inpact", true);
+            character.characterNetworkManager.isBlocking.Value = false;
+            
+        }
+    }
+
     private void PlayDamageVFX(CharacterManager character)
     {
         // if we have fire damage play fire particle
@@ -126,11 +167,12 @@ public class TakeBlockedDamageEffect : InstantCharacterEffect
 
     private void PlayDamageSFX(CharacterManager character)
     {
-        
+
         // if fire damage is greater than 0 play burn sfx
         // if lightning famage is greater then 0 play zap sfx
 
         // get sfx based on blocking weapon
+        character.characterSoundFXManager.PlayBlockSoundFX();
     }
 
     private void PlayDirectionalBasedBlockingAnimation(CharacterManager character)
@@ -154,19 +196,19 @@ public class TakeBlockedDamageEffect : InstantCharacterEffect
         switch (damageIntensity)
         {
             case DamageIntensity.Ping:
-                damageAnimation = "Block_Ping_01";
+                damageAnimation = "Shield_inpact"; // Block_Ping_01
                 break;
             case DamageIntensity.Light:
-                damageAnimation = "Block_Light_01";
+                damageAnimation = "Shield_inpact"; // Block_Light_01
                 break;
             case DamageIntensity.Medium:
-                damageAnimation = "Block_Medium_01";
+                damageAnimation = "Shield_inpact"; // Block_Medium_01
                 break;
             case DamageIntensity.Heavy:
-                damageAnimation = "Block_Heavy_01";
+                damageAnimation = "Shield_inpact"; // Block_Heavy_01
                 break;
             case DamageIntensity.Colossal:
-                damageAnimation = "Block_Colossal_01";
+                damageAnimation = "collosal_inpact"; // Block_Colossal_01
                 break;
             default:
                 break;
