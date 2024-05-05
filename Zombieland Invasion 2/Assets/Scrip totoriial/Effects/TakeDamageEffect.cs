@@ -108,6 +108,22 @@ public class TakeDamageEffect : InstantCharacterEffect
         character.characterNetworkManager.currentHealth.Value -= finalDamage;
 
         // calculate poise damage to determine if the character will be stunned 
+
+        // we subject poise damage from the character total
+        character.characterStatManager.totalPoiseDamage -= poiseDamage;
+
+        float remainingPoise = character.characterStatManager.basePoiseDefense +
+            character.characterStatManager.offensivePoiseBonus +
+            character.characterStatManager.totalPoiseDamage;
+
+        if(remainingPoise <= 0)
+        {
+            poiseIsBroken = true;
+        }
+
+        // since the character has been hit reset the poise timer
+        character.characterStatManager.poiseResetTimer = character.characterStatManager.defaultPoiseResetTime;
+
         Debug.Log("Target has taken " + finalDamage + " damage.");
     }
 
@@ -140,39 +156,78 @@ public class TakeDamageEffect : InstantCharacterEffect
             return;
         }
 
-        // calculate if poise is broken
-        poiseIsBroken = true;
-        if(angleHitFrom >= 145 && angleHitFrom <= 180)
-        {
-            // play front animation
-            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
-        }
-        else if (angleHitFrom <= -145 && angleHitFrom >= -180)
-        {
-            // play front animation
-            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
-        }
-        else if (angleHitFrom >= -45 && angleHitFrom <= 45)
-        {
-            // play back animation
-            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.backward_Medium_Damage);
-        }
-        else if (angleHitFrom >= -144 && angleHitFrom <= -45)
-        {
-            // play left animation
-            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.left_Medium_Damage);
-        }
-        else if (angleHitFrom >= 45 && angleHitFrom <= 144)
-        {
-            // play right animation
-            damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.right_Medium_Damage);
-        }
-
-        // if poise is broken play a staggering damage animation
         if(poiseIsBroken)
         {
+            if (angleHitFrom >= 145 && angleHitFrom <= 180)
+            {
+                // play front animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
+            }
+            else if (angleHitFrom <= -145 && angleHitFrom >= -180)
+            {
+                // play front animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
+            }
+            else if (angleHitFrom >= -45 && angleHitFrom <= 45)
+            {
+                // play back animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.backward_Medium_Damage);
+            }
+            else if (angleHitFrom >= -144 && angleHitFrom <= -45)
+            {
+                // play left animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.left_Medium_Damage);
+            }
+            else if (angleHitFrom >= 45 && angleHitFrom <= 144)
+            {
+                // play right animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.right_Medium_Damage);
+            }
+        }
+        else
+        {
+            if (angleHitFrom >= 145 && angleHitFrom <= 180)
+            {
+                // play front animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Ping_Damage);
+            }
+            else if (angleHitFrom <= -145 && angleHitFrom >= -180)
+            {
+                // play front animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Ping_Damage);
+            }
+            else if (angleHitFrom >= -45 && angleHitFrom <= 45)
+            {
+                // play back animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.backward_Ping_Damage);
+            }
+            else if (angleHitFrom >= -144 && angleHitFrom <= -45)
+            {
+                // play left animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.left_Ping_Damage);
+            }
+            else if (angleHitFrom >= 45 && angleHitFrom <= 144)
+            {
+                // play right animation
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.right_Ping_Damage);
+            }
+        }
+        
+        
             character.characterAnimatorManager.lastDamageAnimationPlayed = damageAnimation;
+
+        if(poiseIsBroken)
+        {
+            // if we are poise broken restrict movement and action
             character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
         }
+        else
+        {
+            // if we are not poise broken simply play upper body animations
+            character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, false, false, true, true);
+        }
+
+            
+        
     }
 }

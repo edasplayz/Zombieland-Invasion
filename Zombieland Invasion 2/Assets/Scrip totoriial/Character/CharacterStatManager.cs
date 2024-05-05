@@ -22,6 +22,12 @@ public class CharacterStatManager : MonoBehaviour
     public float blockingHolyAbsobtion;
     public float blockingStability;
 
+    [Header("Poise")]
+    public float totalPoiseDamage; // how mutch poise damage we have taken
+    public float offensivePoiseBonus; // the poise bonus gained from using weapon (heavy armor have mutch larger bonus)
+    public float basePoiseDefense; // the poise bunus gained from armor/ talisman
+    public float defaultPoiseResetTime = 8; // the time it taks for poise damaga to reset (must not be hit in the time of it will reset)
+    public float poiseResetTimer = 0; // the current timer for poise reset
 
 
     protected virtual void Awake()
@@ -33,6 +39,12 @@ public class CharacterStatManager : MonoBehaviour
     {
 
     }
+
+    protected virtual void Update()
+    {
+        HandlePoiseResetTimer();
+    }
+
     public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
     {
         float stamina = 0;
@@ -98,5 +110,17 @@ public class CharacterStatManager : MonoBehaviour
             staminaRegenerationTimer = 0;
         }
         
+    }
+
+    protected virtual void HandlePoiseResetTimer()
+    {
+        if(poiseResetTimer > 0)
+        {
+            poiseResetTimer -= Time.deltaTime;
+        }
+        else
+        {
+            totalPoiseDamage = 0;
+        }
     }
 }

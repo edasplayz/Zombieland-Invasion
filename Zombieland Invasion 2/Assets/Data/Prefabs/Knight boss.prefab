@@ -715,6 +715,12 @@ MonoBehaviour:
   blockingMagicAbsobtion: 0
   blockingLightningAbsobtion: 0
   blockingHolyAbsobtion: 0
+  blockingStability: 0
+  totalPoiseDamage: 0
+  offensivePoiseBonus: 0
+  basePoiseDefense: 80
+  defaultPoiseResetTime: 8
+  poiseResetTimer: 0
 --- !u!114 &4359725537800976761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,6 +1041,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 0}
   canPerformRollingAttack: 0
   canPerformBackStepAttack: 0
+  canBlock: 1
   actionRecoveryTimer: 1
   enablePivot: 1
   distanceFromTarget: 0
@@ -1048,6 +1055,7 @@ MonoBehaviour:
   knightStompCollider: {fileID: 5437741163391612693}
   stompAttackAOERadius: 1.5
   baseDamage: 25
+  basePoiseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.4
   attack03DamageModifier: 1.6
@@ -1088,6 +1096,8 @@ MonoBehaviour:
     m_InternalValue: 0
   isBlocking:
     m_InternalValue: 0
+  isAttacking:
+    m_InternalValue: 0
   isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
@@ -1099,13 +1109,13 @@ MonoBehaviour:
   isChargingAttack:
     m_InternalValue: 0
   currentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 3000
   maxStamina:
-    m_InternalValue: 0
+    m_InternalValue: 3000
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 3000
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 3000
   vitality:
     m_InternalValue: 1
   endurance:
@@ -4991,6 +5001,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  poiseDamage: 0
   knightCharacterManager: {fileID: 0}
 --- !u!136 &9056068210475794857
 CapsuleCollider:
@@ -5321,6 +5332,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  poiseDamage: 0
   bossCharacter: {fileID: 0}
 --- !u!65 &3256517491354128895 stripped
 BoxCollider:
