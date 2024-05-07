@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
     private bool targetHit;
     private Quaternion initialRotation;
     private Rigidbody rb;
+    [SerializeField] float shootForce;
 
     public int damage;
 
@@ -15,7 +16,14 @@ public class Arrow : MonoBehaviour
         initialRotation = transform.rotation;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
+    {
+        rb.velocity = rb.transform.forward * shootForce;
+
+        Invoke("Disappear", 4f);
+    }
+
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (targetHit)
         {
@@ -51,6 +59,7 @@ public class Arrow : MonoBehaviour
         Invoke("Disappear", 10f);
     }
 
+    */
     private void Disappear()
     {
         // Destroy the arrow GameObject after 10 seconds

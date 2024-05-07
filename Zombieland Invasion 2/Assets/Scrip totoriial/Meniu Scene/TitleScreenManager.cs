@@ -25,6 +25,9 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] Button noCharacterSlotsOkayButton;
     [SerializeField] GameObject deleteCharacterSlotPopUp;
 
+    [Header("Player UI")]
+    public GameObject playerUi;
+
     [Header("Character Slots")]
     public CharacterSlot currentSelecterSlot = CharacterSlot.NO_SLOT;
     

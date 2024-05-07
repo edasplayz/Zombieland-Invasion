@@ -83,6 +83,10 @@ public class PlayerManager : CharacterManager
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+
+        //transform.position = new Vector3(0f, 4f, -7.948008f);
+       // transform.rotation = Quaternion.Euler(0, -0.423f, 0);
+
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallBack;
 
         // if this the player object owned by client

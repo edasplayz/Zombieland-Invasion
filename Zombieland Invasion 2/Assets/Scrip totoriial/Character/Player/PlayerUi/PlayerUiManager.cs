@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Loading;
 
 public class PlayerUiManager : MonoBehaviour
 {
     public static PlayerUiManager instance;
+
+    [SerializeField] GameObject loadingScreen;
 
     [Header("Network Join")]
     [SerializeField] bool startGameAsClient;
@@ -55,5 +58,15 @@ public class PlayerUiManager : MonoBehaviour
         }
     }
 
-    
+    public void EnableLoadingGameScreen()
+    {
+        loadingScreen.SetActive(true);
+    }
+
+    public void DisableLoadingGameScreen()
+    {
+        loadingScreen.SetActive(false);
+    }
+
+
 }

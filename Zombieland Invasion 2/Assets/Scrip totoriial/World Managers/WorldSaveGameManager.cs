@@ -13,6 +13,8 @@ public class WorldSaveGameManager : MonoBehaviour
 
     public PlayerManager player;
 
+    public PlayerUiManager playerUiManager;
+
     [Header("SAVE/LOAD")]
     [SerializeField] bool saveGame;
     [SerializeField] bool loadGame;
@@ -42,6 +44,7 @@ public class WorldSaveGameManager : MonoBehaviour
 
     private void Awake()
     {
+        playerUiManager = FindObjectOfType<PlayerUiManager>();
         // there can only be one instance of this script at one time, if another exist, destroy it
         if (instance == null)
         {
@@ -256,11 +259,26 @@ public class WorldSaveGameManager : MonoBehaviour
         SaveGame();
         LoadWorldScene(worldSceneIndex);
 
-        player.transform.position = new Vector3(0f, 4f, -7.948008f);
-        player.transform.rotation = Quaternion.Euler(0, -0.423f, 0);
+        playerUiManager.EnableLoadingGameScreen();
+        
+
+        Invoke("MovePlayerToSpawn", 3f);
+
+        
+
         //camera.cameraObject.transform.rotation = Quaternion.Euler(0, 91.028f, 0);
 
         SaveGame();
+    }
+
+    private void MovePlayerToSpawn()
+    {
+        player.transform.position = new Vector3(0f, 4f, -7.948008f);
+        player.transform.rotation = Quaternion.Euler(0, -0.423f, 0);
+
+        playerUiManager.DisableLoadingGameScreen();
+
+
     }
 
     public void LoadGame()
@@ -275,6 +293,8 @@ public class WorldSaveGameManager : MonoBehaviour
         currentCharacterData = saveFileDataWriter.LoadSaveFile();
 
         LoadWorldScene(worldSceneIndex);
+
+        
     }
 
     public void SaveGame()

@@ -44,4 +44,230 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44fac6228237bf4eb5bdc8834f4c0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  player: {fileID: 0}
+  playerUiManager: {fileID: 0}
+  saveGame: 0
+  loadGame: 0
   worldSceneIndex: 1
+  currentCharacterSlotBeingUsed: 0
+  currentCharacterData:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot01:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot02:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot03:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot04:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot05:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot06:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot07:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot08:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot09:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
+  characterSlot10:
+    sceneIndex: 1
+    characterName: Character
+    secondsPlayed: 0
+    xPosition: 0
+    yPosition: 0
+    zPosition: 0
+    currentHealth: 0
+    currentStamina: 0
+    vitality: 0
+    endurance: 0
+    sitesOfGrace:
+      keys: 
+      values: 
+    bossesAwakened:
+      keys: 
+      values: 
+    bossesDefeated:
+      keys: 
+      values: 
