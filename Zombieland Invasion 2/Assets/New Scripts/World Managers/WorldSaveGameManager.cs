@@ -268,7 +268,7 @@ public class WorldSaveGameManager : MonoBehaviour
 
         //camera.cameraObject.transform.rotation = Quaternion.Euler(0, 91.028f, 0);
 
-        SaveGame();
+        
     }
 
     private void MovePlayerToSpawn()
@@ -277,7 +277,7 @@ public class WorldSaveGameManager : MonoBehaviour
         player.transform.rotation = Quaternion.Euler(0, -0.423f, 0);
 
         playerUiManager.DisableLoadingGameScreen();
-
+        SaveGame();
 
     }
 

@@ -208,8 +208,30 @@ public class PlayerManager : CharacterManager
             PlayerUiManager.instance.playerUiPopUpManager.SendYouDiedPopUp();
         }
 
+
+        if (IsOwner)
+        {
+            characterNetworkManager.currentHealth.Value = 0;
+            isDead.Value = true;
+
+            // reset any flags here that need to be reset 
+            // nothing yet
+
+            // if we are not grounded, play an aerial death animation
+
+            if (!manuallySelectDeathAnimation)
+            {
+                characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
+            }
+        }
+
         
-        return base.ProcessDeathEvent(manuallySelectDeathAnimation);
+
+        // Wait for a period of time
+        yield return new WaitForSeconds(5);
+
+        Debug.Log("Jis numire");
+        //return base.ProcessDeathEvent(manuallySelectDeathAnimation);
 
         // check for players that are alime, if 0 respawn character
 
