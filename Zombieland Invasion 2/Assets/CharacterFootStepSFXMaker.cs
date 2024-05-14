@@ -20,50 +20,69 @@ public class CharacterFootStepSFXMaker : MonoBehaviour
         character = GetComponentInParent<CharacterManager>();
     }
 
-    private void FixedUpdate()
-    {
-        CheckForFootSteps();
+     private void FixedUpdate()
+     {
+         CheckForFootSteps();
 
-    }
+     }
 
-    private void CheckForFootSteps()
+     private void CheckForFootSteps()
+     {
+         if(character == null)
+         {
+             return;
+         }
+
+         if(!character.characterNetworkManager.isMoving.Value )
+         {
+             return;
+         }
+
+         RaycastHit hit;
+
+         if (Physics.Raycast(transform.position, character.transform.TransformDirection(Vector3.down), out hit, distanceToGround, WorldUtilityManager.Instance.GetEnviroLayers()))
+         {
+             hasTouchedGround = true;
+
+             if(!hasPlayedFootStepSFX)
+             {
+                 steppedOnObject = hit.transform.gameObject;
+             }
+         }
+         else
+         {
+             hasTouchedGround= false;
+             hasPlayedFootStepSFX = false;
+             steppedOnObject= null;
+         }
+
+         if(hasTouchedGround && !hasPlayedFootStepSFX)
+         {
+             hasPlayedFootStepSFX = true;
+             PlayFootStepSoundFX();
+         }
+
+
+     }
+
+    /*private void OnCollisionEnter(Collision collision)
     {
-        if(character == null)
+        if (character == null || audioSource == null)
         {
             return;
         }
 
-        if(!character.characterNetworkManager.isMoving.Value )
+        // Check if the collision is with layers defined as environment layers
+        if ((collision.gameObject.layer & WorldUtilityManager.Instance.GetEnviroLayers().value) != 0)
         {
-            return;
-        }
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, character.transform.TransformDirection(Vector3.down), out hit, distanceToGround, WorldUtilityManager.Instance.GetEnviroLayers()))
-        {
-            hasTouchedGround = true;
-
-            if(!hasPlayedFootStepSFX)
+            // Check if the character is moving and footstep sound hasn't been played yet
+            if (character.characterNetworkManager.isMoving.Value && !hasPlayedFootStepSFX)
             {
-                steppedOnObject = hit.transform.gameObject;
+                PlayFootStepSoundFX();
+                hasPlayedFootStepSFX = true;
             }
         }
-        else
-        {
-            hasTouchedGround= false;
-            hasPlayedFootStepSFX = false;
-            steppedOnObject= null;
-        }
-
-        if(hasTouchedGround && !hasPlayedFootStepSFX)
-        {
-            hasPlayedFootStepSFX = true;
-            PlayFootStepSoundFX();
-        }
-
-
-    }
+    }*/
 
     private void PlayFootStepSoundFX()
     {

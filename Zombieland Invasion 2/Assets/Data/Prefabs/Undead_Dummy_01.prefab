@@ -80,7 +80,7 @@ Transform:
   m_GameObject: {fileID: 3157312984538634794}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.00046, z: 0.00031}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4294875893638899678
 Transform:
   m_ObjectHideFlags: 0
@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 6844678694344043432}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.495247, y: -4.4900002, z: -4.05}
+  m_LocalPosition: {x: 0, y: -4.4900002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -223,6 +223,8 @@ MonoBehaviour:
     m_InternalValue: 0
   isBlocking:
     m_InternalValue: 0
+  isAttacking:
+    m_InternalValue: 0
   isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
@@ -300,6 +302,12 @@ MonoBehaviour:
   blockingMagicAbsobtion: 0
   blockingLightningAbsobtion: 0
   blockingHolyAbsobtion: 0
+  blockingStability: 0
+  totalPoiseDamage: 0
+  offensivePoiseBonus: 0
+  basePoiseDefense: 0
+  defaultPoiseResetTime: 8
+  poiseResetTimer: 0
 --- !u!114 &1671731723939344099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +375,7 @@ MonoBehaviour:
   lockOnTransform: {fileID: 0}
   canPerformRollingAttack: 0
   canPerformBackStepAttack: 0
+  canBlock: 1
   actionRecoveryTimer: 0
   enablePivot: 1
   distanceFromTarget: 0
@@ -379,6 +388,7 @@ MonoBehaviour:
   rightHandDamageCollider: {fileID: 5044974240302301312}
   leftHandDamageCollider: {fileID: 3922255597567584166}
   baseDamage: 25
+  basePoiseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.4
 --- !u!114 &7008751580531658591
@@ -419,6 +429,18 @@ MonoBehaviour:
   backward_Medium_Damage: []
   left_Medium_Damage: []
   right_Medium_Damage: []
+  hit_Forward_Ping_01: hit_Forward_Ping_01
+  hit_Forward_Ping_02: hit_Forward_Ping_02
+  hit_Backwards_Ping_01: hit_Backwards_Ping_01
+  hit_Backwards_Ping_02: hit_Backwards_Ping_02
+  hit_Left_Ping_01: hit_Left_Ping_01
+  hit_Left_Ping_02: hit_Left_Ping_02
+  hit_Right_Ping_01: hit_Right_Ping_01
+  hit_Right_Ping_02: hit_Right_Ping_02
+  forward_Ping_Damage: []
+  backward_Ping_Damage: []
+  left_Ping_Damage: []
+  right_Ping_Damage: []
 --- !u!114 &4354248377722885188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,6 +1432,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  poiseDamage: 0
   undeadCharacter: {fileID: 0}
 --- !u!135 &6742638509340762331
 SphereCollider:
@@ -1764,6 +1787,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  poiseDamage: 0
   undeadCharacter: {fileID: 0}
 --- !u!135 &4990507836291924718
 SphereCollider:

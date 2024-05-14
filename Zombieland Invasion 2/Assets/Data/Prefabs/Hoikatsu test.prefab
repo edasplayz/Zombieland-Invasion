@@ -166,6 +166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hoikatsu test
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a686513848a59ce478eac6d51e52c133, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1630794972795428178, guid: a686513848a59ce478eac6d51e52c133, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -258,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1614384870
+  GlobalObjectIdHash: 3194860882
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
