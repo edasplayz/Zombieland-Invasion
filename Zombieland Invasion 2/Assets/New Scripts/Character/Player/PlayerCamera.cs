@@ -120,6 +120,16 @@ public class PlayerCamera : MonoBehaviour
 
     }
 
+    public void ChangeVerticalSensitivity(float sensitivity)
+    {
+        upAndDownRotationSpeed = sensitivity;
+    }
+
+    public void ChangeHorizontalSensitivity(float sensitivity)
+    {
+        leftAndRightRotationSpeed = sensitivity;
+    }
+
     private void HandleRotations()
     {
         // if loced on force rotation towards target

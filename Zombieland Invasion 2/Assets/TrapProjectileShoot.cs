@@ -11,7 +11,15 @@ public class TrapProjectileShoot : MonoBehaviour
     // shoot position
     [SerializeField] private Transform shootTransform;
 
-    private void Update()
+    // Time delay between spawns (in seconds)
+    [SerializeField] private float spawnDelay = 1.0f;
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(ShootProjectile), 0.0f, spawnDelay);
+    }
+
+    private void ShootProjectile()
     {
         GameObject go = Instantiate(arrow, shootTransform.position, shootTransform.rotation);
         go.GetComponent<NetworkObject>().Spawn();

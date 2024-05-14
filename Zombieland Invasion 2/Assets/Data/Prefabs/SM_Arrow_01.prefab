@@ -134,7 +134,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.05399716
+  m_Radius: 0.1399716
   m_Center: {x: 0, y: 0, z: 0.41083586}
 --- !u!114 &-7062228006769860114
 MonoBehaviour:
@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dbf6425df15ea41b83b47074b2926e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 1
-  damage: 10
+  shootForce: 20
 --- !u!114 &-3022847191929874499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 540417672
+  GlobalObjectIdHash: 693444828
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

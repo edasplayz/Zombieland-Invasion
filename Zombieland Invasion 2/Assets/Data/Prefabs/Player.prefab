@@ -5586,7 +5586,7 @@ MonoBehaviour:
   runningSpeed: 5
   sprintingSpeed: 6.5
   rotationSpeed: 15
-  sprintingStaminaCost: 2
+  sprintingStaminaCost: 5
   jumpStaminaCost: 5
   jumpHight: 4
   jumpForwardSpeed: 5
@@ -5666,6 +5666,18 @@ MonoBehaviour:
   backward_Medium_Damage: []
   left_Medium_Damage: []
   right_Medium_Damage: []
+  hit_Forward_Ping_01: hit_Forward_Ping_01
+  hit_Forward_Ping_02: hit_Forward_Ping_02
+  hit_Backwards_Ping_01: hit_Backwards_Ping_01
+  hit_Backwards_Ping_02: hit_Backwards_Ping_02
+  hit_Left_Ping_01: hit_Left_Ping_01
+  hit_Left_Ping_02: hit_Left_Ping_02
+  hit_Right_Ping_01: hit_Right_Ping_01
+  hit_Right_Ping_02: hit_Right_Ping_02
+  forward_Ping_Damage: []
+  backward_Ping_Damage: []
+  left_Ping_Damage: []
+  right_Ping_Damage: []
 --- !u!82 &-4192970415686797977
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5675,7 +5687,7 @@ AudioSource:
   m_GameObject: {fileID: 5489235924790319826}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3049991640503669692, guid: bda00631170eb6744b011614dd677e94, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

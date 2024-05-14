@@ -1,68 +1,56 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    private bool targetHit;
+    private bool isStuck;
     private Quaternion initialRotation;
     private Rigidbody rb;
     [SerializeField] float shootForce;
-
-    public int damage;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         initialRotation = transform.rotation;
+
+        // Ensure trigger is enabled
+        GetComponent<Collider>().isTrigger = true;
     }
 
     private void Update()
     {
-        rb.velocity = rb.transform.forward * shootForce;
-
-        Invoke("Disappear", 4f);
-    }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (targetHit)
+        if (isStuck)
         {
             return;
         }
-        else
-        {
-            targetHit = true;
-        }
-        if (collision.gameObject.GetComponent<Enemyhp>() != null)
-        {
-            Enemyhp enemyhp = collision.gameObject.GetComponent<Enemyhp>();
 
-            enemyhp.TakeDamage(damage);
-            
-        }
+        // Move the arrow forward
+        rb.velocity = rb.transform.forward * shootForce;
 
-        // Remove the Collider component
-        Destroy(GetComponent<Collider>());
-
-        // Add a FixedJoint component to connect the arrow to the target
-        FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
-        fixedJoint.connectedBody = collision.rigidbody;
-
-        // Adjust the connectedMassScale and massScale to allow the target to move more freely
-        fixedJoint.connectedMassScale = 0.1f;  // Adjust this value as needed
-        fixedJoint.massScale = 1.0f;            // Adjust this value as needed
-
-        // Apply the initial rotation after becoming a child
-        transform.rotation = initialRotation;
-
-        // Schedule the arrow to disappear after 10 seconds
-        Invoke("Disappear", 10f);
+        // Schedule the arrow to disappear after 4 seconds
+        Invoke("Disappear", 4f);
     }
 
-    */
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isStuck)
+        {
+            return; // Already stuck, ignore further collisions
+        }
+
+        // Stick the arrow to the collided object (assuming it has a Rigidbody)
+        isStuck = true;
+        rb.isKinematic = true; // Disable physics simulation
+        transform.parent = other.transform; // Parent the arrow to the collided object
+
+        // Apply the initial rotation after becoming stuck
+        transform.rotation = initialRotation;
+
+        // Optionally add visual or sound effect for sticking
+    }
+
     private void Disappear()
     {
-        // Destroy the arrow GameObject after 10 seconds
+        // Destroy the arrow GameObject
         Destroy(gameObject);
     }
 }

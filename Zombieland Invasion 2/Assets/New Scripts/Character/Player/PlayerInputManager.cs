@@ -9,6 +9,8 @@ public class PlayerInputManager : MonoBehaviour
     public static PlayerInputManager Instance;
     public PlayerManager player;
 
+    public MenuManager menuManager;
+
     PlayerControls playerControls;
 
     [Header("Movement input")]
@@ -36,6 +38,9 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] bool switch_Right_Weapon_Input = false;
     [SerializeField] bool switch_Left_Weapon_Input = false;
     [SerializeField] bool interaction_Input = false;
+
+    [Header("Setting Meniu")]
+    [SerializeField] bool settingMenuEnabled = false; // Variable to track the state of the setting menu
 
     [Header("Qued inputs")]
     [SerializeField] private bool input_Que_Is_Active = false; 
@@ -66,6 +71,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        menuManager = FindObjectOfType<MenuManager>();
         
     }
 
@@ -119,7 +126,11 @@ public class PlayerInputManager : MonoBehaviour
 
             // player movement inputs
             playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+
+            //player camera movement inputs
+            // gamepad
             playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+            // mouse
             playerControls.PlayerCamera.Movement1.performed += i => cameraInput = i.ReadValue<Vector2>();
 
             // actions
@@ -128,6 +139,9 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
             playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
             playerControls.PlayerActions.Interact.performed += i => interaction_Input = true;
+
+            //setting
+            playerControls.PlayerActions.Menu.performed += i => ToggleSettingMenu();
 
             // triggers
             playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
@@ -222,6 +236,10 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandleAllInputs()
     {
+        if(settingMenuEnabled)
+        {
+            return;
+        }
         HandlePlayerMovementInput();
         HandleCameraMovementInput();
         HandleDodgeInput();
@@ -237,6 +255,7 @@ public class PlayerInputManager : MonoBehaviour
         HandleSwitchLeftWeaponInput();
         HandleQuedInputs();
         HandleInteractionInput();
+        
     }
 
     // lock on
@@ -565,5 +584,46 @@ public class PlayerInputManager : MonoBehaviour
                 que_Input_Timer = 0;
             }
         }
+    }
+
+    private void ToggleSettingMenu()
+    {
+        // Toggle the boolean variable
+        settingMenuEnabled = !settingMenuEnabled;
+
+        // Call a method to enable or disable the setting menu based on the boolean variable
+        if (settingMenuEnabled)
+        {
+            EnableSettingMenu();
+        }
+        else
+        {
+            DisableSettingMenu();
+        }
+    }
+
+    private void EnableSettingMenu()
+    {
+        if (menuManager != null)
+        {
+            Debug.Log("veikia 1");
+            settingMenuEnabled = true;
+            menuManager.EnableMenu();
+            
+        }
+        
+    }
+
+    private void DisableSettingMenu()
+    {
+        if (menuManager != null)
+        {
+            Debug.Log("veikia 1");
+            settingMenuEnabled = false;
+            menuManager.DisableMenu();
+            
+
+        }
+        
     }
 }
