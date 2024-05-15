@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Undead Combat Stance State
   m_EditorClassIdentifier: 
   aICharacterAttacks:
-  - {fileID: 11400000, guid: dece1b74f5e9b234a8db0819031d1301, type: 2}
-  - {fileID: 11400000, guid: 186d5f15c5b03dc43a9d36c302007ac1, type: 2}
+  - {fileID: 11400000, guid: 5e41b566cc51bf54d8765219b21fff9b, type: 2}
+  - {fileID: 11400000, guid: 6cbb6d5c8b0be774cb92318a95cc9aaf, type: 2}
+  potensialAttacks: []
+  choosenAttack: {fileID: 0}
+  previousAttack: {fileID: 0}
   canPerformCombo: 0
   chanceToPerformCombo: 25
   maximumEngagementDistance: 0.8
