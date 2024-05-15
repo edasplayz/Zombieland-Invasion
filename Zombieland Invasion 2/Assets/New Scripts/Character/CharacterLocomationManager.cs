@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CharacterLocomationManager : MonoBehaviour
 {
-    CharacterManager character;
+    public CharacterManager character;
+
     [Header("Ground Check and Jumping")]
     [SerializeField] protected float gravityForce = -5.55f;
     [SerializeField] LayerMask groundLayer;

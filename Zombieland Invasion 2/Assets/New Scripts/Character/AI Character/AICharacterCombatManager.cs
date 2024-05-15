@@ -106,7 +106,7 @@ public class AICharacterCombatManager : CharacterCombatManager
             return;
         }
 
-        if(viewableAngle >= 20 && viewableAngle <= 60)
+        /*if(viewableAngle >= 20 && viewableAngle <= 60)
         {
             aICharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_R_45", true);
         }
@@ -114,7 +114,7 @@ public class AICharacterCombatManager : CharacterCombatManager
         {
             aICharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_L_45", true);
         }
-        else if (viewableAngle >= 61 && viewableAngle <= 110)
+        */if (viewableAngle >= 61 && viewableAngle <= 110)
         {
             aICharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_R_90", true);
         }
@@ -122,7 +122,7 @@ public class AICharacterCombatManager : CharacterCombatManager
         {
             aICharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_L_90", true);
         }
-        else if (viewableAngle >= 110 && viewableAngle <= 145)
+       /* else if (viewableAngle >= 110 && viewableAngle <= 145)
         {
             aICharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_R_135", true);
         }
@@ -130,7 +130,7 @@ public class AICharacterCombatManager : CharacterCombatManager
         {
             aICharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_L_135", true);
         }
-        else if (viewableAngle >= 146 && viewableAngle <= 180)
+        */else if (viewableAngle >= 146 && viewableAngle <= 180)
         {
             aICharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_R_180", true);
         }

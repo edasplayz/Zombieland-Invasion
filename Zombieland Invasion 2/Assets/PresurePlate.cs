@@ -6,6 +6,7 @@ public class PresurePlate : MonoBehaviour
 {
     public GameObject objectToActivate; // Reference to the GameObject you want to activate
 
+    [SerializeField] private bool disableOnTrigger = false;
     private void OnTriggerEnter(Collider other)
     {
         // Check if the collider is colliding with an object on the "Character" layer
@@ -14,7 +15,7 @@ public class PresurePlate : MonoBehaviour
             // Activate the GameObject
             if (objectToActivate != null)
             {
-                objectToActivate.SetActive(true);
+                objectToActivate.SetActive(!disableOnTrigger);
             }
         }
     }

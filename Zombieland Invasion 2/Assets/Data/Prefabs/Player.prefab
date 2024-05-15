@@ -5586,9 +5586,9 @@ MonoBehaviour:
   runningSpeed: 5
   sprintingSpeed: 6.5
   rotationSpeed: 15
-  sprintingStaminaCost: 5
-  jumpStaminaCost: 5
-  jumpHight: 4
+  sprintingStaminaCost: 20
+  jumpStaminaCost: 30
+  jumpHight: 1.5
   jumpForwardSpeed: 5
   freeFallingSpeed: 0
   jumpDirection: {x: 0, y: 0, z: 0}

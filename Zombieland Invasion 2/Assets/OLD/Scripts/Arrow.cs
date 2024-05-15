@@ -14,6 +14,9 @@ public class Arrow : MonoBehaviour
 
         // Ensure trigger is enabled
         GetComponent<Collider>().isTrigger = true;
+
+        // Apply initial force in the forward direction
+        rb.velocity = transform.forward * shootForce;
     }
 
     private void Update()
@@ -23,8 +26,8 @@ public class Arrow : MonoBehaviour
             return;
         }
 
-        // Move the arrow forward
-        rb.velocity = rb.transform.forward * shootForce;
+        // Update rotation to match velocity
+        transform.rotation = Quaternion.LookRotation(rb.velocity);
 
         // Schedule the arrow to disappear after 4 seconds
         Invoke("Disappear", 4f);
@@ -37,15 +40,39 @@ public class Arrow : MonoBehaviour
             return; // Already stuck, ignore further collisions
         }
 
-        // Stick the arrow to the collided object (assuming it has a Rigidbody)
-        isStuck = true;
-        rb.isKinematic = true; // Disable physics simulation
-        transform.parent = other.transform; // Parent the arrow to the collided object
+        // Check for CharacterController component
+        if (other.GetComponent<CharacterController>() != null)
+        {
+            // Stick to the object with CharacterController
+            isStuck = true;
+            rb.isKinematic = true; // Disable physics simulation
+            transform.parent = other.transform; // Parent the arrow
 
-        // Apply the initial rotation after becoming stuck
-        transform.rotation = initialRotation;
+            // Apply the initial rotation after becoming stuck
+            transform.rotation = initialRotation;
 
-        // Optionally add visual or sound effect for sticking
+            // Optionally add visual or sound effect for sticking
+        }
+        else
+        {
+            // Check for collisions with anything except triggers
+            if (!other.isTrigger)  // Check if not a trigger
+            {
+                // Stick to object (assuming it's not a trigger)
+                isStuck = true;
+                rb.isKinematic = true; // Disable physics simulation
+                                       // Don't parent the arrow (remains in place)
+                transform.rotation = initialRotation;
+
+                // Optionally add visual or sound effect for sticking
+            }
+            // Existing logic for setting velocity (not needed here)
+            // else
+            // {
+            //   // Set velocity before sticking (for non-character colliders)
+            //   rb.velocity = rb.transform.forward * shootForce;
+            // }
+        }
     }
 
     private void Disappear()
