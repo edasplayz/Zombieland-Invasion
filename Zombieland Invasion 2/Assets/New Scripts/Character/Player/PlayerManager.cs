@@ -20,12 +20,13 @@ public class PlayerManager : CharacterManager
     [HideInInspector] public PlayerEquipmentManager playerEquipmentManager;
     [HideInInspector] public PlayerCombatManager playerCombatManager;
     [HideInInspector] public PlayerInteractionManager playerInteractionManager;
+    public MenuManager menuManager;
     protected override void Awake()
     {
         base.Awake();
 
         // do more stuff, only for the player
-
+        menuManager = FindObjectOfType<MenuManager>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         playerNetworkManager = GetComponent<PlayerNetworkManager>();
@@ -232,6 +233,9 @@ public class PlayerManager : CharacterManager
 
         Debug.Log("Jis numire");
         //return base.ProcessDeathEvent(manuallySelectDeathAnimation);
+        menuManager.RestartGame();
+        ReviveCharacter();
+
 
         // check for players that are alime, if 0 respawn character
 
@@ -304,6 +308,15 @@ public class PlayerManager : CharacterManager
         {
             playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
         }
+    }
+
+    public void RevivePlayer()
+    {
+        
+            ReviveCharacter();
+            Debug.Log("Revive");
+        
+        
     }
 
     // debug delete later

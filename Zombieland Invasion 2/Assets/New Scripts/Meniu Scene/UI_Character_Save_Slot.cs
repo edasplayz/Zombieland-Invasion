@@ -14,9 +14,16 @@ public class UI_Character_Save_Slot : MonoBehaviour
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI timePlayed;
 
+    PlayerLocomotionManager locomotionManager;
+
     private void OnEnable()
     {
         LoadSaveSlots();
+    }
+
+    private void Awake()
+    {
+        locomotionManager = FindObjectOfType<PlayerLocomotionManager>();
     }
 
     private void LoadSaveSlots()
@@ -189,13 +196,17 @@ public class UI_Character_Save_Slot : MonoBehaviour
     public void LoadGameFromCharacterSlot()
     {
         WorldSaveGameManager.instance.currentCharacterSlotBeingUsed = characterSlot;
+        locomotionManager.EnableFreeze();
         WorldSaveGameManager.instance.LoadGame();
         PlayerCamera.instance.SetCursorLockState(true);
-
+        
+        
     }
 
     public void SelectCurrentSlot()
     {
         TitleScreenManager.Instance.SelectCharacterSlot(characterSlot);
     }
+
+   
 }

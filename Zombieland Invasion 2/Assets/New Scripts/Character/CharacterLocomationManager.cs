@@ -15,6 +15,7 @@ public class CharacterLocomationManager : MonoBehaviour
     [SerializeField] protected float fallStartYVelocity = -5; // the force at which our character beggins to fall when they become ungrounded (rises ads they fall longer)
     protected bool fallingVelocityHasBeenSet = false;
     protected float inAirTimer = 0;
+    [SerializeField] bool freeze = false;
 
     [Header("Flags")]
     public bool isRolling = false;
@@ -29,36 +30,42 @@ public class CharacterLocomationManager : MonoBehaviour
 
     protected virtual void Update()
     {
-        HandleGroundCheck();
-
-        if (character.characterLocomationManager.isGrounded)
+        if (!freeze)
         {
-            // if we arre not attemting to jump or move upward
-            if(yVelocity.y < 0)
+
+
+            HandleGroundCheck();
+
+            if (character.characterLocomationManager.isGrounded)
             {
-                inAirTimer = 0;
-                fallingVelocityHasBeenSet = false;
-                yVelocity.y = groundedYVelocity;
+                // if we arre not attemting to jump or move upward
+                if (yVelocity.y < 0)
+                {
+                    inAirTimer = 0;
+                    fallingVelocityHasBeenSet = false;
+                    yVelocity.y = groundedYVelocity;
+                }
             }
-        }
-        else
-        {
-            // if we are not jumping ant our falling velocity has not ben set
-            if(!character.characterNetworkManager.isJumping.Value && !fallingVelocityHasBeenSet)
+            else
             {
-                fallingVelocityHasBeenSet = true;
-                yVelocity.y = fallStartYVelocity;
+                // if we are not jumping ant our falling velocity has not ben set
+                if (!character.characterNetworkManager.isJumping.Value && !fallingVelocityHasBeenSet)
+                {
+                    fallingVelocityHasBeenSet = true;
+                    yVelocity.y = fallStartYVelocity;
+                }
+
+                inAirTimer = inAirTimer + Time.deltaTime;
+                character.animator.SetFloat("InAirTimer", inAirTimer);
+
+                yVelocity.y += gravityForce * Time.deltaTime;
+
+
             }
 
-            inAirTimer = inAirTimer + Time.deltaTime;
-            character.animator.SetFloat("InAirTimer", inAirTimer);
-
-            yVelocity.y += gravityForce * Time.deltaTime;
-
-            
+            // there should alwais be some force applied to the y velocity
+            character.characterController.Move(yVelocity * Time.deltaTime);
         }
-        // there should alwais be some force applied to the y velocity
-        character.characterController.Move(yVelocity * Time.deltaTime);
     }
 
     protected void HandleGroundCheck()
@@ -86,5 +93,18 @@ public class CharacterLocomationManager : MonoBehaviour
     public void DisableCanRotate()
     {
         canRotate = false;
+    }
+
+    public void EnableFreeze()
+    {
+        freeze = true;
+
+        Invoke("DisableFreeze", 1f);
+    }
+
+    public void DisableFreeze()
+    {
+        freeze = false;
+        Debug.Log("Unfreez");
     }
 }

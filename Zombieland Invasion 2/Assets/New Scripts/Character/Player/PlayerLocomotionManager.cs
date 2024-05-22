@@ -6,6 +6,8 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 {
     PlayerManager player;
 
+    
+
     [HideInInspector] public float verticalMovement;
     [HideInInspector] public float horizontalMovement;
     [HideInInspector] public float moveAmount;
@@ -361,4 +363,6 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         yVelocity.y = Mathf.Sqrt(jumpHight * -2 * gravityForce);
 
     }
+
+    
 }

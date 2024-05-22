@@ -12,10 +12,14 @@ public class MenuManager : MonoBehaviour
     public Slider masterVolume;
     public Slider musicVolume;
     public Slider soundVolume;
+    public Button resetButton;
 
     public AudioMixer audioMixer;
 
     public GameObject settingMenu;
+
+    public WorldSaveGameManager worldSaveGameManager;
+    public PlayerManager playerManager;
 
     
 
@@ -24,6 +28,10 @@ public class MenuManager : MonoBehaviour
     private const string MusicVolumeKey = "MusicVolume";
     private const string SoundVolumeKey = "SoundVolume";
 
+    private void Awake()
+    {
+        playerManager = FindAnyObjectByType<PlayerManager>();
+    }
     private void Start()
     {
         if(PlayerPrefs.HasKey(MasterVolumeKey) || PlayerPrefs.HasKey(MusicVolumeKey) || PlayerPrefs.HasKey(SoundVolumeKey))
@@ -120,5 +128,15 @@ public class MenuManager : MonoBehaviour
             ChangeVerticalSensitivity(); // Apply the sensitivity immediately
 
 
+    }
+
+    public void RestartGame()
+    {
+        WorldAIManager.instance.DespawnAllCharacters();
+        worldSaveGameManager.LoadGame();
+        
+        //playerManager.RevivePlayer();
+        
+        
     }
 }

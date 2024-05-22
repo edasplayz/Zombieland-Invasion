@@ -101,7 +101,11 @@ public class SiteOfGraceInteractable : Interactable
         // update/force move quest characters (to do)
 
         // reset monsters/character locations
-        WorldAIManager.instance.ResetAllCharacters();
+        WorldSaveGameManager.instance.SaveGame();
+        
+        WorldAIManager.instance.DespawnAllCharacters();
+        WorldSaveGameManager.instance.LoadGame();
+       // WorldAIManager.instance.ResetAllCharacters();
     }
 
     private IEnumerator WaitForAnimationAndPopUpThenRestoreCollider()

@@ -78,7 +78,7 @@ public class WorldAIManager : MonoBehaviour
 
         spawnedInCharacters.Clear();
     }
-    private void DespawnAllCharacters()
+    public void DespawnAllCharacters()
     {
         foreach (var character in spawnedInCharacters)
         {
