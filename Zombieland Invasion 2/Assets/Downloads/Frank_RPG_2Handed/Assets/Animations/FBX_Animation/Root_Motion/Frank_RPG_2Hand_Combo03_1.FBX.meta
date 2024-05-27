@@ -546,9 +546,9 @@ ModelImporter:
       has translation animation that will be discarded.\n\t'lowerarm_r' has translation
       animation that will be discarded.\n\t'hand_r' has translation animation that
       will be discarded.\n\t'head' has translation animation that will be discarded.\nEvent
-      CloseDamageCollider has a time (1.785333) outside the clip's valid range (0.000000..1.666667).
-      It will never be firedEvent EnableCanDoCombos has a time (1.808650) outside
-      the clip's valid range (0.000000..1.666667). It will never be fired"
+      CloseDamageCollider has a time (0.785547) outside the clip's valid range (0.000000..0.733333).
+      It will never be firedEvent EnableCanDoCombos has a time (0.795806) outside
+      the clip's valid range (0.000000..0.733333). It will never be fired"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -614,15 +614,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.42533368
-        functionName: CloseDamageCollider
+      - time: 0.8044226
+        functionName: EnableCanDoCombos
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8044226
-        functionName: EnableCanDoCombos
+      - time: 0.9447266
+        functionName: CloseDamageCollider
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

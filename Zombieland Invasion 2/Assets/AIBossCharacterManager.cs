@@ -189,6 +189,7 @@ public class AIBossCharacterManager : AICharacterManager
 
         // award players with runes
 
+
         // disable character 
     }
 

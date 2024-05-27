@@ -8,4 +8,10 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Straight Sword
   m_Controller: {fileID: 9100000, guid: d09b0176fe3e47f4cba0a4ec14e6bee9, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: b46cfc5e92133b14085a5b191d0eb8db, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: d64aa4b614a63fc41a0abce6f4aece2c, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 2f822930d6c911641bd91672dafb51c3, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 319caac6b822c3a46b362c1e371a403c, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 6ae655a2c3d3b0544be5d9a52af1b826, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 600ec1ffa01ff4f4fa5421d6a805c634, type: 3}

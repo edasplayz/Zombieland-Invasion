@@ -371,10 +371,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 129
-  groundCheckSphereRadius: 1
+  groundCheckSphereRadius: 0.3
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  freeze: 0
   isRolling: 0
   canRotate: 1
   canMove: 1
@@ -400,6 +401,7 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  freeze: 0
   isRolling: 0
   canRotate: 1
   canMove: 1
@@ -585,7 +587,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.99, z: 0}
+  m_Center: {x: 0, y: 1.12, z: 0}
 --- !u!82 &1938683410272665631
 AudioSource:
   m_ObjectHideFlags: 0
