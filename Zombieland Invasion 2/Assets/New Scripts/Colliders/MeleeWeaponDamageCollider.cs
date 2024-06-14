@@ -44,7 +44,7 @@ public class MeleeWeaponDamageCollider : DamageCollider
             }
             contactPoint = other.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
 
-            // check if we can damage this target based on friendly fire
+            // check if we can damage this target based on friendly fire (to do)
 
             // check if target is blocking
 

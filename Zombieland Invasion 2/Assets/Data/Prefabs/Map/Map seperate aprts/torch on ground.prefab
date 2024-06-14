@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6450877991601730373}
   - component: {fileID: 2199694623159232265}
   - component: {fileID: 1921782407982651040}
+  - component: {fileID: 432211772229464949}
   m_Layer: 0
   m_Name: torch on ground
   m_TagString: Untagged
@@ -84,6 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &432211772229464949
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034782839396598720}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.009
+  m_Height: 0.10037486
+  m_Direction: 2
+  m_Center: {x: 0, y: -1.7817445e-16, z: 0.018645415}
 --- !u!1001 &3654752408572071482
 PrefabInstance:
   m_ObjectHideFlags: 0

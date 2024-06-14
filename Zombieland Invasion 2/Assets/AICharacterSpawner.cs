@@ -21,7 +21,7 @@ public class AICharacterSpawner : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void AttemptToSpawnCharacter()
+    public void TryToSpawnObject()
     {
         if (characterGameObject != null)
         {

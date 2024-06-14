@@ -15,7 +15,7 @@ public class WorldObjectManager : MonoBehaviour
     public List<FogWallInteractable> fogWalls;
 
     // 1. Create an object script that will hold the logic for fog walls
-    // 2. Spawn in those fogwalls as network objects during start of game (Must have a spawner object)
+    // 2. Spawn in those fogwalls as network objects during start of game 
     // 3. Create general object spawner script and prefab
     // 4. When the fog walls are spawned, add them to the world fog wall list
     // 5. Grab the correct fogwall from the list on the boss manager when the boss is being initialized
@@ -38,7 +38,7 @@ public class WorldObjectManager : MonoBehaviour
         if (NetworkManager.Singleton.IsServer)
         {
             networkObjectSpawners.Add(networkObjectSpawner);
-            networkObjectSpawner.AttemptToSpawnCharacter();
+            networkObjectSpawner.TryToSpawnCharacter();
         }
 
     }

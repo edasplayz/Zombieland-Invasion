@@ -15,7 +15,7 @@ public class CharacterSaveData
     public float secondsPlayed;
 
 
-    // qustion why noit use vector3?
+    
     // answer: we can only save data from "basic" variables types (float, int, string, bool, ect)
     [Header("World Coordinates")]
     public float xPosition;

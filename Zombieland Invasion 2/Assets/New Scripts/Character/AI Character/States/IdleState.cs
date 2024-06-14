@@ -16,7 +16,7 @@ public class IdleState : AIState
         else
         {
             // return this state to continually search for a target (keep the state here until a target is found)
-            aICharacter.aICharacterCombatManager.FindATargetViaLineOfSight(aICharacter);
+            aICharacter.aICharacterCombatManager.FindATargetInItsLineOfSight(aICharacter);
             return this;
         }
 

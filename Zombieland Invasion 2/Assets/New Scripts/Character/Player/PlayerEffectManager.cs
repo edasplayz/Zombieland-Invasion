@@ -13,8 +13,9 @@ public class PlayerEffectManager : CharacterEffectsManager
         if (processEffect)
         {
             processEffect = false;
+
+            
             // when we instantiate it, the original is not effected 
-            // why are we instantiating a copy of this, insted of just using it as it is?
             TakeStaminaDamageEffect effect = Instantiate(effectToTest) as TakeStaminaDamageEffect;
             effect.staminDamage = 55;
 

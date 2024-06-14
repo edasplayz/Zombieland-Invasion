@@ -132,7 +132,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleRotations()
     {
-        // if loced on force rotation towards target
+        // if locked on force rotation towards target
         if (player.playerNetworkManager.isLockedOn.Value)
         {
             // this rotates this game object
@@ -158,9 +158,9 @@ public class PlayerCamera : MonoBehaviour
         else
         {
             // normal rotations
-            // rotate left and right based of horizontal mevement on the right joystick
+            // rotate left and right based of horizontal mevement on the mouse
             leftAndRightLookAngle += (PlayerInputManager.Instance.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime;
-            // rotate up and down based on vertical movement on the right joystick
+            // rotate up and down based on vertical movement on the mouse
             upAndDownLookAngle -= (PlayerInputManager.Instance.cameraVerticalInput * upAndDownRotationSpeed) * Time.deltaTime;
             // clamp the up and down look angle between a min and max value 
             upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);

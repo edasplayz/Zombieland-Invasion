@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 [CreateAssetMenu(menuName = "A.I/States/Pursue Target With Movement")]
 
+// this script is not needed this was a test script 
 public class PursueTargetStateWithMovement : AIState
 {
     public override AIState Tick(AICharacterManager aICharacter)
@@ -38,7 +39,7 @@ public class PursueTargetStateWithMovement : AIState
             if (aICharacter.aICharacterCombatManager.viewableAngle < aICharacter.aICharacterCombatManager.minimumFOV
             || aICharacter.aICharacterCombatManager.viewableAngle > aICharacter.aICharacterCombatManager.maximumFOV)
             {
-                aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
+                aICharacter.aICharacterCombatManager.TurnTowardsTarget(aICharacter);
             }
         }
 

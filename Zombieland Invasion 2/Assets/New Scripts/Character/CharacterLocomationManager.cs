@@ -73,19 +73,6 @@ public class CharacterLocomationManager : MonoBehaviour
         character.characterLocomationManager.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
     }
 
-    // draw our ground check sphere in scene view 
-    protected void OnDrawGizmosSelected()
-    {
-        if (character != null && character.transform != null)
-        {
-            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
-        }
-        else
-        {
-            //Debug.LogWarning("Character or character transform is null. Gizmos will not be drawn.");
-        }
-    }
-
     public void EnableCanRotate()
     {
         canRotate = true;
@@ -107,4 +94,19 @@ public class CharacterLocomationManager : MonoBehaviour
         freeze = false;
         Debug.Log("Unfreez");
     }
+
+    // draw our ground check sphere in scene view 
+    protected void OnDrawGizmosSelected()
+    {
+        if (character != null && character.transform != null)
+        {
+            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        }
+        else
+        {
+            //Debug.LogWarning("Character or character transform is null. Gizmos will not be drawn.");
+        }
+    }
+
+   
 }

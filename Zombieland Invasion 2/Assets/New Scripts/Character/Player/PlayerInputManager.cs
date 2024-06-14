@@ -147,7 +147,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
             playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
 
-            // bumpers
+            // attack block buttons
             playerControls.PlayerActions.RB.performed += i => RB_Input = true;
             playerControls.PlayerActions.LB.performed += i => LB_Input = true;
             playerControls.PlayerActions.LB.canceled += i => player.playerNetworkManager.isBlocking.Value = false;
@@ -158,7 +158,7 @@ public class PlayerInputManager : MonoBehaviour
             playerControls.PlayerActions.SeekLeftLockedOnTarget.performed += i => lockOn_Left_Input = true;
             playerControls.PlayerActions.SeekRightLockedOnTarget1.performed += i => lockOn_Right_Input = true;
 
-            // should be mouse controls when locked on 
+            // mouse controls when locked on 
             playerControls.PlayerCamera.Movement1.performed += i =>
             {
                 Vector2 mouseDelta = i.ReadValue<Vector2>();
@@ -299,7 +299,7 @@ public class PlayerInputManager : MonoBehaviour
         if (lockOn_Input && !player.playerNetworkManager.isLockedOn.Value)
         {
             lockOn_Input = false;
-            // if we are aiming using ranged weapon return (do not allow lock whilst aiming)
+            // if we are aiming using ranged weapon return (do not allow lock whilst aiming) to do
 
             // enable lock on
 
@@ -410,9 +410,9 @@ public class PlayerInputManager : MonoBehaviour
         if (dodgeInput)
         {
             dodgeInput = false;
-            // future note return if meniu or ui is open (do nothing) 
+            // to do return if meniu or ui is open (do nothing) 
             // preforme dodge
-            player.playerLocomotionManager.AttempToPreformeDodge();
+            player.playerLocomotionManager.TryToPreformeDodge();
 
         }
     }
@@ -437,10 +437,10 @@ public class PlayerInputManager : MonoBehaviour
         {
             jumpInput = false;
 
-            // if we have a ui window open, simply return without doing anything
+            // if we have a ui window open, simply return without doing anything to do
 
             // attemp to perfome jump
-            player.playerLocomotionManager.AttempToPreformeJump();
+            player.playerLocomotionManager.TryToPreformeJump();
         }
     }
 
@@ -450,11 +450,11 @@ public class PlayerInputManager : MonoBehaviour
         {
             RB_Input = false;
 
-            // TODO: IF WE HAVE A UI WINDOW OPEN RETURN AND DO NOTHING 
+            // IF WE HAVE A UI WINDOW OPEN RETURN AND DO NOTHING to do
 
             player.playerNetworkManager.SetCharacterActionHand(true);
 
-            // todo: if we are two handing the weapon use the two handed action
+            // if we are two handing the weapon use the two handed action to do
 
             player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
         }
@@ -537,7 +537,7 @@ public class PlayerInputManager : MonoBehaviour
         //que_LB_Input = false;
         //que_LT_Input = false;
 
-        // check for ui window being open if its open return
+        // check for ui window being open if its open return to do
 
         if(player.isPreformingAction || player.playerNetworkManager.isJumping.Value)
         {

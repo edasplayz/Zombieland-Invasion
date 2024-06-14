@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootForce: 40
+  particlePrefab: {fileID: 5601036089067188822, guid: 924e772d99fea934f8c7dff7c622e78a, type: 3}
 --- !u!114 &-3022847191929874499
 MonoBehaviour:
   m_ObjectHideFlags: 0

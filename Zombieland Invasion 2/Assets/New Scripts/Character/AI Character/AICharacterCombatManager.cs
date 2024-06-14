@@ -37,7 +37,7 @@ public class AICharacterCombatManager : CharacterCombatManager
 
 
     }
-    public void FindATargetViaLineOfSight(AICharacterManager aICharacter)
+    public void FindATargetInItsLineOfSight(AICharacterManager aICharacter)
     {
         if(currentTarget != null)
         {
@@ -66,7 +66,7 @@ public class AICharacterCombatManager : CharacterCombatManager
             // can i attack this character if so make them my target
             if (WorldUtilityManager.Instance.CanIDamageThisTarget(aICharacter.characterGroup, targetCharacter.characterGroup))
             {
-                // if a potensial target is found it has to be infront of us
+                // if a potensial target is found it has to be in front of us
                 Vector3 targetDirection = targetCharacter.transform.position - aICharacter.transform.position;
                 float angleOfPotentialTarget = Vector3.Angle(targetDirection, aICharacter.transform.forward);
 
@@ -89,7 +89,7 @@ public class AICharacterCombatManager : CharacterCombatManager
 
                         if(enablePivot)
                         {
-                            PivotTowardsTarget(aICharacter);
+                            TurnTowardsTarget(aICharacter);
                         }
                         
                     }
@@ -98,9 +98,9 @@ public class AICharacterCombatManager : CharacterCombatManager
         }
     }
 
-    public virtual void PivotTowardsTarget(AICharacterManager aICharacter)
+    public virtual void TurnTowardsTarget(AICharacterManager aICharacter)
     {
-        // play a pivot animation depending on viewable angle of target
+        // play a turn animation depending on viewable angle of target the commented area is if later i want that the turns would be more accurate
         if (aICharacter.isPreformingAction)
         {
             return;

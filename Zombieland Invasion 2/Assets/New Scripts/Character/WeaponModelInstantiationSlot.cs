@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponModelInstantiationSlot : MonoBehaviour
 {
-    // what slot is this? (left hand or right/ or hips or back)
+    
     public WeaponModelSlot weaponSlot;
     public GameObject currentWeaponModel;
 

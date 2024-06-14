@@ -28,13 +28,13 @@ public class PursueTargetState : AIState
             aICharacter.navMeshAgent.enabled = true;
         }
         // if our target goes outside of the character f.o.v pivot to face them 
-        // this is the part that makes character rotate randomly 
+        // this is the part that makes character turn towards player
         if(aICharacter.aICharacterCombatManager.enablePivot)
         {
             if (aICharacter.aICharacterCombatManager.viewableAngle < aICharacter.aICharacterCombatManager.minimumFOV
             || aICharacter.aICharacterCombatManager.viewableAngle > aICharacter.aICharacterCombatManager.maximumFOV)
             {
-                aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
+                aICharacter.aICharacterCombatManager.TurnTowardsTarget(aICharacter);
             }
         }
         aICharacter.aICharacterLocomotionManager.RotateTowardsAgent(aICharacter);

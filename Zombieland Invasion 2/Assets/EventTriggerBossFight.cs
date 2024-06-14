@@ -12,7 +12,7 @@ public class EventTriggerBossFight : MonoBehaviour
 
         if (boss != null)
         {
-            boss.WakeBoss();
+            boss.ActivateBossEnemy();
         }
     }
 }

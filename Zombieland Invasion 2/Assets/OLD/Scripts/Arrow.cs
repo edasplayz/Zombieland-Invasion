@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
     private Quaternion initialRotation;
     private Rigidbody rb;
     [SerializeField] float shootForce;
+    [SerializeField] GameObject particlePrefab;
 
     private void Start()
     {
@@ -35,18 +36,23 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+        PlayParticleEffect();
+
+
+        /*
         if (isStuck)
         {
             return; // Already stuck, ignore further collisions
         }
 
-        // Check for CharacterController component
-        if (other.GetComponent<CharacterController>() != null)
+        // Check for object with the "Player" tag
+        if (other.gameObject.tag == "Player")
         {
-            // Stick to the object with CharacterController
+            // Stick to the player
             isStuck = true;
             rb.isKinematic = true; // Disable physics simulation
-            transform.parent = other.transform; // Parent the arrow
+            transform.parent = other.transform; // Parent the arrow to the player
 
             // Apply the initial rotation after becoming stuck
             transform.rotation = initialRotation;
@@ -73,11 +79,30 @@ public class Arrow : MonoBehaviour
             //   rb.velocity = rb.transform.forward * shootForce;
             // }
         }
+
+        */
     }
+
 
     private void Disappear()
     {
         // Destroy the arrow GameObject
         Destroy(gameObject);
+    }
+
+    
+    private void PlayParticleEffect()
+    {
+        
+        if (particlePrefab != null)
+        {
+            // Instantiate the particle prefab at the arrow's position
+            Instantiate(particlePrefab, transform.position, transform.rotation);
+            Disappear();
+        }
+        else
+        {
+            Debug.LogError("Particle prefab not assigned to Arrow script!");
+        }
     }
 }

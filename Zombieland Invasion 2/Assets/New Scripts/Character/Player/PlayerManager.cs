@@ -242,22 +242,6 @@ public class PlayerManager : CharacterManager
 
     }
 
-    public override void ReviveCharacter()
-    {
-        base.ReviveCharacter();
-        
-        if (IsOwner)
-        {
-            isDead.Value = false;
-            playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
-            playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
-            // restore focus points
-
-            // play rebirth effects 
-            playerAnimatorManager.PlayTargetActionAnimation("Empty", false);
-        }
-    }
-
     public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
     {
         currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -304,7 +288,7 @@ public class PlayerManager : CharacterManager
         // armor
 
         // lock on 
-        if(playerNetworkManager.isLockedOn.Value)
+        if (playerNetworkManager.isLockedOn.Value)
         {
             playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
         }
@@ -312,12 +296,30 @@ public class PlayerManager : CharacterManager
 
     public void RevivePlayer()
     {
-        
-            ReviveCharacter();
-            Debug.Log("Revive");
-        
-        
+
+        ReviveCharacter();
+        Debug.Log("Revive");
+
+
     }
+
+    public override void ReviveCharacter()
+    {
+        base.ReviveCharacter();
+        
+        if (IsOwner)
+        {
+            isDead.Value = false;
+            playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+            playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
+            // restore focus points
+
+            // play rebirth effects 
+            playerAnimatorManager.PlayTargetActionAnimation("Empty", false);
+        }
+    }
+
+    
 
     // debug delete later
     /*private void DebugMenu()

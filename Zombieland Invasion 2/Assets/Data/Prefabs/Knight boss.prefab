@@ -668,7 +668,7 @@ MonoBehaviour:
   characterUIManager: {fileID: 0}
   characterGroup: 1
   isPreformingAction: 0
-  characterName: Fosfis, The Hardest Enemy In Dark Souls
+  characterName: Kelos, Guardian of the Lost Giants
   aICharacterNetworkManager: {fileID: 0}
   aICharacterCombatManager: {fileID: 0}
   aICharacterLocomotionManager: {fileID: 0}
@@ -679,8 +679,8 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 66f6cf7f03cba0e4a96fe8d18d2b5ec7, type: 2}
   attack: {fileID: 11400000, guid: 9ff889d01da5eea4486492206aa79e67, type: 2}
   bossID: 0
-  bossIntroClip: {fileID: 8300000, guid: e50bb1cca390d8748bbf683e4cb13c0e, type: 3}
-  bossBattleLoopClip: {fileID: 8300000, guid: e4efc810dba7da14b9856bbf1178d66f, type: 3}
+  bossIntroClip: {fileID: 8300000, guid: 14a1cf915de1c2448b200ab123c01445, type: 3}
+  bossBattleLoopClip: {fileID: 8300000, guid: 14a1cf915de1c2448b200ab123c01445, type: 3}
   bossFightIsActive:
     m_InternalValue: 0
   hasBeenDefeated:
@@ -733,6 +733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bc33e2a008e7d429bea8ebb529398a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   gravityForce: -5.55
   groundLayer:
     serializedVersion: 2
@@ -741,6 +742,7 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  freeze: 0
   isRolling: 0
   canRotate: 1
   canMove: 1

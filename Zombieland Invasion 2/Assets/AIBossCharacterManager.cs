@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class AIBossCharacterManager : AICharacterManager
 {
-    // GIVE THIS A,I a unique if
+    // GIVE THIS A,I a unique id
     public int bossID = 0;
 
     [Header("Music")]
@@ -112,27 +112,7 @@ public class AIBossCharacterManager : AICharacterManager
         bossFightIsActive.OnValueChanged -= OnBossFightIsActiveChanged;
     }
 
-    private IEnumerator GetFogWallsFromWorldObjectManager()
-    {
-        while (WorldObjectManager.instance.fogWalls.Count == 0)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
-        // locate fog wall
-        // you can ether share the same ID for boss and fog wall or simply place a fogwall ID cariable here on look for it using that
-
-        fogWalls = new List<FogWallInteractable>();
-
-        // method 1
-        foreach (var fogWall in WorldObjectManager.instance.fogWalls)
-        {
-            if (fogWall.fogWallID == bossID)
-            {
-                fogWalls.Add(fogWall);
-            }
-        }
-    }
+    
 
     public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
     {
@@ -193,7 +173,7 @@ public class AIBossCharacterManager : AICharacterManager
         // disable character 
     }
 
-    public void WakeBoss()
+    public void ActivateBossEnemy()
     {
         if(IsOwner)
         {
@@ -234,6 +214,28 @@ public class AIBossCharacterManager : AICharacterManager
 
     }
 
+    private IEnumerator GetFogWallsFromWorldObjectManager()
+    {
+        while (WorldObjectManager.instance.fogWalls.Count == 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        // locate fog wall
+        // you can ether share the same ID for boss and fog wall or simply place a fogwall ID cariable here on look for it using that
+
+        fogWalls = new List<FogWallInteractable>();
+
+
+        foreach (var fogWall in WorldObjectManager.instance.fogWalls)
+        {
+            if (fogWall.fogWallID == bossID)
+            {
+                fogWalls.Add(fogWall);
+            }
+        }
+    }
+
     private void OnBossFightIsActiveChanged(bool oldStatus, bool newStatus)
     {
         if (bossFightIsActive.Value)
@@ -253,7 +255,7 @@ public class AIBossCharacterManager : AICharacterManager
         
     }
 
-    public void PhaseShift()
+    public void BossFightPhaseShift()
     {
         characterAnimatorManager.PlayTargetActionAnimation(phaseShiftAnimation, true);
         combatStance = Instantiate(phase02CombatStanceState);

@@ -35,7 +35,7 @@ public class AIKnightCombatManager : AICharacterCombatManager
 
     public void SetAttack01Damage()
     {
-        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
+        aiCharacter.characterSoundFXManager.PlayAttackScreamSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
         knightSwordDamageCollider.poiseDamage = basePoiseDamage * attack01DamageModifier;
 
@@ -44,7 +44,7 @@ public class AIKnightCombatManager : AICharacterCombatManager
 
     public void SetAttack02Damage()
     {
-        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
+        aiCharacter.characterSoundFXManager.PlayAttackScreamSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
         knightSwordDamageCollider.poiseDamage = basePoiseDamage * attack02DamageModifier;
         // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
@@ -52,7 +52,7 @@ public class AIKnightCombatManager : AICharacterCombatManager
 
     public void SetAttack03Damage()
     {
-        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
+        aiCharacter.characterSoundFXManager.PlayAttackScreamSoundFX();
         knightSwordDamageCollider.physicalDamage = baseDamage * attack03DamageModifier;
         knightSwordDamageCollider.poiseDamage = basePoiseDamage * attack03DamageModifier;
         // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
@@ -60,7 +60,7 @@ public class AIKnightCombatManager : AICharacterCombatManager
 
     public void SetAttack04Damage()
     {
-        aiCharacter.characterSoundFXManager.PlayAttackGruntSoundFX();
+        aiCharacter.characterSoundFXManager.PlayAttackScreamSoundFX();
 
         
         knightSwordDamageCollider.physicalDamage = baseDamage * attack04DamageModifier;
@@ -68,14 +68,14 @@ public class AIKnightCombatManager : AICharacterCombatManager
         // leftHandDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
     }
 
-    public void OpenClubDamageCollider()
+    public void OpenDamageCollider()
     {
         
         knightSwordDamageCollider.EnableDamageCollider();
         aiKnightManager.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(aiKnightManager.knightSoundFXManager.swordWhooshes));
     }
 
-    public void CloseClubDamageCollider()
+    public void CloseDamageCollider()
     {
         knightSwordDamageCollider.DisableDamageCollider();
     }
@@ -88,9 +88,9 @@ public class AIKnightCombatManager : AICharacterCombatManager
         knightStompCollider.StompAttack();
     }
 
-    public override void PivotTowardsTarget(AICharacterManager aICharacter)
+    public override void TurnTowardsTarget(AICharacterManager aICharacter)
     {
-        // play a pivot animation depending on viewable angle of target
+        // play a turn animation depending on viewable angle of target
         if (aICharacter.isPreformingAction)
         {
             return;

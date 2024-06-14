@@ -14,10 +14,7 @@ public class CharacterSoundFXManager : MonoBehaviour
 
     [Header("FootSteps")]
     [SerializeField] protected AudioClip[] footSteps;
-    //method 2
-    //public AudioClip[] footSteps;
-    //public AudioClip[] footStepsDirt;
-    //public AudioClip[] footStepsStone;
+   
 
     protected virtual void Awake()
     {
@@ -36,7 +33,7 @@ public class CharacterSoundFXManager : MonoBehaviour
         }
     }
 
-    public void PlayRollSoundFX()
+    public void PlayDodgeSoundFX()
     {
         audioSource.PlayOneShot(WorldSoundFXManager.instance.rollSFX);
     }
@@ -50,7 +47,7 @@ public class CharacterSoundFXManager : MonoBehaviour
         
     }
 
-    public virtual void PlayAttackGruntSoundFX()
+    public virtual void PlayAttackScreamSoundFX()
     {
         if(attackGrunts.Length > 0)
         {

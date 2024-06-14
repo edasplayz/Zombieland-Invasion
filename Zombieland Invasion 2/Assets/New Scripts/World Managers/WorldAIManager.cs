@@ -35,7 +35,7 @@ public class WorldAIManager : MonoBehaviour
         if(NetworkManager.Singleton.IsServer)
         {
             aICharacterSpawners.Add(aICharacterSpawner);
-            aICharacterSpawner.AttemptToSpawnCharacter();
+            aICharacterSpawner.TryToSpawnObject();
         }
         
     }
@@ -73,7 +73,7 @@ public class WorldAIManager : MonoBehaviour
 
         foreach(var spawner in aICharacterSpawners)
         {
-            spawner.AttemptToSpawnCharacter();
+            spawner.TryToSpawnObject();
         }
 
         spawnedInCharacters.Clear();
@@ -92,5 +92,6 @@ public class WorldAIManager : MonoBehaviour
         // disable gameobjects for clients upon connecting if disabled status is true 
         // can be used to disable characters that are far from players to save memory
         // characters can be split into areas (area 1 area 2 ...)
+        // to do
     }
 }

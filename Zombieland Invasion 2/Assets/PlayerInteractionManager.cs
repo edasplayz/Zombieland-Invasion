@@ -45,21 +45,24 @@ public class PlayerInteractionManager : MonoBehaviour
             return;
         }
 
-        // if we have an interactable action and have not notified our player we do se here
+        
         if (currentInteractableActions[0] != null)
         {
             PlayerUiManager.instance.playerUiPopUpManager.SendPlayerMessagePopUp(currentInteractableActions[0].interactableText);
         }
     }
 
-    private void RefreshInteractionList()
+    public void Interact()
     {
-        for(int i = currentInteractableActions.Count - 1; i > -1; i--)
+        if (currentInteractableActions == null)
         {
-            if (currentInteractableActions[i] == null)
-            {
-                currentInteractableActions.RemoveAt(i);
-            }
+            return;
+        }
+
+        if (currentInteractableActions[0] != null)
+        {
+            currentInteractableActions[0].Interact(player);
+            RefreshInteractionList();
         }
     }
 
@@ -75,7 +78,7 @@ public class PlayerInteractionManager : MonoBehaviour
 
     public void RemoveInteractionFromList(Interactable interactableObject)
     {
-        
+
 
         if (currentInteractableActions.Contains(interactableObject))
         {
@@ -85,19 +88,20 @@ public class PlayerInteractionManager : MonoBehaviour
         RefreshInteractionList();
     }
 
-    public void Interact()
+    private void RefreshInteractionList()
     {
-        if(currentInteractableActions == null)
+        for(int i = currentInteractableActions.Count - 1; i > -1; i--)
         {
-            return;
-        }
-
-        if (currentInteractableActions[0] != null)
-        {
-            currentInteractableActions[0].Interact(player);
-            RefreshInteractionList();
+            if (currentInteractableActions[i] == null)
+            {
+                currentInteractableActions.RemoveAt(i);
+            }
         }
     }
+
+    
+
+    
 
 
 }

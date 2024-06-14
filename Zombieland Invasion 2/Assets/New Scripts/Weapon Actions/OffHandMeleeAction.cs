@@ -9,7 +9,7 @@ public class OffHandMeleeAction : WeaponItemAction
     {
         base.AttemptToPreformAction(playerPerformingAction, weaponPerformingAction);
 
-        // check for power stance action
+        
 
         // check for can block
         if (!playerPerformingAction.playerCombatManager.canBlock)

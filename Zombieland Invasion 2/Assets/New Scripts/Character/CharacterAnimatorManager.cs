@@ -179,10 +179,6 @@ public class CharacterAnimatorManager : MonoBehaviour
 
         this.applyRootMotion = applyRootMotion;
         character.animator.CrossFade(targetAnimation, 0.2f);
-        // can be used to stop character form attemting new action
-        // form exaple if you get damaged and begin performing a damage animation
-        // this flag will turn true if you are stunned 
-        // we can then check for this before attempting new actions
         character.isPreformingAction = isPerformingAction;
         character.characterLocomationManager.canRotate = canRotate;
         character.characterLocomationManager.canMove = canMove;
@@ -202,10 +198,10 @@ public class CharacterAnimatorManager : MonoBehaviour
     {
 
         // keep track of last attack performed (for combos)
-        // keep tharck of current attack type (light, heavy, ect)
+        // keep tharck of current attack type (light, heavy)
         // update animation set to current weapon animations
-        // decide if our attack can be parried
-        // tell the network our (isattacking) floag is active (for counter damage ect)
+        // decide if our attack can be parried (to do)
+        // tell the network our (isattacking) floag is active (for counter damage)
         character.characterCombatManager.currentAttackType = attackType;
         character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
         UpdateAnimatorController(weapon.weaponAnimator);

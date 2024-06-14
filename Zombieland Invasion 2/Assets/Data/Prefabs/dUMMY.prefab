@@ -5168,7 +5168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3539950123
+  GlobalObjectIdHash: 2250711423
   InScenePlacedSourceGlobalObjectIdHash: 3539950123
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -5227,9 +5227,9 @@ MonoBehaviour:
   maxStamina:
     m_InternalValue: 300
   currentHealth:
-    m_InternalValue: 300
+    m_InternalValue: 99999
   maxHealth:
-    m_InternalValue: 300
+    m_InternalValue: 99999
   vitality:
     m_InternalValue: 1
   endurance:
@@ -5307,6 +5307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bc33e2a008e7d429bea8ebb529398a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
   gravityForce: -5.55
   groundLayer:
     serializedVersion: 2
@@ -5315,6 +5316,7 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  freeze: 0
   isRolling: 0
   canRotate: 1
   canMove: 1
@@ -5859,7 +5861,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Character Name
+  m_text: Dummy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

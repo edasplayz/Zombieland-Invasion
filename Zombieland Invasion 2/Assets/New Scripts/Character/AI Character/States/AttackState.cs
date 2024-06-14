@@ -69,7 +69,7 @@ public class AttackState : AIState
 
         if (pivotAfterAttack)
         {
-            aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
+            aICharacter.aICharacterCombatManager.TurnTowardsTarget(aICharacter);
         }
 
         return SwitchState(aICharacter, aICharacter.combatStance);

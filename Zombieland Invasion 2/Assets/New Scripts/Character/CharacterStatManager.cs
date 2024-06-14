@@ -24,8 +24,8 @@ public class CharacterStatManager : MonoBehaviour
 
     [Header("Poise")]
     public float totalPoiseDamage; // how mutch poise damage we have taken
-    public float offensivePoiseBonus; // the poise bonus gained from using weapon (heavy armor have mutch larger bonus)
-    public float basePoiseDefense; // the poise bunus gained from armor/ talisman
+    public float offensivePoiseBonus; // the poise bonus gained from using weapon (heavy weapon have mutch larger bonus  to do)
+    public float basePoiseDefense; // the poise bunus gained from armor/ talisman to do
     public float defaultPoiseResetTime = 8; // the time it taks for poise damaga to reset (must not be hit in the time of it will reset)
     public float poiseResetTimer = 0; // the current timer for poise reset
 
@@ -49,7 +49,7 @@ public class CharacterStatManager : MonoBehaviour
     {
         float stamina = 0;
 
-        // create an equation for how you want your stamina to be calculated
+        
 
         stamina = endurance * 10;
         return Mathf.RoundToInt(stamina);
@@ -59,7 +59,7 @@ public class CharacterStatManager : MonoBehaviour
     {
         float health = 0;
 
-        // create an equation for how you want your stamina to be calculated
+        
 
         health = vitality * 15;
         return Mathf.RoundToInt(health);

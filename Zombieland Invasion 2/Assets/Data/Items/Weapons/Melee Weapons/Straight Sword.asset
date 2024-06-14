@@ -23,7 +23,7 @@ MonoBehaviour:
   dexREQ: 10
   intREQ: 0
   faitREQ: 0
-  physicalDamage: 118
+  physicalDamage: 700
   magicDamage: 0
   fireDamage: 0
   holyDamage: 0

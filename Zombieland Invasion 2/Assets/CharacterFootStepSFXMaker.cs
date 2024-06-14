@@ -5,6 +5,8 @@ using UnityEngine.TextCore.Text;
 
 public class CharacterFootStepSFXMaker : MonoBehaviour
 {
+    // this need to be fixed
+
     CharacterManager character;
 
     AudioSource audioSource;
@@ -86,11 +88,7 @@ public class CharacterFootStepSFXMaker : MonoBehaviour
 
     private void PlayFootStepSoundFX()
     {
-        // here you could play a different sfx depending on the layer of the ground or a tag or such (snow, wood, stone ect)
-        // method 2
-        //audioSource.PlayOneShot(WorldSoundFXManager.instance.ChooseRandomFootStepSoundBasedOnGround(steppedOnObject, character));
-
-        // method 2 (simple)
+        
         character.characterSoundFXManager.PlayFootStepSoundFX();
     }
 

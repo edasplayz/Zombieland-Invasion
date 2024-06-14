@@ -30,6 +30,16 @@ public class UI_Boss_HP_Bar : UI_StatBar
         {
             RemoveHPBar(2.5f);
         }
+
+        
+    }
+
+    private void Update()
+    {
+        if (bossCharacter == null)
+        {
+            RemoveHPBar(2.5f);
+        }
     }
 
     public void RemoveHPBar(float time)

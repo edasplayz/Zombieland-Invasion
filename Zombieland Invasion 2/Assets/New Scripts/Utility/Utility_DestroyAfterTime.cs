@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Utility_DestroyAfterTime : MonoBehaviour
 {
-    [SerializeField] float timeUntilDestroyed = 5;
+    [SerializeField] float timeUntilDestroyed = 1;
 
     private void Awake()
     {

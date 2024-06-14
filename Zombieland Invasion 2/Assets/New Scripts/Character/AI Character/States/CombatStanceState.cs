@@ -51,7 +51,7 @@ public class CombatStanceState : AIState
             {
                 if (aICharacter.aICharacterCombatManager.viewableAngle < -30 || aICharacter.aICharacterCombatManager.viewableAngle > 30)
                 {
-                    aICharacter.aICharacterCombatManager.PivotTowardsTarget(aICharacter);
+                    aICharacter.aICharacterCombatManager.TurnTowardsTarget(aICharacter);
                 }
             }
         }
@@ -156,6 +156,14 @@ public class CombatStanceState : AIState
         
        
     }
+    protected override void ResetStateFlags(AICharacterManager aICharacter)
+    {
+        base.ResetStateFlags(aICharacter);
+        hasAttack = false;
+        hasRolledForComboChance = false;
+
+
+    }
 
     protected virtual bool RollForOutcomeChance(int outcomeChance)
     {
@@ -170,14 +178,7 @@ public class CombatStanceState : AIState
         return outcomeWillBePerformed;
     }
 
-    protected override void ResetStateFlags(AICharacterManager aICharacter)
-    {
-        base.ResetStateFlags(aICharacter);
-        hasAttack = false;
-        hasRolledForComboChance = false;
-
-        
-    }
+    
 
 
 

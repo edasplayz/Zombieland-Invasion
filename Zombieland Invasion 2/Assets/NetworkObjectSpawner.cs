@@ -21,7 +21,7 @@ public class NetworkObjectSpawner : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void AttemptToSpawnCharacter()
+    public void TryToSpawnCharacter()
     {
         if (networkGameObject != null)
         {

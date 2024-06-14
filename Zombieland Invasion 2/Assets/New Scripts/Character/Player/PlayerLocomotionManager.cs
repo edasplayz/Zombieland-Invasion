@@ -260,7 +260,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
 
     }
 
-    public void AttempToPreformeDodge()
+    public void TryToPreformeDodge()
     {
         if(player.isPreformingAction)
         {
@@ -297,7 +297,7 @@ public class PlayerLocomotionManager : CharacterLocomationManager
         player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
     }
 
-    public void AttempToPreformeJump()
+    public void TryToPreformeJump()
     {
         // if we are performing general action we do not want to allow jump (will change when cambat is added)
         if (player.isPreformingAction)

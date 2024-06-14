@@ -79,7 +79,7 @@ public class SiteOfGraceInteractable : Interactable
         WorldSaveGameManager.instance.currentCharacterData.sitesOfGrace.Add(siteOfGraceID, true );
 
         player.playerAnimatorManager.PlayTargetActionAnimation("Activate_Site_Of_Grace_01", true);
-        //hide weapon models whilist playing animation if you desire
+        //hide weapon models whilist playing animation 
 
 
         // sends a pop up
@@ -93,12 +93,12 @@ public class SiteOfGraceInteractable : Interactable
     {
         Debug.Log("Resting");
 
-        // temporaly code section
-        interactableCollider.enabled = true; // temporarily re_enabling the collider here until we add the menu so you can respawn monsters indefinitely
+        
+        interactableCollider.enabled = true; 
         player.playerNetworkManager.currentHealth.Value = player.playerNetworkManager.maxHealth.Value;
         player.playerNetworkManager.currentStamina.Value = player.playerNetworkManager.maxStamina.Value;
         // refill flask (to do)
-        // update/force move quest characters (to do)
+        
 
         // reset monsters/character locations
         WorldSaveGameManager.instance.SaveGame();
@@ -114,6 +114,21 @@ public class SiteOfGraceInteractable : Interactable
         interactableCollider.enabled = true;
     }
 
+
+    public override void Interact(PlayerManager player)
+    {
+        base.Interact(player);
+
+        if (!isActivated.Value)
+        {
+            RestoreSiteOfGrace(player);
+
+        }
+        else
+        {
+            RestAtSiteOfGrace(player);
+        }
+    }
     private void OnIsActivatedChanged(bool oldStatus, bool newStatus)
     {
         if (isActivated.Value)
@@ -132,18 +147,5 @@ public class SiteOfGraceInteractable : Interactable
         }
     }
 
-    public override void Interact(PlayerManager player)
-    {
-        base.Interact(player);
-
-        if(!isActivated.Value) 
-        { 
-            RestoreSiteOfGrace(player);
-        
-        }
-        else
-        {
-            RestAtSiteOfGrace(player);
-        }
-    }
+    
 }

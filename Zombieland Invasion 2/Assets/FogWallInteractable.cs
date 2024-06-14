@@ -110,7 +110,7 @@ public class FogWallInteractable : Interactable
         // make this function the same time as the walking trough fog wall animation lenght
         Physics.IgnoreCollision(player.characterController, fogWallCollider, true);
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         Physics.IgnoreCollision(player.characterController, fogWallCollider, false);
     }
 }

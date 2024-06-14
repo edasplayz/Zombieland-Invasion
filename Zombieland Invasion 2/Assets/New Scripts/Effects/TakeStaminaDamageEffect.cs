@@ -18,9 +18,7 @@ public class TakeStaminaDamageEffect : InstantCharacterEffect
 
     private void CalculateStaminaDamage(CharacterManager character)
     {
-        // compare the base stamina agoinst other player effects/modifiers
-        // change the value before subtracking/adding it 
-        // play sound fx of vfx during effect 
+       
 
         if(character.IsOwner)
         {

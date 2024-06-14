@@ -12,8 +12,8 @@ public class WeaponItemAction : ScriptableObject
 
     public virtual void AttemptToPreformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
     {
-        // what does every weapon action have in common?
-        // 1. we shoud always keep track of which weapon is currently being used
+        
+        //  we shoud always keep track of which weapon is currently being used
         if(playerPerformingAction.IsOwner)
         {
             playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = weaponPerformingAction.itemID;

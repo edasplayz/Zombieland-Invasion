@@ -6,9 +6,9 @@ public class CharacterEffectsManager : MonoBehaviour
 {
     // process instant effects (take damage, heal)
 
-    // proccess timed effect (poison, build ups)
+    // proccess timed effect (poison, build ups) to do
 
-    // process tatic effect (armor, removing buffs from talisman ect)
+    // process tatic effect (armor, removing buffs from talisman ect) to do
 
     CharacterManager character;
 
@@ -22,8 +22,7 @@ public class CharacterEffectsManager : MonoBehaviour
 
     public virtual void ProccessInstantEffect(InstantCharacterEffect effect)
     {
-        // take in an effect 
-        // process it 
+       
         effect.ProccesEffect(character);
     }
 

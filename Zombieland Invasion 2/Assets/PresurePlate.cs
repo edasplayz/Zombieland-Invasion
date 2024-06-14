@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PresurePlate : MonoBehaviour
 {
-    public GameObject objectToActivate; // Reference to the GameObject you want to activate
+    public GameObject objectToActivate; 
 
     [SerializeField] private bool disableOnTrigger = false;
     private void OnTriggerEnter(Collider other)

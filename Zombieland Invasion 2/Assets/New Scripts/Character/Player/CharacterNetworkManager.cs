@@ -90,11 +90,19 @@ public class CharacterNetworkManager : NetworkBehaviour
         }
     }
 
+
+
     public void OnIsChargingAttackCharge(bool ondStatus, bool newStatus)
     {
         character.animator.SetBool("IsChargingAttack", isChargingAttack.Value);
     }
 
+    public virtual void OnIsBlockingChnage(bool oldStatus, bool newStatus)
+    {
+        character.animator.SetBool("isBlocking", isBlocking.Value);
+
+
+    }
     public void OnIsMovingChanged(bool ondStatus, bool newStatus)
     {
         character.animator.SetBool("isMoving", isMoving.Value);
@@ -105,12 +113,7 @@ public class CharacterNetworkManager : NetworkBehaviour
         gameObject.SetActive(isActive.Value);
     }
 
-    public virtual void OnIsBlockingChnage(bool oldStatus, bool newStatus)
-    {
-        character.animator.SetBool("isBlocking", isBlocking.Value);
-
-
-    }
+    
     // a server rpc is a funcion called from a client, to the server (in our case the host)
     [ServerRpc]
     public void NotifyTheServerOfActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)
